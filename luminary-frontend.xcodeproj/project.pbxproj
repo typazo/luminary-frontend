@@ -14,6 +14,10 @@
 		2F82CD302ED29F520012C3C9 /* luminary_frontendTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD2F2ED29F520012C3C9 /* luminary_frontendTests.swift */; };
 		2F82CD3A2ED29F520012C3C9 /* luminary_frontendUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD392ED29F520012C3C9 /* luminary_frontendUITests.swift */; };
 		2F82CD3C2ED29F520012C3C9 /* luminary_frontendUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD3B2ED29F520012C3C9 /* luminary_frontendUITestsLaunchTests.swift */; };
+		2F82CD4A2ED2A1750012C3C9 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD492ED2A1750012C3C9 /* Post.swift */; };
+		2F82CD4D2ED2A1A50012C3C9 /* PostListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD4C2ED2A1A50012C3C9 /* PostListViewModel.swift */; };
+		2F82CD502ED2A1C50012C3C9 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD4F2ED2A1C50012C3C9 /* NetworkManager.swift */; };
+		2F82CD532ED2A1EF0012C3C9 /* PostListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD522ED2A1EF0012C3C9 /* PostListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,10 @@
 		2F82CD352ED29F520012C3C9 /* luminary-frontendUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "luminary-frontendUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F82CD392ED29F520012C3C9 /* luminary_frontendUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luminary_frontendUITests.swift; sourceTree = "<group>"; };
 		2F82CD3B2ED29F520012C3C9 /* luminary_frontendUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luminary_frontendUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2F82CD492ED2A1750012C3C9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		2F82CD4C2ED2A1A50012C3C9 /* PostListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListViewModel.swift; sourceTree = "<group>"; };
+		2F82CD4F2ED2A1C50012C3C9 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		2F82CD522ED2A1EF0012C3C9 /* PostListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +102,11 @@
 		2F82CD1D2ED29F4E0012C3C9 /* luminary-frontend */ = {
 			isa = PBXGroup;
 			children = (
+				2F82CD512ED2A1D80012C3C9 /* Views */,
+				2F82CD4E2ED2A1B50012C3C9 /* Networking */,
+				2F82CD4B2ED2A18D0012C3C9 /* ViewModels */,
+				2F82CD482ED2A1460012C3C9 /* Models */,
 				2F82CD1E2ED29F4E0012C3C9 /* luminary_frontendApp.swift */,
-				2F82CD202ED29F4E0012C3C9 /* ContentView.swift */,
 				2F82CD222ED29F510012C3C9 /* Assets.xcassets */,
 				2F82CD242ED29F510012C3C9 /* Preview Content */,
 			);
@@ -125,6 +136,39 @@
 				2F82CD3B2ED29F520012C3C9 /* luminary_frontendUITestsLaunchTests.swift */,
 			);
 			path = "luminary-frontendUITests";
+			sourceTree = "<group>";
+		};
+		2F82CD482ED2A1460012C3C9 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2F82CD492ED2A1750012C3C9 /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2F82CD4B2ED2A18D0012C3C9 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2F82CD4C2ED2A1A50012C3C9 /* PostListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2F82CD4E2ED2A1B50012C3C9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				2F82CD4F2ED2A1C50012C3C9 /* NetworkManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		2F82CD512ED2A1D80012C3C9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2F82CD522ED2A1EF0012C3C9 /* PostListView.swift */,
+				2F82CD202ED29F4E0012C3C9 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,7 +301,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F82CD4D2ED2A1A50012C3C9 /* PostListViewModel.swift in Sources */,
+				2F82CD4A2ED2A1750012C3C9 /* Post.swift in Sources */,
+				2F82CD502ED2A1C50012C3C9 /* NetworkManager.swift in Sources */,
 				2F82CD212ED29F4E0012C3C9 /* ContentView.swift in Sources */,
+				2F82CD532ED2A1EF0012C3C9 /* PostListView.swift in Sources */,
 				2F82CD1F2ED29F4E0012C3C9 /* luminary_frontendApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
