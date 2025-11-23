@@ -8,9 +8,3 @@
 //
 
 import Foundation
-
-enum LoadingState {
-    case loaded
-    case loading
-    case error(_: Error)
-}
