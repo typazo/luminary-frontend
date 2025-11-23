@@ -47,6 +47,7 @@ struct CountdownView : View {
                         print("timer finished")
                         //here, we should route to session finished view... right now we dont do that tho
                         //perhaps we call a different function that lets us go there bc idk how we would do that here
+                        //ISSUE!! it repeatedly prints timer finished even after i leave
                     }
                 }
             }

@@ -27,6 +27,7 @@
 		525331DB2ED2A94E008D49CD /* SessionActiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331DA2ED2A94B008D49CD /* SessionActiveView.swift */; };
 		525331E32ED2C7F0008D49CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331E22ED2C7EE008D49CD /* TimerView.swift */; };
 		525331E92ED2F2D4008D49CD /* Constellation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331E82ED2F2D2008D49CD /* Constellation.swift */; };
+		525331EB2ED2F73F008D49CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331EA2ED2F73C008D49CD /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		525331DA2ED2A94B008D49CD /* SessionActiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionActiveView.swift; sourceTree = "<group>"; };
 		525331E22ED2C7EE008D49CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		525331E82ED2F2D2008D49CD /* Constellation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constellation.swift; sourceTree = "<group>"; };
+		525331EA2ED2F73C008D49CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +161,7 @@
 		2F82CD482ED2A1460012C3C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				525331EA2ED2F73C008D49CD /* User.swift */,
 				525331E82ED2F2D2008D49CD /* Constellation.swift */,
 				2F82CD492ED2A1750012C3C9 /* Post.swift */,
 			);
@@ -341,6 +344,7 @@
 				525331DB2ED2A94E008D49CD /* SessionActiveView.swift in Sources */,
 				525331D92ED2A926008D49CD /* SessionFinishedView.swift in Sources */,
 				2F82CD4A2ED2A1750012C3C9 /* Post.swift in Sources */,
+				525331EB2ED2F73F008D49CD /* User.swift in Sources */,
 				2F82CD502ED2A1C50012C3C9 /* NetworkManager.swift in Sources */,
 				2F82CD212ED29F4E0012C3C9 /* ContentView.swift in Sources */,
 				2F82CD532ED2A1EF0012C3C9 /* PostListView.swift in Sources */,
