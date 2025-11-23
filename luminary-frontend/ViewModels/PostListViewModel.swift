@@ -14,7 +14,7 @@ enum LoadingState {
     case error(_: Error)
 }
 
-class PostistViewModel: ObservableObject {
+class PostListViewModel: ObservableObject {
 
     @Published var posts: [Post] = []
     @Published var loadingState: LoadingState = .loading
@@ -84,6 +84,7 @@ class PostistViewModel: ObservableObject {
                     self.posts = fetchedPosts
                     self.loadingState = .loaded
                 case .failure(let err):
+                    self.posts = dummyData
                     self.loadingState = .error(err)
                 }
             }

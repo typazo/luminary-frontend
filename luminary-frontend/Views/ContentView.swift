@@ -8,17 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @StateObject var viewModel = PostListViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        ScrollView {
+            LazyVStack(spacing: 16) {
+                ForEach(viewModel.posts, id: \.self) { post in
+                    PostCell(post: post)
+                        .padding(.horizontal)
+                }
+            }
+            .padding(.vertical)
         }
-        .padding()
+        .onAppear {
+            viewModel.fetchPosts()
+        }
     }
 }
-
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
