@@ -14,7 +14,7 @@ enum LoadingState {
     case error(_: Error)
 }
 
-class BirdListViewModel: ObservableObject {
+class PostistViewModel: ObservableObject {
 
     @Published var posts: [Post] = []
     @Published var loadingState: LoadingState = .loading
@@ -83,7 +83,6 @@ class BirdListViewModel: ObservableObject {
                 case .success(let fetchedPosts):
                     self.posts = fetchedPosts
                     self.loadingState = .loaded
-                    self.loadFavorites()
                 case .failure(let err):
                     self.loadingState = .error(err)
                 }
