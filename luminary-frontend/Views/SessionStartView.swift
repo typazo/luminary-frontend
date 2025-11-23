@@ -42,6 +42,7 @@ struct SessionStartView: View {
                     destination: CountdownView(totalMinutes: minutes, totalSeconds: seconds)
 //                    isActive: $navigateToCountdown //we should implement this "is active" for the constellation setting
                 ) {
+
                     Text("Start Timer")
                     .padding()
                     .background(Color.blue)

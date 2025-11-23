@@ -41,9 +41,6 @@ struct User : Hashable, Codable {
 }
 
 
-
-
-
 // this is temporary
 var userDummyData = [
     User(userId: 0, displayName: "Leem", constellationAttempts: 1),

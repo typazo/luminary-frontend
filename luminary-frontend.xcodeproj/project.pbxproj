@@ -29,6 +29,8 @@
 		525331E32ED2C7F0008D49CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331E22ED2C7EE008D49CD /* TimerView.swift */; };
 		525331E92ED2F2D4008D49CD /* Constellation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331E82ED2F2D2008D49CD /* Constellation.swift */; };
 		525331EB2ED2F73F008D49CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331EA2ED2F73C008D49CD /* User.swift */; };
+		525331EF2ED37ECC008D49CD /* ShieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331EE2ED37EC9008D49CD /* ShieldManager.swift */; };
+		525331F12ED37F2C008D49CD /* ShieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331F02ED37F28008D49CD /* ShieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		525331E22ED2C7EE008D49CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		525331E82ED2F2D2008D49CD /* Constellation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constellation.swift; sourceTree = "<group>"; };
 		525331EA2ED2F73C008D49CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		525331EE2ED37EC9008D49CD /* ShieldManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldManager.swift; sourceTree = "<group>"; };
+		525331F02ED37F28008D49CD /* ShieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 		2F82CD4E2ED2A1B50012C3C9 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				525331EE2ED37EC9008D49CD /* ShieldManager.swift */,
 				2F82CD4F2ED2A1C50012C3C9 /* NetworkManager.swift */,
 			);
 			path = Networking;
@@ -190,6 +195,7 @@
 		2F82CD512ED2A1D80012C3C9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				525331F02ED37F28008D49CD /* ShieldView.swift */,
 				525331E22ED2C7EE008D49CD /* TimerView.swift */,
 				525331DA2ED2A94B008D49CD /* SessionActiveView.swift */,
 				525331D82ED2A923008D49CD /* SessionFinishedView.swift */,
@@ -350,6 +356,8 @@
 				525331E32ED2C7F0008D49CD /* TimerView.swift in Sources */,
 				2F82CD5F2ED386770012C3C9 /* Duration+Extension.swift in Sources */,
 				525331D22ED2A8A9008D49CD /* FeedView.swift in Sources */,
+				525331EF2ED37ECC008D49CD /* ShieldManager.swift in Sources */,
+				525331F12ED37F2C008D49CD /* ShieldView.swift in Sources */,
 				525331D42ED2A90F008D49CD /* SessionStartView.swift in Sources */,
 				525331E92ED2F2D4008D49CD /* Constellation.swift in Sources */,
 				2F82CD4D2ED2A1A50012C3C9 /* PostListViewModel.swift in Sources */,
@@ -521,6 +529,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"luminary-frontend/Preview Content\"";
+				DEVELOPMENT_TEAM = WL6L6PX44C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -549,6 +558,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"luminary-frontend/Preview Content\"";
+				DEVELOPMENT_TEAM = WL6L6PX44C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
