@@ -39,24 +39,23 @@ class NetworkManager {
         }
     }
     
-    func fetchConstellations(completion: @escaping (Result<[Constellation], Error>) -> Void) {
+    func fetchConstellations() async throws -> [Constellation] {
         let endpoint = "placeholder"
-
         let decoder = JSONDecoder()
 
-        // Create the request
-        AF.request(endpoint, method: .get)
-            .validate()
-            .responseDecodable(of: [Constellation].self, decoder: decoder) { response in
-                // Handle the response
-                switch response.result {
-                case .success(let constellations):
-                    print("Successfully fetched \(constellations.count) constellations")
-                    completion(.success(constellations))
-                case .failure(let error):
-                    print("Error in NetworkManager.fetchPosts: \(error.localizedDescription)")
-                    completion(.failure(error))
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(endpoint, method: .get)
+                .validate()
+                .responseDecodable(of: [Constellation].self, decoder: decoder) { response in
+                    switch response.result {
+                    case .success(let constellations):
+                        print("Successfully fetched \(constellations.count) constellations")
+                        continuation.resume(returning: constellations)
+                    case .failure(let error):
+                        print("Error in NetworkManager.fetchConstellations: \(error.localizedDescription)")
+                        continuation.resume(throwing: error)
+                    }
                 }
-            }
+        }
     }
 }
