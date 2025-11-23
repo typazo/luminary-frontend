@@ -11,6 +11,9 @@ import Foundation
 import SwiftUI
 
 struct SessionStartView: View {
+    @StateObject var sessionManager = SessionManager.shared
+    
+    @State private var navigateToCountdown = false
     var minutes = 5
     var seconds = 0
 //    @State private var navigateToCountdown = false
@@ -37,18 +40,39 @@ struct SessionStartView: View {
                     .cornerRadius(10)
                 }
                 
-                //the button to start the timer
-                NavigationLink(
-                    destination: CountdownView(totalMinutes: minutes, totalSeconds: seconds)
-//                    isActive: $navigateToCountdown //we should implement this "is active" for the constellation setting
-                ) {
+//                //the button to start the timer
+//                NavigationLink(
+//                    destination: CountdownView(totalMinutes: minutes, totalSeconds: seconds)
+//                        .environmentObject(sessionManager) // pass the session manager
+//                ) {
+//                    Text("Start Timer")
+//                        .padding()
+//                        .background(Color.blue)
+//                        .foregroundColor(.white)
+//                        .cornerRadius(10)
+//                }
+//                .onTapGesture {
+//                    sessionManager.sessionActive = true
+//                }
+                
+                VStack {
+                    NavigationLink(
+                        destination: CountdownView(totalMinutes: minutes, totalSeconds: seconds)
+                            .environmentObject(sessionManager),
+                        label: {
+                            Text("Start Timer")
+                                .padding()
+                                .background(Color.blue)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                    )
+                    .simultaneousGesture(TapGesture().onEnded {
+                        sessionManager.sessionActive = true
+                    })
 
-                    Text("Start Timer")
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
                 }
+                
             }
             .padding()
         }
