@@ -13,6 +13,7 @@ struct Post: Hashable, Codable {
     let message: String
     let constellationName: String
     let postType: String
+    let studyDuration: Duration
     
     //networking initalizer
 //    init(from decoder: Decoder) throws {
@@ -34,12 +35,13 @@ struct Post: Hashable, Codable {
 //    }
     
     //normal initializer
-    init(displayName: String, postTime: Date, message: String, constellationName: String, postType: String) {
+    init(displayName: String, postTime: Date, message: String, constellationName: String, postType: String, studyDuration: Duration) {
         self.displayName = displayName
         self.postTime = postTime
         self.message = message
         self.constellationName = constellationName
         self.postType = postType
+        self.studyDuration = studyDuration
     }
 }
 
@@ -50,6 +52,7 @@ struct Post: Hashable, Codable {
 // this is temporary
 //could u pls rename this to postdummydata so i can name other things dummydata as well?
 var dummyData = [
-    Post(displayName: "Kalyee", postTime: Date(), message: "bluh", constellationName: "lil dipper", postType: "star"),
-    Post(displayName: "Tyler", postTime: Date(), message: "hi", constellationName: "big dipper", postType: "constellation")
+    Post(displayName: "Kaylee", postTime: Date(timeIntervalSinceReferenceDate: 384678574), message: "bluh", constellationName: "lil dipper", postType: "star", studyDuration: Duration.seconds(61 * 60 + 31)),
+    Post(displayName: "Tyler", postTime: Date(timeIntervalSinceReferenceDate: 8921), message: "hi", constellationName: "big dipper", postType: "star", studyDuration: Duration.seconds(10 * 60)),
+    Post(displayName: "Lexi", postTime: Date(timeIntervalSinceReferenceDate: 21), message: "glorbizoid", constellationName: "virgo", postType: "constellation", studyDuration: Duration.seconds(10 * 60 + 40))
 ]

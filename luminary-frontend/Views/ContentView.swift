@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var currentPage: Page = .start
-
-    enum Page {
-        case start
-        case countdown
-        case feed
-    }
+//    @State private var currentPage: Page = .start
+//
+//    enum Page {
+//        case start
+//        case countdown
+//        case feed
+//    }
 
     var body: some View {
         //might move this tab view into a different file so we can reuse it across pages

@@ -6,20 +6,33 @@
 //
 
 import SwiftUI
-
+//TODO: Implement the difference between a constelation and a star completion. No point in starting until I can see the design. Will implement this with an if statement that changes the view depending on the "constelation" / "star" string passed in.
 struct PostCell: View {
     var post: Post
-    var cellWidth: CGFloat = 128
-    let cellHeight: CGFloat = 128
+//    var cellWidth: CGFloat = 128
+//    let cellHeight: CGFloat = 128
 
     var body: some View {
-        Text(post.displayName)
-                .font(.system(size: 100, weight: .regular, design: .rounded))
-                .foregroundColor(.black)
-                .frame(width: cellWidth, alignment: .leading)
+        VStack{
+            HStack{
+                //            Image("temp")
+                Text("Image goes here later")
+                VStack{
+                    Text(post.displayName)
+                    Text("\(post.postTime.convertToAgo())")
+                }
+            }
+            Text("Constellation goes here")
+            Text(post.message)
+            Text("\(post.studyDuration.formattedHumanReadable())")
+            
+
+        }
+        .background(Color.gray)
+        .cornerRadius(15) 
     }
 }
-
+    
 
 
 struct PostCell_Previews: PreviewProvider {
