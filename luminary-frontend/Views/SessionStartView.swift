@@ -59,14 +59,13 @@ struct SessionStartView: View {
 //Constellations menu -- a cute little drop down
 //TODO: Figure out how to get the info from this and store it
 struct ConstellationsDropdownView : View {
-    var constellations = ["Constellation 1", "Constellation 2", "Constellation 3"] //later, replace with fetched constellation
-    @State private var selectedConstellation: String = "Constellation 1"
+    @State private var selectedConstellation: Constellation = constellationDummyData[0]
 
     var body: some View {
         VStack {
-            Menu(selectedConstellation) {
-                ForEach(constellations, id: \.self) { constellation in
-                    Button(constellation, action: {
+            Menu(selectedConstellation.name) {
+                ForEach(constellationDummyData, id: \.self) { constellation in
+                    Button(constellation.name, action: {
                         selectedConstellation = constellation
                     })
                 }

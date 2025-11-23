@@ -1,18 +1,16 @@
 //
-//  Post.swift
+//  Constellation.swift
 //  luminary-frontend
 //
-//  Created by Tyler on 11/22/25.
+//  Created by Kaylee Ulep on 11/23/25.
 //
 
 import Foundation
 
-struct Post: Hashable, Codable {
-    let displayName: String
-    let postTime: Date
-    let message: String
-    let constellationName: String
-    let postType: String
+struct Constellation: Hashable, Codable {
+    let name: String
+    let constellationId: Int
+    let weight: Int
     
     //networking initalizer
 //    init(from decoder: Decoder) throws {
@@ -34,12 +32,10 @@ struct Post: Hashable, Codable {
 //    }
     
     //normal initializer
-    init(displayName: String, postTime: Date, message: String, constellationName: String, postType: String) {
-        self.displayName = displayName
-        self.postTime = postTime
-        self.message = message
-        self.constellationName = constellationName
-        self.postType = postType
+    init(name: String, constellationId: Int, weight: Int) {
+        self.name = name
+        self.constellationId = constellationId
+        self.weight = weight
     }
 }
 
@@ -48,8 +44,8 @@ struct Post: Hashable, Codable {
 
 
 // this is temporary
-//could u pls rename this to postdummydata so i can name other things dummydata as well?
-var dummyData = [
-    Post(displayName: "Kalyee", postTime: Date(), message: "bluh", constellationName: "lil dipper", postType: "star"),
-    Post(displayName: "Tyler", postTime: Date(), message: "hi", constellationName: "big dipper", postType: "constellation")
+var constellationDummyData = [
+    Constellation(name: "Cassiopeia", constellationId: 0, weight: 3),
+    Constellation(name: "Ursa Major", constellationId: 1, weight: 5),
+    Constellation(name: "Pyxis", constellationId: 2, weight: 8)
 ]

@@ -26,6 +26,7 @@
 		525331D92ED2A926008D49CD /* SessionFinishedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331D82ED2A923008D49CD /* SessionFinishedView.swift */; };
 		525331DB2ED2A94E008D49CD /* SessionActiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331DA2ED2A94B008D49CD /* SessionActiveView.swift */; };
 		525331E32ED2C7F0008D49CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331E22ED2C7EE008D49CD /* TimerView.swift */; };
+		525331E92ED2F2D4008D49CD /* Constellation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331E82ED2F2D2008D49CD /* Constellation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		525331D82ED2A923008D49CD /* SessionFinishedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFinishedView.swift; sourceTree = "<group>"; };
 		525331DA2ED2A94B008D49CD /* SessionActiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionActiveView.swift; sourceTree = "<group>"; };
 		525331E22ED2C7EE008D49CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
+		525331E82ED2F2D2008D49CD /* Constellation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constellation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +159,7 @@
 		2F82CD482ED2A1460012C3C9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				525331E82ED2F2D2008D49CD /* Constellation.swift */,
 				2F82CD492ED2A1750012C3C9 /* Post.swift */,
 			);
 			path = Models;
@@ -333,6 +336,7 @@
 				525331E32ED2C7F0008D49CD /* TimerView.swift in Sources */,
 				525331D22ED2A8A9008D49CD /* FeedView.swift in Sources */,
 				525331D42ED2A90F008D49CD /* SessionStartView.swift in Sources */,
+				525331E92ED2F2D4008D49CD /* Constellation.swift in Sources */,
 				2F82CD4D2ED2A1A50012C3C9 /* PostListViewModel.swift in Sources */,
 				525331DB2ED2A94E008D49CD /* SessionActiveView.swift in Sources */,
 				525331D92ED2A926008D49CD /* SessionFinishedView.swift in Sources */,
