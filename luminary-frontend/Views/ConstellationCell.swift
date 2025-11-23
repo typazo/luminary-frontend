@@ -14,8 +14,12 @@ struct ConstellationCell: View {
 
     var body: some View {
         VStack{
-            
-            
+            HStack{
+                Spacer()
+                Text(constellation.name)
+            }
+            Text("image containing \(constellation.weight) stars goes here")
+                .font(.system(size: 32))
         }
         .background(Color.gray)
         .cornerRadius(15)

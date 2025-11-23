@@ -58,4 +58,24 @@ class NetworkManager {
                 }
         }
     }
+    
+    func fetchUserStats() async throws -> UserStats {
+        let endpoint = "placeholder/user/stats" 
+        let decoder = JSONDecoder()
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(endpoint, method: .get)
+                .validate()
+                .responseDecodable(of: UserStats.self, decoder: decoder) { response in
+                    switch response.result {
+                    case .success(let stats):
+                        print("Successfully fetched user stats")
+                        continuation.resume(returning: stats)
+                    case .failure(let error):
+                        print("Error in NetworkManager.fetchUserStats: \(error.localizedDescription)")
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+    }
 }

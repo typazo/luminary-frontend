@@ -21,9 +21,10 @@
 		2F82CD5A2ED2B0D90012C3C9 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD592ED2B0D90012C3C9 /* PostCell.swift */; };
 		2F82CD5D2ED3827A0012C3C9 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD5C2ED3827A0012C3C9 /* Date+Extension.swift */; };
 		2F82CD5F2ED386770012C3C9 /* Duration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD5E2ED386770012C3C9 /* Duration+Extension.swift */; };
-		2F82CD612ED3999F0012C3C9 /* ConstellationListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD602ED3999F0012C3C9 /* ConstellationListViewModel.swift */; };
+		2F82CD612ED3999F0012C3C9 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD602ED3999F0012C3C9 /* ProfileViewModel.swift */; };
 		2F82CD632ED39AA70012C3C9 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD622ED39AA70012C3C9 /* LoadingState.swift */; };
 		2F82CD652ED39CA30012C3C9 /* ConstellationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD642ED39CA30012C3C9 /* ConstellationCell.swift */; };
+		2F82CD672ED3A52F0012C3C9 /* UserStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD662ED3A52F0012C3C9 /* UserStats.swift */; };
 		525331D02ED2A8A3008D49CD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331CF2ED2A89E008D49CD /* ProfileView.swift */; };
 		525331D22ED2A8A9008D49CD /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331D12ED2A8A5008D49CD /* FeedView.swift */; };
 		525331D42ED2A90F008D49CD /* SessionStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331D32ED2A8FE008D49CD /* SessionStartView.swift */; };
@@ -71,9 +72,10 @@
 		2F82CD592ED2B0D90012C3C9 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 		2F82CD5C2ED3827A0012C3C9 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
 		2F82CD5E2ED386770012C3C9 /* Duration+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Duration+Extension.swift"; sourceTree = "<group>"; };
-		2F82CD602ED3999F0012C3C9 /* ConstellationListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationListViewModel.swift; sourceTree = "<group>"; };
+		2F82CD602ED3999F0012C3C9 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		2F82CD622ED39AA70012C3C9 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 		2F82CD642ED39CA30012C3C9 /* ConstellationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationCell.swift; sourceTree = "<group>"; };
+		2F82CD662ED3A52F0012C3C9 /* UserStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStats.swift; sourceTree = "<group>"; };
 		525331CF2ED2A89E008D49CD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		525331D12ED2A8A5008D49CD /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		525331D32ED2A8FE008D49CD /* SessionStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStartView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				525331EA2ED2F73C008D49CD /* User.swift */,
 				525331E82ED2F2D2008D49CD /* Constellation.swift */,
 				2F82CD492ED2A1750012C3C9 /* Post.swift */,
+				2F82CD662ED3A52F0012C3C9 /* UserStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -187,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				2F82CD4C2ED2A1A50012C3C9 /* PostListViewModel.swift */,
-				2F82CD602ED3999F0012C3C9 /* ConstellationListViewModel.swift */,
+				2F82CD602ED3999F0012C3C9 /* ProfileViewModel.swift */,
 				2F82CD622ED39AA70012C3C9 /* LoadingState.swift */,
 			);
 			path = ViewModels;
@@ -373,12 +376,13 @@
 				525331F12ED37F2C008D49CD /* ShieldView.swift in Sources */,
 				525331D42ED2A90F008D49CD /* SessionStartView.swift in Sources */,
 				525331E92ED2F2D4008D49CD /* Constellation.swift in Sources */,
-				2F82CD612ED3999F0012C3C9 /* ConstellationListViewModel.swift in Sources */,
+				2F82CD612ED3999F0012C3C9 /* ProfileViewModel.swift in Sources */,
 				2F82CD4D2ED2A1A50012C3C9 /* PostListViewModel.swift in Sources */,
 				2F82CD5D2ED3827A0012C3C9 /* Date+Extension.swift in Sources */,
 				525331DB2ED2A94E008D49CD /* SessionActiveView.swift in Sources */,
 				525331D92ED2A926008D49CD /* SessionFinishedView.swift in Sources */,
 				2F82CD652ED39CA30012C3C9 /* ConstellationCell.swift in Sources */,
+				2F82CD672ED3A52F0012C3C9 /* UserStats.swift in Sources */,
 				2F82CD4A2ED2A1750012C3C9 /* Post.swift in Sources */,
 				525331EB2ED2F73F008D49CD /* User.swift in Sources */,
 				2F82CD632ED39AA70012C3C9 /* LoadingState.swift in Sources */,
