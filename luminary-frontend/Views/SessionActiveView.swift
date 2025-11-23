@@ -14,13 +14,7 @@ struct CountdownView : View {
     @State private var remainingMinutes: Int
     @State private var remainingSeconds: Int
     @State private var timer: Timer? = nil
-    @StateObject var sessionManager = SessionManager.shared
-    
-    //    @StateObject private var vm: CountdownViewModel
-    
-//    init(vm: CountdownViewModel){
-////        self._vm = StateObject(wrappedValue: vm)
-//    }
+    @EnvironmentObject var sessionManager : SessionManager
     
     init(totalMinutes: Int, totalSeconds: Int = 0){
         remainingMinutes = totalMinutes
@@ -38,28 +32,39 @@ struct CountdownView : View {
                 }
                 .frame(width: 200, height: 200)
                 .onAppear {
-                    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true){
-                        timer in
-                        if remainingSeconds > 0 {
-                            remainingSeconds -= 1
-                        } else if remainingMinutes > 0 {
-                            remainingMinutes -= 1
-                            remainingSeconds = 59
-                        } else {
-                            // Timer finished
-                            print("timer finished")
-                            //here, we should route to session finished view... right now we dont do that tho
-                            //perhaps we call a different function that lets us go there bc idk how we would do that here
-                            //ISSUE!! it repeatedly prints timer finished even after i leave
-                        }
+                    startTimer()
+                }
+                NavigationLink("bruh", destination: DetectLeavingView())
+                NavigationLink("cancel", destination: SessionStartView())
+                    .onTapGesture {
+                        sessionManager.sessionActive = false
+                        sessionManager.sessionFailed = true
                     }
-                }
-                Button("Cancel"){
-                    
-                }
             } else {
                 Text("No active session")
             }
         }
     }
+    
+    private func startTimer() {
+            // prevent multiple timers
+            guard timer == nil else { return }
+
+            timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+                if remainingSeconds > 0 {
+                    remainingSeconds -= 1
+                } else if remainingMinutes > 0 {
+                    remainingMinutes -= 1
+                    remainingSeconds = 59
+                } else {
+                    print("timer finished")
+                    timer?.invalidate()
+                    timer = nil
+                    //here, we should route to session finished view... right now we dont do that tho
+                    //perhaps we call a different function that lets us go there bc idk how we would do that here
+                    //ISSUE!! it repeatedly prints timer finished even after i leave
+                    sessionManager.sessionActive = false
+                }
+            }
+        }
 }

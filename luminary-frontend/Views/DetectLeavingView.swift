@@ -6,15 +6,9 @@
 //
 import SwiftUI
 
-class SessionManager: ObservableObject {
-    static let shared = SessionManager()  // singleton
-    
-    @Published var sessionActive: Bool = false
-}
-
 
 struct DetectLeavingView : View {
-    @StateObject var sessionManager = SessionManager.shared
+    @EnvironmentObject var sessionManager : SessionManager
     @State private var text = "hi!!"
     @Environment(\.scenePhase) var scenePhase
     //from testing, i'm noticing that app is:
@@ -27,19 +21,26 @@ struct DetectLeavingView : View {
         Text(text)
             .font(.system(size: 30))
             .bold()
+            .onAppear {
+                self.updateText(currentPhase: scenePhase)
+            }
             .onChange(of: scenePhase){ currentPhase in
-                
-                if (sessionManager.sessionActive){
-                    if (currentPhase == .active || currentPhase == .inactive){
-                        self.text = "your star is growing brighter!! session is active"
-                    } else if (currentPhase == .background) {
-                        self.text = "YOUR STAR FADED. HOW COULD YOU"
-                        print("app is in the background")
-                        sessionManager.sessionActive = false
-                    }
-                } else {
-                    self.text = "u dont have a session going lol"
-                }
+                self.updateText(currentPhase: currentPhase)
             }
     }
+    
+    private func updateText(currentPhase: ScenePhase) {
+            if (sessionManager.sessionActive){
+                if (currentPhase == .active || currentPhase == .inactive){
+                    self.text = "your star is growing brighter!! session is active"
+                } else if (currentPhase == .background) {
+                    self.text = "YOUR STAR FADED. HOW COULD YOU"
+                    print("app is in the background")
+                    sessionManager.sessionActive = false
+                    sessionManager.sessionFailed = true
+                }
+            } else {
+                self.text = "u dont have a session going lol"
+            }
+        }
 }

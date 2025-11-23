@@ -15,6 +15,8 @@ struct ContentView: View {
 //        case countdown
 //        case feed
 //    }
+    
+    @StateObject var sessionManager = SessionManager.shared
 
     var body: some View {
         //might move this tab view into a different file so we can reuse it across pages
@@ -44,6 +46,7 @@ struct ContentView: View {
                     Text("dictatorship")
                 }
         }
+        .environmentObject(sessionManager)
         .padding()
     }
 }

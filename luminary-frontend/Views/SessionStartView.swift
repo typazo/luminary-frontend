@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 
 struct SessionStartView: View {
-    @StateObject var sessionManager = SessionManager.shared
+    @EnvironmentObject var sessionManager : SessionManager
     
     @State private var navigateToCountdown = false
     var minutes = 5
@@ -69,6 +69,7 @@ struct SessionStartView: View {
                     )
                     .simultaneousGesture(TapGesture().onEnded {
                         sessionManager.sessionActive = true
+                        sessionManager.sessionFailed = false //reset the failed session
                     })
 
                 }
