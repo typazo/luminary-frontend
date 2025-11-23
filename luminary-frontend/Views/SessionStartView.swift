@@ -14,8 +14,6 @@ struct SessionStartView: View {
     @EnvironmentObject var sessionManager : SessionManager
     
     @State private var navigateToCountdown = false
-    var minutes = 5
-    var seconds = 0
 //    @State private var navigateToCountdown = false
     
     var body: some View {
@@ -32,7 +30,7 @@ struct SessionStartView: View {
                 NavigationLink(
                     destination: SetTimeView()
                 ) {
-                    Text("Duration: \(minutes) min : \(seconds) sec")
+                    Text("Duration: \(sessionManager.remainingMinutes) min : \(sessionManager.remainingSeconds) sec")
                         .font(.headline)
                     .padding()
                     .background(Color.gray)
@@ -57,7 +55,7 @@ struct SessionStartView: View {
                 
                 VStack {
                     NavigationLink(
-                        destination: CountdownView(totalMinutes: minutes, totalSeconds: seconds)
+                        destination: CountdownView()
                             .environmentObject(sessionManager),
                         label: {
                             Text("Start Timer")
