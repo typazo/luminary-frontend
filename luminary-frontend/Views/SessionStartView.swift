@@ -18,9 +18,14 @@ struct SessionStartView: View {
     var body: some View {
         NavigationStack{
             VStack(spacing: 30) {
+                
+                //TODO: Disable this constellations button when you already are working towards one
+                ConstellationsDropdownView()
+                
                 Text("Ready to start your session?")
                     .font(.title)
                 
+                //the text that displays how much time you're setting the countdown for
                 NavigationLink(
                     destination: SetTimeView()
                 ) {
@@ -32,6 +37,7 @@ struct SessionStartView: View {
                     .cornerRadius(10)
                 }
                 
+                //the button to start the timer
                 NavigationLink(
                     destination: CountdownView(totalMinutes: minutes, totalSeconds: seconds),
 //                    isActive: $navigateToCountdown //we should implement this "is active" for the constellation setting
@@ -45,5 +51,30 @@ struct SessionStartView: View {
             }
             .padding()
         }
+    }
+    
+    
+}
+
+//Constellations menu -- a cute little drop down
+//TODO: Figure out how to get the info from this and store it
+struct ConstellationsDropdownView : View {
+    var constellations = ["Constellation 1", "Constellation 2", "Constellation 3"] //later, replace with fetched constellation
+    @State private var selectedConstellation: String = "Constellation 1"
+
+    var body: some View {
+        VStack {
+            Menu(selectedConstellation) {
+                ForEach(constellations, id: \.self) { constellation in
+                    Button(constellation, action: {
+                        selectedConstellation = constellation
+                    })
+                }
+            }
+            .padding(.all, 16)
+            .foregroundStyle(Color.white)
+            .background(RoundedRectangle(cornerRadius: 16).fill(Color.black))
+        }
+
     }
 }
