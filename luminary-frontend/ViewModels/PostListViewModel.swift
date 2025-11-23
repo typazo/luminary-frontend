@@ -16,7 +16,7 @@ enum LoadingState {
 
 class BirdListViewModel: ObservableObject {
 
-    @Published var birds: [Bird] = []
+    @Published var posts: [Post] = []
     @Published var loadingState: LoadingState = .loading
 
 //    // MARK: - Functions
@@ -81,7 +81,7 @@ class BirdListViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch fetchResult {
                 case .success(let fetchedPosts):
-                    self.birds = fetchedPosts
+                    self.posts = fetchedPosts
                     self.loadingState = .loaded
                     self.loadFavorites()
                 case .failure(let err):
