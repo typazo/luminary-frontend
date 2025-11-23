@@ -71,23 +71,40 @@ class PostListViewModel: ObservableObject {
     
     // MARK: - Networking
 
-    func fetchPosts() {
+//    func fetchPosts() {
+//        self.loadingState = .loading
+//        self.posts = []
+//
+//        NetworkManager.shared.fetchPosts { [weak self] fetchResult in
+//            guard let self = self else { return }
+//
+//            DispatchQueue.main.async {
+//                switch fetchResult {
+//                case .success(let fetchedPosts):
+//                    self.posts = fetchedPosts
+//                    self.loadingState = .loaded
+//                case .failure(let err):
+//                    self.posts = dummyData
+//                    self.loadingState = .error(err)
+//                }
+//            }
+//        }
+//    }
+    
+    
+    func fetchPosts() async {
         self.loadingState = .loading
-        self.posts = []
-
-        NetworkManager.shared.fetchPosts { [weak self] fetchResult in
-            guard let self = self else { return }
-
-            DispatchQueue.main.async {
-                switch fetchResult {
-                case .success(let fetchedPosts):
-                    self.posts = fetchedPosts
-                    self.loadingState = .loaded
-                case .failure(let err):
-                    self.posts = dummyData
-                    self.loadingState = .error(err)
-                }
-            }
+        
+        do {
+            // Call your NetworkManager async method
+            let fetchedPosts = try await NetworkManager.shared.fetchPosts()
+            
+            self.posts = fetchedPosts
+            self.loadingState = .loaded
+        } catch {
+            // fallback data if network fails
+            self.posts = dummyData
+            self.loadingState = .error(error)
         }
     }
 }

@@ -21,8 +21,11 @@ struct FeedView : View {
             }
             .padding(.vertical)
         }
-        .onAppear {
-            viewModel.fetchPosts()
+        .refreshable {
+            await viewModel.fetchPosts()
+        }
+        .task {
+            await viewModel.fetchPosts()
         }
     }
 }
