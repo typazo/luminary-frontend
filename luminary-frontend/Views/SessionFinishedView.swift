@@ -8,4 +8,15 @@
 //
 
 import Foundation
+import SwiftUI
 
+
+//We need to distinguish between a fail and a success
+struct SessionFinishedView : View {
+
+    var body : some View {
+        VStack{
+            Text("Wow you finished the session lfg")
+        }
+    }
+}

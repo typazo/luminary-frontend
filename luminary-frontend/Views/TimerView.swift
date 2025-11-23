@@ -24,32 +24,23 @@ struct SetTimeView : View {
             .clipped()
             
             
-            NavigationLink("start timer",
-                destination: CountdownView( vm: CountdownViewModel(totalMinutes: selectedMinutes, totalSeconds: selectedSeconds)
-                )
+//            NavigationLink(
+//                "Start Timer",
+//                destination: CountdownView(
+//                    totalMinutes: selectedMinutes,
+//                    totalSeconds: selectedSeconds
+//                )
+//            )
+            
+            NavigationLink(
+                "Save timer timesss",
+                destination: SessionStartView(minutes: selectedMinutes, seconds: selectedSeconds)
             )
         }
     }
     
 }
 
-struct CountdownView : View {
-    @StateObject private var vm: CountdownViewModel
-    
-    init(vm: CountdownViewModel){
-        self._vm = StateObject(wrappedValue: vm)
-    }
-    
-    var body : some View {
-        VStack{
-            Text("\(vm.remainingMinutes) minutes")
-                .font(.system(size: 50, weight: .bold))
-            Text("\(vm.remainingSeconds) seconds")
-                .font(.system(size: 50, weight: .bold))
-        }
-        .frame(width: 200, height: 200)
-        }
-    }
 
 
 struct TimerView_Previews: PreviewProvider {
