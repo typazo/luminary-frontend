@@ -38,6 +38,11 @@ struct ContentView: View {
                     Image(systemName: "person.circle.fill") //random for now
                     Text("Profile")
                 }
+            DetectLeavingView()
+                .tabItem {
+                    Image(systemName: "person.circle.fill") //random for now
+                    Text("dictatorship")
+                }
         }
         .padding()
     }

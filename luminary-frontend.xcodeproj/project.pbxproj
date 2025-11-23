@@ -30,6 +30,7 @@
 		525331EB2ED2F73F008D49CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331EA2ED2F73C008D49CD /* User.swift */; };
 		525331EF2ED37ECC008D49CD /* ShieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331EE2ED37EC9008D49CD /* ShieldManager.swift */; };
 		525331F12ED37F2C008D49CD /* ShieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331F02ED37F28008D49CD /* ShieldView.swift */; };
+		52F809D42ED38D8E003BDF93 /* DetectLeavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F809D32ED38D87003BDF93 /* DetectLeavingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		525331EA2ED2F73C008D49CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		525331EE2ED37EC9008D49CD /* ShieldManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldManager.swift; sourceTree = "<group>"; };
 		525331F02ED37F28008D49CD /* ShieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldView.swift; sourceTree = "<group>"; };
+		52F809D32ED38D87003BDF93 /* DetectLeavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectLeavingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +194,7 @@
 		2F82CD512ED2A1D80012C3C9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				52F809D32ED38D87003BDF93 /* DetectLeavingView.swift */,
 				525331F02ED37F28008D49CD /* ShieldView.swift */,
 				525331E22ED2C7EE008D49CD /* TimerView.swift */,
 				525331DA2ED2A94B008D49CD /* SessionActiveView.swift */,
@@ -344,6 +347,7 @@
 			files = (
 				525331E32ED2C7F0008D49CD /* TimerView.swift in Sources */,
 				525331D22ED2A8A9008D49CD /* FeedView.swift in Sources */,
+				52F809D42ED38D8E003BDF93 /* DetectLeavingView.swift in Sources */,
 				525331EF2ED37ECC008D49CD /* ShieldManager.swift in Sources */,
 				525331F12ED37F2C008D49CD /* ShieldView.swift in Sources */,
 				525331D42ED2A90F008D49CD /* SessionStartView.swift in Sources */,
