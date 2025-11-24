@@ -34,13 +34,15 @@ struct DetectLeavingView : View {
                 if (currentPhase == .active || currentPhase == .inactive){
                     self.text = "your star is growing brighter!! session is active"
                 } else if (currentPhase == .background) {
-                    self.text = "YOUR STAR FADED. HOW COULD YOU"
-                    print("app is in the background")
+//                    self.text = "YOUR STAR FADED. HOW COULD YOU"
+//                    print("app is in the background")
                     sessionManager.sessionActive = false
                     sessionManager.sessionFailed = true
+                    //forcibly switch to the "sessionfinishedview"
                 }
             } else {
                 self.text = "u dont have a session going lol"
             }
         }
+    
 }

@@ -39,11 +39,11 @@ struct ContentView: View {
                             Text("Profile")
                         }
 
-                    DetectLeavingView()
-                        .tabItem {
-                            Image(systemName: "person.circle.fill")
-                            Text("dictatorship")
-                        }
+//                    DetectLeavingView()
+//                        .tabItem {
+//                            Image(systemName: "person.circle.fill")
+//                            Text("dictatorship")
+//                        }
 
                     // Dev-only helper tab to reset the onboarding gate
                     #if DEBUG

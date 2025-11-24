@@ -11,4 +11,7 @@ class SessionManager: ObservableObject {
     
     @Published var sessionActive: Bool = false
     @Published var sessionFailed: Bool = false
+    
+    @Published  var remainingMinutes: Int = 5
+    @Published var remainingSeconds: Int = 0
 }
