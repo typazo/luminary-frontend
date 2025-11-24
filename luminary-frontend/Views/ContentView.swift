@@ -1,3 +1,4 @@
+    
 //
 //  ContentView.swift
 //  luminary-frontend
@@ -8,50 +9,77 @@
 import SwiftUI
 
 struct ContentView: View {
-//    @State private var currentPage: Page = .start
-//
-//    enum Page {
-//        case start
-//        case countdown
-//        case feed
-//    }
-    
+    // If you bring back paging later:
+    // @State private var currentPage: Page = .start
+    // enum Page { case start, countdown, feed }
+
     @StateObject var sessionManager = SessionManager.shared
+    @EnvironmentObject var settings: UserSettings
 
     var body: some View {
-        //might move this tab view into a different file so we can reuse it across pages
-        
-        TabView {
-            FeedView()
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-                .tabItem {
-                    Image(systemName: "ellipses.bubble.fill") //random for now
-                    Text("Feed")
+        Group {
+            // Gate: show setup until displayName is set
+            if settings.displayName != nil {
+                TabView {
+                    FeedView()
+                        .tabItem {
+                            Image(systemName: "ellipses.bubble.fill")
+                            Text("Feed")
+                        }
+
+                    SessionStartView()
+                        .tabItem {
+                            Image(systemName: "moon.stars.fill")
+                            Text("Focus")
+                        }
+
+                    ProfileView()
+                        .tabItem {
+                            Image(systemName: "person.circle.fill")
+                            Text("Profile")
+                        }
+
+                    DetectLeavingView()
+                        .tabItem {
+                            Image(systemName: "person.circle.fill")
+                            Text("dictatorship")
+                        }
+
+                    // Dev-only helper tab to reset the onboarding gate
+                    #if DEBUG
+                    // Dev-only helper tab
+                    Button("Reset Display Name") {
+                        UserDefaults.standard.removeObject(forKey: "displayName")
+                        settings.displayName = nil
+                        print("Reset displayName (DEBUG)")
+                    }
+                    .background(Color.red.opacity(0.2))
+                    .cornerRadius(8)
+                    .tabItem {
+                        Label("Reset", systemImage: "arrow.counterclockwise")
+                    }
+                    #endif
+
                 }
-            SessionStartView()
-                .tabItem {
-                    Image(systemName: "moon.stars.fill") //random for now
-                    Text("Focus")
-                    //here it's a "tab item" and it just shows you what's inside the tab, but what i want it to do is route
-                }
-            ProfileView()
-                .tabItem {
-                    Image(systemName: "person.circle.fill") //random for now
-                    Text("Profile")
-                }
-            DetectLeavingView()
-                .tabItem {
-                    Image(systemName: "person.circle.fill") //random for now
-                    Text("dictatorship")
-                }
+                .environmentObject(sessionManager)
+                // Avoid padding on TabView; apply padding inside tab content if needed
+            } else {
+                DisplayNameView()
+                // No need to re-inject settings; already inherited from environment
+            }
         }
-        .environmentObject(sessionManager)
-        .padding()
+        // Log changes in displayName without breaking ViewBuilder
+        .onChange(of: settings.displayName) { newValue in
+            print("ContentView: re-evaluated. displayName = \(String(describing: newValue))")
+        }
+        // Optional: animate the transition between onboarding and app shell
+        .animation(.default, value: settings.displayName)
     }
 }
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .environmentObject(UserSettings())
     }
 }

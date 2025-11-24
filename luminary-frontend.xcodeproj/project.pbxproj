@@ -25,6 +25,8 @@
 		2F82CD632ED39AA70012C3C9 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD622ED39AA70012C3C9 /* LoadingState.swift */; };
 		2F82CD652ED39CA30012C3C9 /* ConstellationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD642ED39CA30012C3C9 /* ConstellationCell.swift */; };
 		2F82CD672ED3A52F0012C3C9 /* UserStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD662ED3A52F0012C3C9 /* UserStats.swift */; };
+		2F82CD692ED3AEED0012C3C9 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD682ED3AEED0012C3C9 /* UserSettings.swift */; };
+		2F82CD6B2ED3AF290012C3C9 /* DisplayNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD6A2ED3AF290012C3C9 /* DisplayNameView.swift */; };
 		525331D02ED2A8A3008D49CD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331CF2ED2A89E008D49CD /* ProfileView.swift */; };
 		525331D22ED2A8A9008D49CD /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331D12ED2A8A5008D49CD /* FeedView.swift */; };
 		525331D42ED2A90F008D49CD /* SessionStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331D32ED2A8FE008D49CD /* SessionStartView.swift */; };
@@ -77,6 +79,8 @@
 		2F82CD622ED39AA70012C3C9 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
 		2F82CD642ED39CA30012C3C9 /* ConstellationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationCell.swift; sourceTree = "<group>"; };
 		2F82CD662ED3A52F0012C3C9 /* UserStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStats.swift; sourceTree = "<group>"; };
+		2F82CD682ED3AEED0012C3C9 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		2F82CD6A2ED3AF290012C3C9 /* DisplayNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNameView.swift; sourceTree = "<group>"; };
 		525331CF2ED2A89E008D49CD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		525331D12ED2A8A5008D49CD /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		525331D32ED2A8FE008D49CD /* SessionStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStartView.swift; sourceTree = "<group>"; };
@@ -184,6 +188,7 @@
 				525331E82ED2F2D2008D49CD /* Constellation.swift */,
 				2F82CD492ED2A1750012C3C9 /* Post.swift */,
 				2F82CD662ED3A52F0012C3C9 /* UserStats.swift */,
+				2F82CD682ED3AEED0012C3C9 /* UserSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				2F82CD202ED29F4E0012C3C9 /* ContentView.swift */,
 				2F82CD592ED2B0D90012C3C9 /* PostCell.swift */,
 				2F82CD642ED39CA30012C3C9 /* ConstellationCell.swift */,
+				2F82CD6A2ED3AF290012C3C9 /* DisplayNameView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -385,6 +391,7 @@
 				525331DB2ED2A94E008D49CD /* SessionActiveView.swift in Sources */,
 				525331D92ED2A926008D49CD /* SessionFinishedView.swift in Sources */,
 				2F82CD652ED39CA30012C3C9 /* ConstellationCell.swift in Sources */,
+				2F82CD6B2ED3AF290012C3C9 /* DisplayNameView.swift in Sources */,
 				52F809D72ED3A998003BDF93 /* SessionManager.swift in Sources */,
 				2F82CD672ED3A52F0012C3C9 /* UserStats.swift in Sources */,
 				2F82CD4A2ED2A1750012C3C9 /* Post.swift in Sources */,
@@ -394,6 +401,7 @@
 				2F82CD212ED29F4E0012C3C9 /* ContentView.swift in Sources */,
 				525331D02ED2A8A3008D49CD /* ProfileView.swift in Sources */,
 				2F82CD1F2ED29F4E0012C3C9 /* luminary_frontendApp.swift in Sources */,
+				2F82CD692ED3AEED0012C3C9 /* UserSettings.swift in Sources */,
 				2F82CD5A2ED2B0D90012C3C9 /* PostCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
