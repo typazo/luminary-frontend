@@ -9,32 +9,25 @@
 
 import Foundation
 import SwiftUI
-//old
-
-////We need to distinguish between a fail and a success
-//struct SessionFinishedView : View {
-//
-//
-//    var body : some View {
-//        VStack{
-//            Text("Wow you finished the session lfg")
-//        }
-//    }
-//}
-
-
-// new
 
 struct SessionFinishedView : View {
     let onReturnToStart: () -> Void
+    
+    @EnvironmentObject var sessionManager : SessionManager
 
     var body : some View {
         VStack(spacing: 20) {
-            Text("Nice work! 🎉")
+            Text("OHH YEAH")
                 .font(.title)
 
-            Text("You finished the session.")
+            Text("You earned a star!")
                 .font(.headline)
+            
+            Text("You worked for \(sessionManager.totalMinutes) minutes and \(sessionManager.totalSeconds) seconds")
+                .font(.headline)
+            //right now this doesnt work because i never actually updated totals
+            
+            //and then an image here to show how much youve done for your constellation
 
             Button("Return to Start") {
                 onReturnToStart() // sets sessionActive = false, returns to tabs

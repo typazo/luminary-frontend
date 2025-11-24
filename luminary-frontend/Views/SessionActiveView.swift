@@ -40,6 +40,7 @@ import SwiftUI
 
 struct SessionActiveView: View {
     @EnvironmentObject var sessionManager: SessionManager
+    @Environment(\.scenePhase) var scenePhase
     
     let onCancel: () -> Void
     let onFinish: () -> Void
@@ -68,10 +69,18 @@ struct SessionActiveView: View {
                     onFinish() // flips to finished screen in the router
                 }
                 .foregroundColor(.blue)
+                
 
             }
             .padding()
             .toolbar(.hidden, for: .tabBar) // keep tab bar hidden while full-screen
+            .onChange(of: scenePhase) { currentPhase in
+                if (currentPhase == .background){
+                    onCancel()
+                    //cancel if we go to the background
+                    //this should detect if we exit the app
+                }
+            }
         }
     }
 }

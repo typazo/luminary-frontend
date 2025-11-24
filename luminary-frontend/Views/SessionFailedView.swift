@@ -13,7 +13,7 @@ struct SessionFailedView: View {
 
     var body: some View {
         VStack(spacing: 16) {
-            Text("Session cancelled")
+            Text("Your session failed so your star faded")
                 .font(.title)
             Button("Return to Start") {
                 onReturnToStart()

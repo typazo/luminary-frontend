@@ -28,8 +28,7 @@ struct SetTimeView : View {
             }
             .pickerStyle(.wheel)
             .clipped()
-            
-            
+        
             //right now i don't want to have this button because it adds an unnecessary step to the stack!!
             //            NavigationLink(
             //                "Save timer timesss",
@@ -51,9 +50,14 @@ struct SetTimeView : View {
         //        remainingSeconds = totalSeconds
         //    }
         
+        
         /// Called when countdown reaches zero
         let onCompleted: () -> Void
 
+        
+        init(onCompleted: @escaping () -> Void) {
+                self.onCompleted = onCompleted
+            }
         
         
         var body : some View {
