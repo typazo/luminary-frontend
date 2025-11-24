@@ -27,6 +27,7 @@
 		2F82CD672ED3A52F0012C3C9 /* UserStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD662ED3A52F0012C3C9 /* UserStats.swift */; };
 		2F82CD692ED3AEED0012C3C9 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD682ED3AEED0012C3C9 /* UserSettings.swift */; };
 		2F82CD6B2ED3AF290012C3C9 /* DisplayNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD6A2ED3AF290012C3C9 /* DisplayNameView.swift */; };
+		2F82CD6F2ED413A30012C3C9 /* SessionFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD6E2ED413A30012C3C9 /* SessionFailedView.swift */; };
 		525331D02ED2A8A3008D49CD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331CF2ED2A89E008D49CD /* ProfileView.swift */; };
 		525331D22ED2A8A9008D49CD /* FeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331D12ED2A8A5008D49CD /* FeedView.swift */; };
 		525331D42ED2A90F008D49CD /* SessionStartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331D32ED2A8FE008D49CD /* SessionStartView.swift */; };
@@ -81,6 +82,7 @@
 		2F82CD662ED3A52F0012C3C9 /* UserStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStats.swift; sourceTree = "<group>"; };
 		2F82CD682ED3AEED0012C3C9 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		2F82CD6A2ED3AF290012C3C9 /* DisplayNameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayNameView.swift; sourceTree = "<group>"; };
+		2F82CD6E2ED413A30012C3C9 /* SessionFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionFailedView.swift; sourceTree = "<group>"; };
 		525331CF2ED2A89E008D49CD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		525331D12ED2A8A5008D49CD /* FeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedView.swift; sourceTree = "<group>"; };
 		525331D32ED2A8FE008D49CD /* SessionStartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStartView.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				2F82CD592ED2B0D90012C3C9 /* PostCell.swift */,
 				2F82CD642ED39CA30012C3C9 /* ConstellationCell.swift */,
 				2F82CD6A2ED3AF290012C3C9 /* DisplayNameView.swift */,
+				2F82CD6E2ED413A30012C3C9 /* SessionFailedView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				525331D42ED2A90F008D49CD /* SessionStartView.swift in Sources */,
 				525331E92ED2F2D4008D49CD /* Constellation.swift in Sources */,
 				2F82CD612ED3999F0012C3C9 /* ProfileViewModel.swift in Sources */,
+				2F82CD6F2ED413A30012C3C9 /* SessionFailedView.swift in Sources */,
 				2F82CD4D2ED2A1A50012C3C9 /* PostListViewModel.swift in Sources */,
 				2F82CD5D2ED3827A0012C3C9 /* Date+Extension.swift in Sources */,
 				525331DB2ED2A94E008D49CD /* SessionActiveView.swift in Sources */,

@@ -53,25 +53,18 @@ struct SessionStartView: View {
 //                    sessionManager.sessionActive = true
 //                }
                 
-                VStack {
-                    NavigationLink(
-                        destination: CountdownView()
-                            .environmentObject(sessionManager),
-                        label: {
-                            Text("Start Timer")
-                                .padding()
-                                .background(Color.blue)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
-                        }
-                    )
-                    .simultaneousGesture(TapGesture().onEnded {
-                        sessionManager.sessionActive = true
-                        sessionManager.sessionFailed = false //reset the failed session
-                    })
-
-                }
                 
+                Button {
+                    sessionManager.sessionActive = true
+                    sessionManager.sessionFailed = false // reset failed flags
+                    sessionManager.sessionFinished = false
+                } label: {
+                    Text("Start Timer")
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
             }
             .padding()
         }

@@ -13,7 +13,8 @@ struct ContentView: View {
     // @State private var currentPage: Page = .start
     // enum Page { case start, countdown, feed }
 
-    @StateObject var sessionManager = SessionManager.shared
+    //@StateObject var sessionManager = SessionManager.shared
+    @EnvironmentObject var sessionManager: SessionManager
     @EnvironmentObject var settings: UserSettings
 
     var body: some View {
@@ -61,8 +62,44 @@ struct ContentView: View {
                     #endif
 
                 }
-                .environmentObject(sessionManager)
-                // Avoid padding on TabView; apply padding inside tab content if needed
+                
+                .fullScreenCover(isPresented: $sessionManager.sessionActive) {
+                    SessionActiveView(
+                        onCancel: {
+                            // cancel → failed screen
+                            sessionManager.sessionActive = false
+                            sessionManager.sessionFailed = true
+                        },
+                        onFinish: {
+                            // finish → finished screen
+                            sessionManager.sessionActive = false
+                            sessionManager.sessionFinished = true
+                        }
+                    )
+                    .environmentObject(sessionManager)
+                    .toolbar(.hidden, for: .tabBar)
+                }
+                // ✅ Present FINISHED full-screen
+                .fullScreenCover(isPresented: $sessionManager.sessionFinished) {
+                    SessionFinishedView(onReturnToStart: {
+                        // return → dismiss cover and reset flags
+                        sessionManager.sessionFinished = false
+                        sessionManager.sessionFailed = false
+                        sessionManager.sessionActive = false
+                    })
+                    .environmentObject(sessionManager)
+                    .toolbar(.hidden, for: .tabBar)
+                }
+                // ✅ Present FAILED full-screen (optional)
+                .fullScreenCover(isPresented: $sessionManager.sessionFailed) {
+                    SessionFailedView(onReturnToStart: {
+                        sessionManager.sessionFinished = false
+                        sessionManager.sessionFailed = false
+                        sessionManager.sessionActive = false
+                    })
+                    .environmentObject(sessionManager)
+                    .toolbar(.hidden, for: .tabBar)
+                }
             } else {
                 DisplayNameView()
                 // No need to re-inject settings; already inherited from environment
@@ -71,6 +108,7 @@ struct ContentView: View {
         // Log changes in displayName without breaking ViewBuilder
         .onChange(of: settings.displayName) { newValue in
             print("ContentView: re-evaluated. displayName = \(String(describing: newValue))")
+            
         }
         // Optional: animate the transition between onboarding and app shell
         .animation(.default, value: settings.displayName)

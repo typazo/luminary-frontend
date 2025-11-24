@@ -51,6 +51,10 @@ struct SetTimeView : View {
         //        remainingSeconds = totalSeconds
         //    }
         
+        /// Called when countdown reaches zero
+        let onCompleted: () -> Void
+
+        
         
         var body : some View {
             VStack{
@@ -98,7 +102,8 @@ struct SetTimeView : View {
                     //here, we should route to session finished view... right now we dont do that tho
                     //perhaps we call a different function that lets us go there bc idk how we would do that here
                     //ISSUE!! it repeatedly prints timer finished even after i leave
-                    sessionManager.sessionActive = false
+                    //sessionManager.sessionActive = false
+                    onCompleted()
                 }
             }
         }
