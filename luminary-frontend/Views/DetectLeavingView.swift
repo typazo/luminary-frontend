@@ -6,6 +6,8 @@
 //
 import SwiftUI
 
+//my playground for messing with the view and scenphases, but we will likely end up deleting this
+
 
 struct DetectLeavingView : View {
     @EnvironmentObject var sessionManager : SessionManager

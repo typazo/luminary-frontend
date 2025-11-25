@@ -39,6 +39,7 @@ struct ContentView: View {
                             Image(systemName: "person.circle.fill")
                             Text("Profile")
                         }
+                        .environmentObject(UserSettings())
 
 //                    DetectLeavingView()
 //                        .tabItem {

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ProfileView : View {
     @StateObject var viewModel = ProfileViewModel()
+    @EnvironmentObject var settings: UserSettings
 
     var body : some View {
         ScrollView{
@@ -18,8 +19,15 @@ struct ProfileView : View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
-                Text("Your galaxy :)")
-                    .font(.system(size: 24))
+                
+                //later ill just have one text that has different words based on if with a text variable
+                if let name = settings.displayName {
+                    Text("\(name)'s Galaxy :)")
+                        .font(.system(size: 24))
+                } else {
+                    Text("Someone's Galaxy :)")
+                        .font(.system(size: 24))
+                }
                 if let stats = viewModel.userStats {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Stars completed: \(stats.starsCompleted)")

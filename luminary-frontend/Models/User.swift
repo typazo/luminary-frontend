@@ -8,7 +8,7 @@
 import Foundation
 
 struct User : Hashable, Codable {
-    let userId: Int //they say "PK" ?
+    let userId: Int //they say "PK" (primary key)
     let displayName: String
     let constellationAttempts: Int
 //    let studySessions: [StudySession]
