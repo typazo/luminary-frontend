@@ -54,31 +54,27 @@ struct SessionActiveView: View {
 
                 CountdownView(
                     onCompleted: {
-                        // This should route to the finished screen in your cover.
-                        // If you are using the SessionCoverRouter approach:
-                        onFinish() // switches the router to SessionFinishedView
+                        onFinish()
                     })
                 .environmentObject(sessionManager)
 
                 Button("Cancel Session") {
-                    onCancel() // sets sessionFailed = true
+                    onCancel()
                 }
                 .foregroundColor(.red)
 
                 Button("Finish Session") {
-                    onFinish() // flips to finished screen in the router
+                    onFinish()
                 }
                 .foregroundColor(.blue)
                 
 
             }
             .padding()
-            .toolbar(.hidden, for: .tabBar) // keep tab bar hidden while full-screen
+            .toolbar(.hidden, for: .tabBar)
             .onChange(of: scenePhase) { currentPhase in
                 if (currentPhase == .background){
                     onCancel()
-                    //cancel if we go to the background
-                    //this should detect if we exit the app
                 }
             }
         }

@@ -10,7 +10,7 @@ import FamilyControls
 
 @main
 struct luminary_frontendApp: App {
-    @StateObject var settings = UserSettings()  // single instance for app
+    @StateObject var settings = UserSettings()  
     let center = AuthorizationCenter.shared //necessary for asking permission for auth
     @StateObject var sessionManager = SessionManager.shared
     

@@ -35,7 +35,6 @@ struct DisplayNameView: View {
     }
     @MainActor
     private func saveName() {
-        // Dismiss the keyboard first
         nameFieldIsFocused = false
 
         let trimmed = inputName.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -44,7 +43,6 @@ struct DisplayNameView: View {
             return
         }
 
-        // Save to UserSettings and UserDefaults
         DispatchQueue.main.async {
             self.settings.displayName = trimmed
             print("DisplayNameView: Set displayName to '\(trimmed)'")

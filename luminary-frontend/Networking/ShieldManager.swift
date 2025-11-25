@@ -15,7 +15,6 @@ class ShieldManager: ObservableObject {
     private let store = ManagedSettingsStore()
     
     func shieldActivities() {
-        // Clear to reset previous settings
         store.clearAllSettings()
                      
         let applications = discouragedSelections.applicationTokens
