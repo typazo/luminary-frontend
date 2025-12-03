@@ -40,18 +40,29 @@ struct ProfileView : View {
                     .cornerRadius(12)
                     .padding(.horizontal)
                 }
-                ForEach(viewModel.constellations, id: \.self) { constellation in
-                    ConstellationCell(constellation: constellation)
-                        .padding(.horizontal)
+                if viewModel.completedConstellations.isEmpty {
+                    Text("No completed constellations yet!")
+                        .foregroundColor(.gray)
+                        .padding()
+                } else {
+                    ForEach(viewModel.completedConstellations, id: \.self) { constellation in
+                        ConstellationCell(constellation: constellation)
+                            .padding(.horizontal)
+                    }
                 }
+
             }
             .padding(.vertical)
         }
         .refreshable {
-            await viewModel.fetchProfileData()
+            if let userId = settings.userId {
+                await viewModel.fetchProfileData(for: userId)
+            }
         }
         .task {
-            await viewModel.fetchProfileData()
+            if let userId = settings.userId {
+                await viewModel.fetchProfileData(for: userId)
+            }
         }
 
     }

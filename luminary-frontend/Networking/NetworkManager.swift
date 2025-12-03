@@ -8,29 +8,74 @@
 import Alamofire
 import Foundation
 
+
+struct TotalMinutesResponse: Codable {
+    let total_minutes: Int
+}
+
+struct CompletedConstellationsResponse: Codable {
+    let num_completed: Int
+}
+
+struct ConstellationAttemptsResponse: Codable {
+    let constellation_attempts: [ConstellationAttempt]
+}
+
+struct ConstellationAttempt: Codable {
+    let stars_completed: Int
+}
+
+
+
 class NetworkManager {
 
     /// Shared singleton instance
     static let shared = NetworkManager()
-
+    private let baseURL = "http://136.107.14.97"
     private init() { }
 
     // MARK: - Requests
     
+//    func fetchPosts() async throws -> [Post] {
+//        let endpoint = "\(baseURL)/api/feed/"
+//
+//        let decoder = JSONDecoder()
+//
+//        // Create the request
+//        return try await withCheckedThrowingContinuation { continuation in
+//            AF.request(endpoint, method: .get)
+//                .validate()
+//                .responseDecodable(of: [Post].self, decoder: decoder) { response in
+//                    switch response.result {
+//                    case .success(let posts):
+//                        print("Successfully fetched \(posts.count) posts")
+//                        continuation.resume(returning: posts)
+//                    case .failure(let error):
+//                        print("Error in NetworkManager.fetchPosts: \(error.localizedDescription)")
+//                        continuation.resume(throwing: error)
+//                    }
+//                }
+//        }
+//    }
+    
+    
     func fetchPosts() async throws -> [Post] {
-        let endpoint = "placeholder/api/feed/"
-
+        let endpoint = "\(baseURL)/api/feed/"
         let decoder = JSONDecoder()
 
-        // Create the request
+        // Decode wrapper { "posts": [...] }
+        struct PostsResponse: Decodable {
+            let posts: [Post]
+        }
+
         return try await withCheckedThrowingContinuation { continuation in
             AF.request(endpoint, method: .get)
                 .validate()
-                .responseDecodable(of: [Post].self, decoder: decoder) { response in
+                .responseDecodable(of: PostsResponse.self, decoder: decoder) { response in
                     switch response.result {
-                    case .success(let posts):
-                        print("Successfully fetched \(posts.count) posts")
-                        continuation.resume(returning: posts)
+                    case .success(let wrapper):
+                        print("Successfully fetched \(wrapper.posts.count) posts")
+                        continuation.resume(returning: wrapper.posts)
                     case .failure(let error):
                         print("Error in NetworkManager.fetchPosts: \(error.localizedDescription)")
                         continuation.resume(throwing: error)
@@ -40,78 +85,43 @@ class NetworkManager {
     }
     
     
-//    func fetchPosts() async throws -> [Post] { ALTERNATE VERSION TO TRY IF ABOVE DOESNT WORK
-//        let endpoint = "https://your-api.com/api/feed/"
-//        let decoder = JSONDecoder()
-//
-//        // Decode wrapper { "posts": [...] }
-//        struct PostsResponse: Decodable {
-//            let posts: [Post]
-//        }
-//
-//        return try await withCheckedThrowingContinuation { continuation in
-//            AF.request(endpoint, method: .get)
-//                .validate()
-//                .responseDecodable(of: PostsResponse.self, decoder: decoder) { response in
-//                    switch response.result {
-//                    case .success(let wrapper):
-//                        print("Successfully fetched \(wrapper.posts.count) posts")
-//                        continuation.resume(returning: wrapper.posts)
-//                    case .failure(let error):
-//                        print("Error in NetworkManager.fetchPosts: \(error.localizedDescription)")
-//                        continuation.resume(throwing: error)
-//                    }
-//                }
-//        }
-//    }
-
     
-    func fetchConstellations() async throws -> [Constellation] {
-        let endpoint = "placeholder"
+    func fetchUserStats(for userId: Int) async throws -> UserStats {
         let decoder = JSONDecoder()
 
-        return try await withCheckedThrowingContinuation { continuation in
-            AF.request(endpoint, method: .get)
-                .validate()
-                .responseDecodable(of: [Constellation].self, decoder: decoder) { response in
-                    switch response.result {
-                    case .success(let constellations):
-                        print("Successfully fetched \(constellations.count) constellations")
-                        continuation.resume(returning: constellations)
-                    case .failure(let error):
-                        print("Error in NetworkManager.fetchConstellations: \(error.localizedDescription)")
-                        continuation.resume(throwing: error)
-                    }
-                }
-        }
-    }
-     
-    //TODO: THIS IS TOTALLLY NOT A THING AND IT NEEDS TO BE FIXED BRUH
-    func fetchUserStats() async throws -> UserStats {
-        let endpoint = "placeholder/user/stats"
-        let decoder = JSONDecoder()
+        async let minutesResponse = AF.request("\(baseURL)/api/users/\(userId)/total_minutes/")
+            .validate()
+            .serializingDecodable(TotalMinutesResponse.self, decoder: decoder)
+            .value
 
-        return try await withCheckedThrowingContinuation { continuation in
-            AF.request(endpoint, method: .get)
-                .validate()
-                .responseDecodable(of: UserStats.self, decoder: decoder) { response in
-                    switch response.result {
-                    case .success(let stats):
-                        print("Successfully fetched user stats")
-                        continuation.resume(returning: stats)
-                    case .failure(let error):
-                        print("Error in NetworkManager.fetchUserStats: \(error.localizedDescription)")
-                        continuation.resume(throwing: error)
-                    }
-                }
-        }
+        async let completedResponse = AF.request("\(baseURL)/api/users/\(userId)/completed_constellations/")
+            .validate()
+            .serializingDecodable(CompletedConstellationsResponse.self, decoder: decoder)
+            .value
+
+        async let attemptsResponse = AF.request("\(baseURL)/api/users/\(userId)/constellation_attempts/")
+            .validate()
+            .serializingDecodable(ConstellationAttemptsResponse.self, decoder: decoder)
+            .value
+
+        let (minutesData, completedData, attemptsData) = try await (minutesResponse, completedResponse, attemptsResponse)
+
+        let starsCompleted = attemptsData.constellation_attempts.reduce(0) { $0 + $1.stars_completed }
+        let constellationsCompleted = completedData.num_completed
+        let hoursStudied = minutesData.total_minutes / 60
+
+        return UserStats(starsCompleted: starsCompleted,
+                         constellationsCompleted: constellationsCompleted,
+                         hoursStudied: hoursStudied)
     }
+
+
     
     
     // MARK: - Users API
 
     func fetchAllUsers() async throws -> [User] {
-        let endpoint = "/api/users/"
+        let endpoint = "\(baseURL)/api/users/"
         let decoder = JSONDecoder()
         return try await withCheckedThrowingContinuation { continuation in
             AF.request(endpoint, method: .get)
@@ -128,7 +138,7 @@ class NetworkManager {
     }
 
     func fetchUser(byID id: Int) async throws -> User {
-        let endpoint = "/api/users/\(id)/"
+        let endpoint = "\(baseURL)/api/users/\(id)/"
         let decoder = JSONDecoder()
         return try await withCheckedThrowingContinuation { continuation in
             AF.request(endpoint, method: .get)
@@ -145,7 +155,7 @@ class NetworkManager {
     }
 
     func createUser(displayName: String) async throws -> User {
-        let endpoint = "/api/users/"
+        let endpoint = "\(baseURL)/api/users/"
         let decoder = JSONDecoder()
         struct CreateUserBody: Encodable { let display_name: String }
         return try await withCheckedThrowingContinuation { continuation in
@@ -164,6 +174,26 @@ class NetworkManager {
             }
         }
     }
+    
+    
+    func deleteUser(byID id: Int) async throws {
+        let endpoint = "\(baseURL)/api/users/\(id)/"
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(endpoint, method: .delete)
+                .validate(statusCode: 200..<300)
+                .response { response in
+                    switch response.result {
+                    case .success:
+                        print("User deleted successfully")
+                        continuation.resume()
+                    case .failure(let error):
+                        print("Error deleting user: \(error.localizedDescription)")
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+    }
+
 
     /// Ensures a user exists on the server and returns it.
     /// Order of resolution:
@@ -207,7 +237,7 @@ class NetworkManager {
     
     //THiS IS FOR THE PROFILE PAGE
     func fetchCompletedConstellations(for userId: Int) async throws -> [Constellation] {
-        let endpoint = "https://your-api.com/api/users/\(userId)/completed_constellations/"
+        let endpoint = "\(baseURL)/api/users/\(userId)/completed_constellations/"
         let decoder = JSONDecoder()
 
         struct CompletedConstellationsResponse: Codable {
