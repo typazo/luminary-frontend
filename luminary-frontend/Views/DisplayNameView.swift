@@ -23,30 +23,31 @@ struct DisplayNameView: View {
                 .focused($nameFieldIsFocused)
                 .submitLabel(.done)
                 .onSubmit {
-                    saveName()
+                    Task { await saveName() }
                 }
 
             Button("Continue") {
-                saveName()
+                Task { await saveName() }
             }
             .disabled(inputName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
         }
         .padding()
     }
-    @MainActor
-    private func saveName() {
-        nameFieldIsFocused = false
 
+    @MainActor
+    private func saveName() async {
+        nameFieldIsFocused = false
         let trimmed = inputName.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
             print("DisplayNameView: Attempted save with empty name")
             return
         }
 
-        DispatchQueue.main.async {
-            self.settings.displayName = trimmed
-            print("DisplayNameView: Set displayName to '\(trimmed)'")
+        do {
+            let user = try await NetworkManager.shared.ensureUserExists(using: settings, fallbackDisplayName: trimmed)
+            print("DisplayNameView: Created or found user → \(user)")
+        } catch {
+            print("DisplayNameView: Failed to create/find user → \(error)")
         }
-
     }
 }

@@ -19,7 +19,7 @@ struct ContentView: View {
 
     var body: some View {
         Group {
-            if settings.displayName != nil {
+            if settings.userId != nil {
                 TabView {
                     FeedView()
                         .tabItem {

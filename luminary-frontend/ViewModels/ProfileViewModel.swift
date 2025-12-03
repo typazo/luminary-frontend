@@ -8,52 +8,31 @@
 import Foundation
 
 
-class ProfileViewModel: ObservableObject {
 
+@MainActor
+class ProfileViewModel: ObservableObject {
     @Published var constellations: [Constellation] = []
+    @Published var completedConstellations: [Constellation] = []
     @Published var userStats: UserStats? = nil
     @Published var loadingState: LoadingState = .loading
-    
 
-
-    
-    
-//    func fetchConstellations() async {
-//        self.loadingState = .loading
-//
-//        do {
-//            // Call your NetworkManager async method
-//            let fetchedConstellations = try await NetworkManager.shared.fetchConstellations()
-//
-//            self.constellations = fetchedConstellations
-//            self.loadingState = .loaded
-//        } catch {
-//            // fallback data if network fails
-//            self.constellations = constellationDummyData
-//            self.loadingState = .error(error)
-//        }
-//    }
-    
-    // MARK: - Networking
-    
-    func fetchProfileData() async {
+    func fetchProfileData(for userId: Int) async {
         loadingState = .loading
-        
         do {
-            // Fetch constellations and stats in parallel
             async let constellationsTask = NetworkManager.shared.fetchConstellations()
             async let statsTask = NetworkManager.shared.fetchUserStats()
-            
-            let (fetchedConstellations, fetchedStats) = try await (constellationsTask, statsTask)
-            
-            // Update published properties
+            async let completedTask = NetworkManager.shared.fetchCompletedConstellations(for: userId)
+
+            let (fetchedConstellations, fetchedStats, fetchedCompleted) = try await (constellationsTask, statsTask, completedTask)
+
             constellations = fetchedConstellations
             userStats = fetchedStats
+            completedConstellations = fetchedCompleted
             loadingState = .loaded
         } catch {
-            // Fallback data on failure
             constellations = constellationDummyData
             userStats = UserStats.defaultStats
+            completedConstellations = []
             loadingState = .error(error)
         }
     }

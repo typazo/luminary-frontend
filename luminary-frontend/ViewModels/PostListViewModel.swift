@@ -92,19 +92,18 @@ class PostListViewModel: ObservableObject {
 //    }
     
     
+
     func fetchPosts() async {
-        self.loadingState = .loading
-        
+        loadingState = .loading
+
         do {
-            // Call your NetworkManager async method
             let fetchedPosts = try await NetworkManager.shared.fetchPosts()
-            
-            self.posts = fetchedPosts
-            self.loadingState = .loaded
+            posts = fetchedPosts
+            loadingState = .loaded
         } catch {
-            // fallback data if network fails
-            self.posts = dummyData
-            self.loadingState = .error(error)
+            posts = dummyData
+            loadingState = .error(error)
         }
     }
+
 }

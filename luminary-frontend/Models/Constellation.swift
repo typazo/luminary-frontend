@@ -12,6 +12,20 @@ struct Constellation: Hashable, Codable {
     let constellationId: Int
     let weight: Int
     
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case constellationId = "id"
+        case weight
+    }
+
+    init(name: String, constellationId: Int, weight: Int) {
+        self.name = name
+        self.constellationId = constellationId
+        self.weight = weight
+    }
+
+    
     //networking initalizer
 //    init(from decoder: Decoder) throws {
 //            let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -30,13 +44,6 @@ struct Constellation: Hashable, Codable {
 //            self.name = try container.decode(String.self, forKey: .name)
 //            self.rating = try container.decode(Float.self, forKey: .rating)
 //    }
-    
-    //normal initializer
-    init(name: String, constellationId: Int, weight: Int) {
-        self.name = name
-        self.constellationId = constellationId
-        self.weight = weight
-    }
 }
 
 
