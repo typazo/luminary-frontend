@@ -120,7 +120,7 @@ struct Post: Hashable, Codable {
         try container.encode(formatter.string(from: postTime), forKey: .createdAt)
 
         // Duration seconds → minutes integer
-        let seconds = Int(studyDuration.components.seconds ?? 0)
+        let seconds = Int(studyDuration.components.seconds )
         try container.encode(seconds / 60, forKey: .studyDuration)
 
         // Nested user/constellation (only if required by your POST spec)
