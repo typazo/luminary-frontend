@@ -24,9 +24,9 @@ struct ProfileView : View {
                 if let name = settings.displayName {
                     Text("\(name)'s Galaxy :)")
                         .font(.system(size: 24))
-                } else {
-                    Text("Someone's Galaxy :)")
-                        .font(.system(size: 24))
+//                } else {
+//                    Text("Someone's Galaxy :)")
+//                        .font(.system(size: 24))
                 }
                 if let stats = viewModel.userStats {
                     VStack(alignment: .leading, spacing: 8) {

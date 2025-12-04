@@ -18,14 +18,14 @@ struct DisplayNameView: View {
             Text("create display name")
                 .font(.custom("CormorantInfant-SemiBold", size: 26.31))
                 .foregroundColor(.veryLightPurple)
-            
-            Spacer().frame(height: 27) //for padding
+                .padding(.bottom, 25)
 
             TextField("what's the name of your galaxy?", text: $inputName)
                 .font(.custom("CormorantInfant-SemiBold", size: 14.07))
                 .foregroundColor(.warmPurple) //must fix color
                 .frame(width: 253.33, height: 92.33)
                 .padding(.horizontal, 20)
+                .padding(.bottom, 25)
                 .background(Color(hex: 0xF8CDFB))
 //                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .textFieldStyle(.plain)
