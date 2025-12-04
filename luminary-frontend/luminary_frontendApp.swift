@@ -11,7 +11,7 @@ import FamilyControls
 @main
 struct luminary_frontendApp: App {
     @StateObject var settings = UserSettings()  
-    let center = AuthorizationCenter.shared //necessary for asking permission for auth
+//    let center = AuthorizationCenter.shared //necessary for asking permission for auth
     @StateObject var sessionManager = SessionManager.shared
     
     var body: some Scene {
@@ -19,13 +19,6 @@ struct luminary_frontendApp: App {
             ContentView()
                 .environmentObject(settings)
                 .environmentObject(sessionManager)
-                .task {
-                    do {
-                        try await center.requestAuthorization(for: .individual)
-                    } catch {
-                        print("Failed to get authorization: \(error)")
-                    }
-                }
         }
     }
 }

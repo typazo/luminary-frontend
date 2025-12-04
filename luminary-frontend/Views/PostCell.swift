@@ -37,6 +37,6 @@ struct PostCell: View {
 
 struct PostCell_Previews: PreviewProvider {
     static var previews: some View {
-        PostCell(post:dummyData[0])
+        PostCell(post:postDummyData[0])
     }
 }

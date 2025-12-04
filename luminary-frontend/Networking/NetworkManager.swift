@@ -34,30 +34,7 @@ class NetworkManager {
     private let baseURL = "http://136.107.14.97"
     private init() { }
 
-    // MARK: - Requests
-    
-//    func fetchPosts() async throws -> [Post] {
-//        let endpoint = "\(baseURL)/api/feed/"
-//
-//        let decoder = JSONDecoder()
-//
-//        // Create the request
-//        return try await withCheckedThrowingContinuation { continuation in
-//            AF.request(endpoint, method: .get)
-//                .validate()
-//                .responseDecodable(of: [Post].self, decoder: decoder) { response in
-//                    switch response.result {
-//                    case .success(let posts):
-//                        print("Successfully fetched \(posts.count) posts")
-//                        continuation.resume(returning: posts)
-//                    case .failure(let error):
-//                        print("Error in NetworkManager.fetchPosts: \(error.localizedDescription)")
-//                        continuation.resume(throwing: error)
-//                    }
-//                }
-//        }
-//    }
-    
+    // MARK: - Requests    
     
     func fetchPosts() async throws -> [Post] {
         let endpoint = "\(baseURL)/api/feed/"
