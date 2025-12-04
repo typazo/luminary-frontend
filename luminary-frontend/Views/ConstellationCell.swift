@@ -20,6 +20,25 @@ struct ConstellationCell: View {
             }
             Text("image containing \(constellation.weight) stars goes here")
                 .font(.system(size: 32))
+            
+            
+            ZStack {
+                
+                Rectangle()
+                        .fill(Color.black)
+                        .frame(width: 100, height: 55)
+                
+                Image("constellation_frame")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 45)
+
+                Image("constellation1_stage1")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 45)
+                
+            }
         }
         .background(Color.gray)
         .cornerRadius(15)
