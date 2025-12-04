@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct DisplayNameView: View {
     @State private var inputName = ""
     @FocusState private var nameFieldIsFocused: Bool
@@ -14,24 +15,55 @@ struct DisplayNameView: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Text("Enter your display name")
-                .font(.headline)
+            Text("create display name")
+                .font(.custom("CormorantInfant-SemiBold", size: 26.31))
+                .foregroundColor(.veryLightPurple)
+            
+            Spacer().frame(height: 27) //for padding
 
-            TextField("Display Name", text: $inputName)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
+            TextField("what's the name of your galaxy?", text: $inputName)
+                .font(.custom("CormorantInfant-SemiBold", size: 14.07))
+                .foregroundColor(.warmPurple) //must fix color
+                .frame(width: 253.33, height: 92.33)
+                .padding(.horizontal, 20)
+                .background(Color(hex: 0xF8CDFB))
+//                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .textFieldStyle(.plain)
+                .cornerRadius(10)
+//                .padding()
                 .focused($nameFieldIsFocused)
                 .submitLabel(.done)
                 .onSubmit {
                     Task { await saveName() }
                 }
-
-            Button("Continue") {
+            
+            Spacer().frame(height: 27) //for padding
+            
+            
+            Button {
                 Task { await saveName() }
+            } label: {
+                ZStack {
+                    // --- IMAGE BACKGROUND ---
+                    Image("start_button") // Replace with your actual image asset name
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+//                        .frame(width: 253.33, height: 92.33) // Match your TextField's size, or adjust as needed
+                    
+                    // --- TEXT CONTENT ---
+                    Text("start your journey")
+                        .font(.custom("CormorantInfant-SemiBold", size: 21.31))
+                        // Set the text color to ensure visibility over the image
+                        .foregroundColor(.veryLightPurple) // Choose a color that stands out against the image
+                }
+                
             }
+            .frame(width: 184.51, height: 51.11)
+            
             .disabled(inputName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
         }
         .padding()
+        
     }
 
     @MainActor
@@ -49,5 +81,11 @@ struct DisplayNameView: View {
         } catch {
             print("DisplayNameView: Failed to create/find user → \(error)")
         }
+    }
+}
+
+struct DisplayNameView_Previews: PreviewProvider {
+    static var previews: some View {
+        DisplayNameView()
     }
 }
