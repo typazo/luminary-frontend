@@ -7,54 +7,27 @@
 
 import Foundation
 
-
+@MainActor
 class ProfileViewModel: ObservableObject {
-
-    @Published var constellations: [Constellation] = []
+    @Published var completedConstellations: [Constellation] = []
     @Published var userStats: UserStats? = nil
     @Published var loadingState: LoadingState = .loading
-    
 
-
-    
-    
-//    func fetchConstellations() async {
-//        self.loadingState = .loading
-//
-//        do {
-//            // Call your NetworkManager async method
-//            let fetchedConstellations = try await NetworkManager.shared.fetchConstellations()
-//
-//            self.constellations = fetchedConstellations
-//            self.loadingState = .loaded
-//        } catch {
-//            // fallback data if network fails
-//            self.constellations = constellationDummyData
-//            self.loadingState = .error(error)
-//        }
-//    }
-    
-    // MARK: - Networking
-    
-    func fetchProfileData() async {
+    func fetchProfileData(for userId: Int) async {
         loadingState = .loading
-        
         do {
-            // Fetch constellations and stats in parallel
-            async let constellationsTask = NetworkManager.shared.fetchConstellations()
-            async let statsTask = NetworkManager.shared.fetchUserStats()
-            
-            let (fetchedConstellations, fetchedStats) = try await (constellationsTask, statsTask)
-            
-            // Update published properties
-            constellations = fetchedConstellations
-            userStats = fetchedStats
-            loadingState = .loaded
+            // Fetch stats + completed constellations in parallel
+            async let statsTask = NetworkManager.shared.fetchUserStats(for: userId)
+            async let completedTask = NetworkManager.shared.fetchCompletedConstellations(for: userId)
+
+            let (fetchedStats, fetchedCompleted) = try await (statsTask, completedTask)
+
+            self.userStats = fetchedStats
+            self.completedConstellations = fetchedCompleted
+            self.loadingState = .loaded
         } catch {
-            // Fallback data on failure
-            constellations = constellationDummyData
-            userStats = UserStats.defaultStats
-            loadingState = .error(error)
+            self.loadingState = .error(error)
         }
     }
 }
+
