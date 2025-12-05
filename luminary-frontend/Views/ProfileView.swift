@@ -154,7 +154,7 @@ import SwiftUI
 //}
 
 
-//maybe work better? idk
+//maybe work better? idk    
 
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()

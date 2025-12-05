@@ -19,6 +19,7 @@ struct SessionStartView: View {
     @State private var errorMessage: String?
     @State private var selectedConstellation: Constellation = Constellation(name: "Loading…", constellationId: -1, weight: 0)
     
+    @State private var activeAttempt = false
 
 
     var body: some View {
@@ -32,11 +33,23 @@ struct SessionStartView: View {
                 
                 VStack(spacing: 30) {
                     // -- Dropdown of Constellation Choices --
-                    ConstellationsDropdownView(selectedConstellation: $selectedConstellation)
-                        .padding(.top, 150)
-                        .padding(.bottom, 10)
-                    
-                    
+                    if !activeAttempt {
+                        ConstellationsDropdownView(selectedConstellation: $selectedConstellation)
+                            .padding(.top, 150)
+                            .padding(.bottom, 10)
+                    } else {
+                        if let attemptFocus = sessionManager.currentAttempt {
+                            Text("your current selected constellation is \(attemptFocus.id)")
+                                .padding(.top, 150)
+                                .padding(.bottom, 10)
+                        } else {
+                            // Provide a fallback view when currentAttempt is nil
+                            Text("No current attempt; please choose a constellation.")
+                                .foregroundColor(.secondary)
+                                .padding(.top, 150)
+                                .padding(.bottom, 10)
+                        }
+                    }
                     // -- Timer graphic + selected time
                     NavigationLink(destination: SetTimeView()) {
                         ZStack(){
@@ -167,8 +180,39 @@ struct SessionStartView: View {
                 
             }
         }
-    }
         
+        // ✅ This replaces your top-level Task: runs once when the view appears
+        .task {
+            await resolveCurrentAttemptOnAppear()
+        }
+
+    }
+    
+    private func resolveCurrentAttemptOnAppear() async {
+        guard let userId = settings.userId else {
+            errorMessage = "No user ID is set."
+            return
+        }
+
+        do {
+            let resolvedAttempt = try await NetworkManager.shared.getUserCurrentAttempt(userId: userId)
+            // If SessionManager is @MainActor, these assignments are safe
+            sessionManager.currentAttempt = resolvedAttempt
+            errorMessage = nil
+            activeAttempt = true
+        } catch {
+            if let afError = error as? AFError, afError.responseCode == 404 {
+                // No current attempt exists
+                activeAttempt = false
+            } else {
+                errorMessage = "Unable to load current attempt."
+                sessionManager.sessionActive = false
+                sessionManager.sessionFailed = true
+                sessionManager.sessionFinished = false
+                print("Fetch attempt error:", error)
+            }
+        }
+    }
 }
 
 struct SessionStartViewPreviews: PreviewProvider {
