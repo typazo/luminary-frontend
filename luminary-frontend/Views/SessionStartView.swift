@@ -21,6 +21,7 @@ struct SessionStartView: View {
     @State private var selectedConstellation: Constellation = Constellation(name: "Loading…", constellationId: -1, weight: 0)
     
     @State private var activeAttempt = false
+    
 
 
     var body: some View {
@@ -64,10 +65,9 @@ struct SessionStartView: View {
                                 .scaledToFit()
                                 .frame(height:270)
                             
-                            Text(String(format: "%02d:%02d:%02d",
+                            Text(String(format: "%02d:%02d",
                                         max(0, sessionManager.remainingHours),
-                                        max(0, sessionManager.remainingMinutes),
-                                        max(0, sessionManager.remainingSeconds)))
+                                        max(0, sessionManager.remainingMinutes)))
                                 .foregroundColor(Color.warmPurple)
                                 .font(.custom("CormorantInfant-Bold", size: 60))
                         }
@@ -92,7 +92,7 @@ struct SessionStartView: View {
                                 await MainActor.run { errorMessage = "No user ID is set." }
                                 return
                             }
-
+                            
                             // 1) Resolve attempt (fetch current or create new for selected constellation)
                             var resolvedAttempt: ConstellationAttemptFocus
                             do {
@@ -123,6 +123,8 @@ struct SessionStartView: View {
                                         }
                                         print("Create attempt error:", error)
                                         return
+                                        
+                                        
                                     }
                                 } else {
                                     await MainActor.run {
@@ -140,7 +142,8 @@ struct SessionStartView: View {
                             // Choose your rounding rule; here we round up if there are leftover seconds.
 //                            let minutes = max(1, sessionManager.remainingMinutes + (sessionManager.remainingSeconds > 0 ? 1 : 0))
                             let workedMinutes = max(sessionManager.totalSessionMinutes, 0)
-
+                            
+                            print("DEBUG — Hours selected: remaining=\(sessionManager.remainingHours), total=\(sessionManager.totalHours)")
                             // 3) Create the session via NetworkManager
                             do {
                                 let session = try await NetworkManager.shared.createSession(

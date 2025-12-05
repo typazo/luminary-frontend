@@ -43,6 +43,8 @@ struct SetTimeView : View {
                     
                     Spacer()
                     
+                    
+                    
                     //the hours and minutes pickers
                     HStack{
                         VStack {
@@ -50,7 +52,14 @@ struct SetTimeView : View {
                                 .font(.custom("CormorantInfant-SemiBold", size: 25))
                                 .foregroundColor(.white)
                             
-                            Picker("Hours", selection: $sessionManager.remainingHours) {
+                            Picker("Hours", selection: Binding(
+                                get: { sessionManager.remainingHours },
+                                set: { newValue in
+                                    sessionManager.remainingHours = newValue
+                                    sessionManager.totalHours = newValue   // ← store chosen value
+                                    print("DEBUG — Hours selected: remaining=\(sessionManager.remainingHours), total=\(sessionManager.totalHours)")
+                                }
+                            )) {
                                 // Allow up to 5 hours for the session
                                 ForEach(0..<6, id: \.self) { hour in
                                     Text("\(hour) hr")
@@ -70,7 +79,13 @@ struct SetTimeView : View {
                                 .font(.custom("CormorantInfant-SemiBold", size: 25))
                                 .foregroundColor(.white)
                             
-                            Picker("Minutes", selection: $sessionManager.remainingMinutes) {
+                            Picker("Minutes", selection: Binding(
+                                get: { sessionManager.remainingMinutes },
+                                set: { newValue in
+                                    sessionManager.remainingMinutes = newValue
+                                    sessionManager.totalMinutes = newValue  // ← store chosen value
+                                }
+                            )) {
                                 // Iterate through 0 to 120 minutes (up to 2 hours)
                                 ForEach(1..<60, id: \.self) { minute in
                                     Text("\(minute) min")
@@ -162,17 +177,20 @@ struct SetTimeView : View {
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
                 if sessionManager.remainingSeconds > 0 {
                     sessionManager.remainingSeconds -= 1
+
                 } else if sessionManager.remainingMinutes > 0 {
                     sessionManager.remainingMinutes -= 1
                     sessionManager.remainingSeconds = 59
+
+                } else if sessionManager.remainingHours > 0 {
+                    sessionManager.remainingHours -= 1
+                    sessionManager.remainingMinutes = 59
+                    sessionManager.remainingSeconds = 59
+
                 } else {
-                    print("timer finished")
+                    // finished
                     timer?.invalidate()
                     timer = nil
-                    //here, we should route to session finished view... right now we dont do that tho
-                    //perhaps we call a different function that lets us go there bc idk how we would do that here
-                    //ISSUE!! it repeatedly prints timer finished even after i leave
-                    //sessionManager.sessionActive = false
                     onCompleted()
                 }
             }

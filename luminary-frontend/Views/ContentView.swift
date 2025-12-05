@@ -120,9 +120,13 @@ struct ContentView: View {
                                     }
                                 }
                             },
+                            
+                            
                             onFinish: {
                                 sessionManager.sessionActive = false
                                 sessionManager.sessionFinished = true
+                                
+                                print("DEBUG — Hours selected: remaining=\(sessionManager.remainingHours), total=\(sessionManager.totalHours)")
 
                                 Task {
                                     // 1) Complete the session

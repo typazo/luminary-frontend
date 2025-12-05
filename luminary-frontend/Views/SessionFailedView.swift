@@ -18,6 +18,8 @@ struct SessionFailedView: View {
                 .scaledToFill()
                 .ignoresSafeArea() // covers entire screen
          
+            
+            
             VStack(spacing: 16) {
                 
     //            Text("Your session failed so your star faded")
