@@ -93,14 +93,9 @@
 		525331EA2ED2F73C008D49CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		525331EE2ED37EC9008D49CD /* ShieldManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldManager.swift; sourceTree = "<group>"; };
 		525331F02ED37F28008D49CD /* ShieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShieldView.swift; sourceTree = "<group>"; };
-		52B3ACE32EE2092D00A98379 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		52F809D32ED38D87003BDF93 /* DetectLeavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectLeavingView.swift; sourceTree = "<group>"; };
 		52F809D62ED3A996003BDF93 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		52B3ACD82EE2058000A98379 /* Assets */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Assets; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		2F82CD182ED29F4E0012C3C9 /* Frameworks */ = {
@@ -151,8 +146,6 @@
 		2F82CD1D2ED29F4E0012C3C9 /* luminary-frontend */ = {
 			isa = PBXGroup;
 			children = (
-				52B3ACE32EE2092D00A98379 /* Info.plist */,
-				52B3ACD82EE2058000A98379 /* Assets */,
 				2F82CD5B2ED382580012C3C9 /* Extensions */,
 				2F82CD512ED2A1D80012C3C9 /* Views */,
 				2F82CD4E2ED2A1B50012C3C9 /* Networking */,
@@ -265,9 +258,6 @@
 			buildRules = (
 			);
 			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				52B3ACD82EE2058000A98379 /* Assets */,
 			);
 			name = "luminary-frontend";
 			packageProductDependencies = (
@@ -578,7 +568,6 @@
 				DEVELOPMENT_TEAM = WL6L6PX44C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "luminary-frontend/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -608,7 +597,6 @@
 				DEVELOPMENT_TEAM = WL6L6PX44C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "luminary-frontend/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
