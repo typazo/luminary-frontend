@@ -16,7 +16,7 @@ struct FeedView : View {
             LazyVStack(spacing: 16) {
                 ForEach(viewModel.posts, id: \.self) { post in
                     PostCell(post: post)
-                        .padding(.horizontal)
+//                        .padding(.horizontal)
                 }
             }
             .padding(.vertical)
@@ -27,5 +27,12 @@ struct FeedView : View {
         .task {
             await viewModel.fetchPosts()
         }
+    }
+}
+
+
+struct FeedView_Previews: PreviewProvider {
+    static var previews: some View {
+        FeedView()
     }
 }

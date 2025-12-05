@@ -20,4 +20,15 @@ extension Date {
         return formatter.localizedString(for: self, relativeTo: Date())
     }
 
+    
+    func formattedTimestamp() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a  •  MM/dd/yy"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+
+        // Lowercase the AM/PM part
+        let result = formatter.string(from: self)
+        return result
+    }
+    
 }

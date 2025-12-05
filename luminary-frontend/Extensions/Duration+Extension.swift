@@ -26,4 +26,17 @@ extension Duration {
             return "\(minutes) \(minutes == 1 ? "minute" : "minutes")"
         }
     }
+    
+    /// Returns a time string in "HH:MM" format (e.g., "07:32")
+    func formattedHHMM() -> String {
+        let totalSeconds = self.components.seconds
+        let nonNegativeSeconds = max(0, totalSeconds)
+        
+        let hours = nonNegativeSeconds / 3600
+        let minutes = (nonNegativeSeconds % 3600) / 60
+        
+        let formattedString = String(format: "%02d:%02d", hours, minutes)
+        
+        return formattedString
+    }
 }
