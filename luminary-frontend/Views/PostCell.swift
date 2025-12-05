@@ -56,6 +56,7 @@ struct PostCell: View {
             
             Text("\(post.studyDuration.formattedHumanReadable())")
                 .font(.custom("CormorantInfant-SemiBold", size: 12))
+                .foregroundColor(Color.warmPurple)
                 
             
 
