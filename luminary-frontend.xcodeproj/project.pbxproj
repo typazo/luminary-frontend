@@ -10,6 +10,8 @@
 		2F2A9A272EE26359003D98FF /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A9A262EE26359003D98FF /* AppColors.swift */; };
 		2F2A9A2B2EE2665D003D98FF /* CormorantInfant-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A9A292EE2636D003D98FF /* CormorantInfant-SemiBold.ttf */; };
 		2F2A9A2C2EE26661003D98FF /* CormorantInfant-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A9A282EE26364003D98FF /* CormorantInfant-Bold.ttf */; };
+		2F2A9A2E2EE26D5C003D98FF /* ConstellationAttempt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A9A2D2EE26D5C003D98FF /* ConstellationAttempt.swift */; };
+		2F2A9A302EE270C8003D98FF /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A9A2F2EE270C8003D98FF /* Session.swift */; };
 		2F82CD1F2ED29F4E0012C3C9 /* luminary_frontendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD1E2ED29F4E0012C3C9 /* luminary_frontendApp.swift */; };
 		2F82CD212ED29F4E0012C3C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD202ED29F4E0012C3C9 /* ContentView.swift */; };
 		2F82CD232ED29F510012C3C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F82CD222ED29F510012C3C9 /* Assets.xcassets */; };
@@ -67,6 +69,8 @@
 		2F2A9A282EE26364003D98FF /* CormorantInfant-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantInfant-Bold.ttf"; sourceTree = "<group>"; };
 		2F2A9A292EE2636D003D98FF /* CormorantInfant-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantInfant-SemiBold.ttf"; sourceTree = "<group>"; };
 		2F2A9A2A2EE2644F003D98FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F2A9A2D2EE26D5C003D98FF /* ConstellationAttempt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstellationAttempt.swift; sourceTree = "<group>"; };
+		2F2A9A2F2EE270C8003D98FF /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		2F82CD1B2ED29F4E0012C3C9 /* luminary-frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "luminary-frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F82CD1E2ED29F4E0012C3C9 /* luminary_frontendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luminary_frontendApp.swift; sourceTree = "<group>"; };
 		2F82CD202ED29F4E0012C3C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -210,6 +214,8 @@
 				2F82CD492ED2A1750012C3C9 /* Post.swift */,
 				2F82CD662ED3A52F0012C3C9 /* UserStats.swift */,
 				2F82CD682ED3AEED0012C3C9 /* UserSettings.swift */,
+				2F2A9A2D2EE26D5C003D98FF /* ConstellationAttempt.swift */,
+				2F2A9A2F2EE270C8003D98FF /* Session.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -421,10 +427,12 @@
 				2F82CD672ED3A52F0012C3C9 /* UserStats.swift in Sources */,
 				2F82CD4A2ED2A1750012C3C9 /* Post.swift in Sources */,
 				525331EB2ED2F73F008D49CD /* User.swift in Sources */,
+				2F2A9A302EE270C8003D98FF /* Session.swift in Sources */,
 				2F82CD632ED39AA70012C3C9 /* LoadingState.swift in Sources */,
 				2F82CD502ED2A1C50012C3C9 /* NetworkManager.swift in Sources */,
 				2F82CD212ED29F4E0012C3C9 /* ContentView.swift in Sources */,
 				525331D02ED2A8A3008D49CD /* ProfileView.swift in Sources */,
+				2F2A9A2E2EE26D5C003D98FF /* ConstellationAttempt.swift in Sources */,
 				2F82CD1F2ED29F4E0012C3C9 /* luminary_frontendApp.swift in Sources */,
 				2F2A9A272EE26359003D98FF /* AppColors.swift in Sources */,
 				2F82CD692ED3AEED0012C3C9 /* UserSettings.swift in Sources */,

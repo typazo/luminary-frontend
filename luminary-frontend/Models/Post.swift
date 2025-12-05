@@ -7,28 +7,6 @@
 
 import Foundation
 
-//struct Post: Hashable, Codable {
-//    let displayName: String
-//    let postTime: Date
-//    let message: String
-//    let constellationName: String
-//    let postType: String
-//    let studyDuration: Duration
-//
-//
-//    //normal initializer
-//    init(displayName: String, postTime: Date, message: String, constellationName: String, postType: String, studyDuration: Duration) {
-//        self.displayName = displayName
-//        self.postTime = postTime
-//        self.message = message
-//        self.constellationName = constellationName
-//        self.postType = postType
-//        self.studyDuration = studyDuration
-//    }
-//}
-
-
-
 import Foundation
 
 struct Post: Hashable, Codable {

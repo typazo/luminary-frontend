@@ -240,6 +240,292 @@ class NetworkManager {
                 }
         }
     }
+    
+    
+    
+    
+    
+    //MARK: backend required for "Focus" page
+    
+    
+    
+    /// - Parameter attemptId: The ID of the attempt to increment.
+    /// - Returns: The updated attempt object as returned by the API.
+    func incrementAttemptProgress(attemptId: Int) async throws -> ConstellationAttempt {
+        let endpoint = "\(baseURL)/api/constellation_attempts/\(attemptId)/"
+        let decoder = JSONDecoder()
+        
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(endpoint, method: .put)
+                .validate()
+                .responseDecodable(of: ConstellationAttempt.self, decoder: decoder) { response in
+                    switch response.result {
+                    case .success(let attempt):
+                        continuation.resume(returning: attempt)
+                    case .failure(let error):
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+    }
+    
+    
+    
+    
+    
+    
+    /// Creates a new Constellation Attempt for a given user.
+    /// - Parameters:
+    ///   - userId: The user ID (e.g., 1).
+    ///   - constellationId: The constellation ID to create an attempt for.
+    /// - Returns: The created ConstellationAttempt returned by the API.
+    func createConstellationAttempt(userId: Int, constellationId: Int) async throws -> ConstellationAttemptFocus {
+        let endpoint = "\(baseURL)/api/users/\(userId)/constellation_attempts/"
+        let decoder = JSONDecoder()
+        // Convert snake_case JSON keys (e.g., stars_completed) to camelCase properties (starsCompleted)
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        // If you need auth headers, add them here.
+        // let headers: HTTPHeaders = ["Authorization": "Bearer \(token)"]
+
+        let parameters: [String: Any] = [
+            "constellation_id": constellationId
+        ]
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(
+                endpoint,
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default
+                // , headers: headers
+            )
+            .validate()
+            .responseDecodable(of: ConstellationAttemptFocus.self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let attempt):
+                    continuation.resume(returning: attempt)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+
+
+    /// Creates a new session for a constellation attempt.
+    /// - Parameters:
+    ///   - userId: The ID of the user starting the session.
+    ///   - attemptId: The constellation attempt ID associated with the session.
+    ///   - minutes: Duration of the session in minutes.
+    /// - Returns: The created Session returned by the API.
+    func createSession(userId: Int, attemptId: Int, minutes: Int) async throws -> Session {
+        let endpoint = "\(baseURL)/api/sessions/"
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        let parameters: [String: Any] = [
+            "user_id": userId,
+            "constellation_attempt_id": attemptId,
+            "minutes": minutes
+        ]
+        
+        // If you need auth, uncomment and supply a token.
+        // let headers: HTTPHeaders = [
+        //     "Authorization": "Bearer \(token)",
+        //     "Content-Type": "application/json"
+        // ]
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(
+                endpoint,
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default
+                // , headers: headers
+            )
+            .validate()
+            .responseDecodable(of: Session.self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let session):
+                    continuation.resume(returning: session)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+    
+    
+    
+    /// Marks a session as completed.
+    /// - Parameter sessionId: The ID of the session to complete.
+    /// - Returns: The updated Session object from the API.
+    func completeSession(sessionId: Int) async throws -> Session {
+        let endpoint = "\(baseURL)/api/sessions/\(sessionId)/complete"
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        // If your API requires auth, add headers here:
+        // let headers: HTTPHeaders = [
+        //     "Authorization": "Bearer \(token)",
+        //     "Content-Type": "application/json"
+        // ]
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(
+                endpoint,
+                method: .put
+                // , headers: headers
+            )
+            .validate()
+            .responseDecodable(of: Session.self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let session):
+                    continuation.resume(returning: session)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+
+    
+    
+    /// Returns true if the number of **completed** sessions for the attempt is >= the constellation's weight.
+    /// - Parameter attemptId: The Constellation Attempt ID.
+    /// - Returns: Bool indicating completion status.
+    func isAttemptComplete(attemptId: Int) async throws -> Bool {
+        let endpoint = "\(baseURL)/api/constellation_attempts/\(attemptId)/"
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        let attempt: ConstellationAttemptFocus = try await withCheckedThrowingContinuation { continuation in
+            AF.request(endpoint, method: .get)
+                .validate()
+                .responseDecodable(of: ConstellationAttemptFocus.self, decoder: decoder) { response in
+                    switch response.result {
+                    case .success(let attempt):
+                        continuation.resume(returning: attempt)
+                    case .failure(let error):
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+
+        // Only count sessions where is_completed == true
+        let completedCount = attempt.sessions.filter { $0.isCompleted }.count
+        let required = attempt.constellation.weight
+
+        return completedCount >= required
+    }
+
+    
+    
+    
+    /// Completes a constellation attempt by ID.
+    /// - Parameter attemptId: The ID of the attempt to complete.
+    /// - Returns: A `CompleteAttemptResponse` containing the updated attempt and meta info.
+    func completeConstellationAttempt(attemptId: Int) async throws -> CompleteAttemptResponse {
+        let endpoint = "\(baseURL)/api/constellation_attempts/\(attemptId)/complete"
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(endpoint, method: .put)
+                .validate()
+                .responseDecodable(of: CompleteAttemptResponse.self, decoder: decoder) { response in
+                    switch response.result {
+                    case .success(let wrapper):
+                        continuation.resume(returning: wrapper)
+                    case .failure(let error):
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+    }
+
+
+
+    /// Creates a new Post (either "completion" or "progress").
+    /// - Parameters:
+    ///   - userId: The user ID.
+    ///   - constellationId: The constellation ID associated with the post.
+    ///   - postType: Must be "completion" or "progress".
+    ///   - message: Optional text message to include with the post.
+    ///   - studyDurationMinutes: Optional study time in minutes.
+    /// - Returns: The created `Post` returned by the API.
+    func createPost(
+        userId: Int,
+        constellationId: Int,
+        postType: String,
+        message: String? = nil,
+        studyDurationMinutes: Int? = nil
+    ) async throws -> Post {
+        let endpoint = "\(baseURL)/api/posts/"
+        let decoder = JSONDecoder()
+        // Your Post model handles snake_case via CodingKeys and custom init, so no special strategy needed.
+
+        // Only send the fields required by the API (no nested user/constellation in request body).
+        var parameters: [String: Any] = [
+            "user_id": userId,
+            "constellation_id": constellationId,
+            "post_type": postType
+        ]
+        if let message, !message.isEmpty {
+            parameters["message"] = message
+        }
+        if let studyDurationMinutes {
+            parameters["study_duration"] = studyDurationMinutes
+        }
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(
+                endpoint,
+                method: .post,
+                parameters: parameters,
+                encoding: JSONEncoding.default
+            )
+            .validate()
+            .responseDecodable(of: Post.self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let post):
+                    continuation.resume(returning: post)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
+
+    
+    
+    
+    /// Cancels a session by ID.
+    /// - Parameter sessionId: The ID of the session to cancel.
+    /// - Returns: The updated `Session` object from the API.
+    func cancelSession(sessionId: Int) async throws -> Session {
+        let endpoint = "\(baseURL)/api/sessions/\(sessionId)/cancel"
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(
+                endpoint,
+                method: .put
+            )
+            .validate()
+            .responseDecodable(of: Session.self, decoder: decoder) { response in
+                switch response.result {
+                case .success(let session):
+                    continuation.resume(returning: session)
+                case .failure(let error):
+                    continuation.resume(throwing: error)
+                }
+            }
+        }
+    }
 
 
 }
