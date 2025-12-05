@@ -146,7 +146,7 @@ struct SetTimeView : View {
                                     max(0, sessionManager.remainingMinutes),
                                     max(0, sessionManager.remainingSeconds)))
                             .font(.custom("CormorantInfant-SemiBold", size: 50))
-                                                .foregroundStyle(Color.persianIndigo)
+                            .foregroundStyle(Color.warmPurple)
                     }
                     .frame(width: 200, height: 200)
                     .onAppear {

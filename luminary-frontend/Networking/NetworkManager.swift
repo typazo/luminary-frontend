@@ -67,7 +67,7 @@ class NetworkManager {
     private let baseURL = "http://136.107.14.97"
     private init() { }
 
-    // MARK: - Requests    
+    // MARK: - Requests
     
     func fetchPosts() async throws -> [Post] {
         let endpoint = "\(baseURL)/api/feed/"
@@ -348,6 +348,8 @@ class NetworkManager {
     /// - Returns: The created ConstellationAttempt returned by the API.
     func createConstellationAttempt(userId: Int, constellationId: Int) async throws -> ConstellationAttemptFocus {
         let endpoint = "\(baseURL)/api/users/\(userId)/constellation_attempts/"
+        
+        
         let decoder = JSONDecoder()
         // Convert snake_case JSON keys (e.g., stars_completed) to camelCase properties (starsCompleted)
         decoder.keyDecodingStrategy = .convertFromSnakeCase
@@ -358,6 +360,10 @@ class NetworkManager {
         let parameters: [String: Any] = [
             "constellation_id": constellationId
         ]
+        
+        
+        print("Creating constellation attempt with URL: \(endpoint)")
+        print("Parameters:", parameters)
 
         return try await withCheckedThrowingContinuation { continuation in
             AF.request(
@@ -377,6 +383,8 @@ class NetworkManager {
                 }
             }
         }
+        
+        
     }
     
 

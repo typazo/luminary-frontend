@@ -41,20 +41,36 @@ struct SessionStartView: View {
                             .padding(.bottom, 10)
                     } else {
                         if let attemptFocus = sessionManager.currentAttempt {
-                            Text("your current selected constellation is \(attemptFocus.id)")
-                                .font(.custom("CormorantInfant-SemiBold", size: 35))
+                            Text("selected: \(attemptFocus.constellation.name)")
+                                .font(.custom("CormorantInfant-SemiBold", size: 16))
                                 .foregroundColor(.amour)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color.mediumOrchid)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Color.amour, lineWidth: 2.8)
+                                )
                                 .padding(.top, 150)
                                 .padding(.bottom, 10)
-                                .textCase(.lowercase)
                         } else {
                             // Provide a fallback view when currentAttempt is nil
                             Text("no current constellation attempt")
-                                .font(.custom("CormorantInfant-SemiBold", size: 35))
-                                .foregroundColor(.amour)
+                                .font(.custom("CormorantInfant-SemiBold", size: 16))
+                                .foregroundColor(.warmPurple)
+                                .padding()
+                                .background(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .fill(Color.amour)
+                                )
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 16)
+                                        .stroke(Color.mediumOrchid, lineWidth: 2.8) // <-- This adds the border
+                                )
                                 .padding(.top, 150)
                                 .padding(.bottom, 10)
-                                .textCase(.lowercase)
                         }
                     }
                     // -- Timer graphic + selected time

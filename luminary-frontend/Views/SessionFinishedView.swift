@@ -57,8 +57,9 @@ struct SessionFinishedView : View {
                         Text(String(format: "%02d:%02d",
                                     sessionManager.totalHours,
                                     sessionManager.totalMinutes))
+//                        Text("Placeholder")
                             .font(.custom("CormorantInfant-SemiBold", size: 45.5))
-                            .foregroundStyle(Color("warmPurple"))
+                            .foregroundStyle(Color.warmPurple)
                             .offset(y: -175)
                     
                         Rectangle()
