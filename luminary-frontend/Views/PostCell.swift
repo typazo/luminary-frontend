@@ -13,6 +13,23 @@ import SwiftUI
 
 struct PostCell: View {
     var post: Post
+    
+
+    var workingVsFinished: String {
+        post.postType == "completion" ? "finished.." : "working on.."
+    }
+    
+    var backgroundColor: Color {
+        post.postType == "completion" ? Color.amour : Color.veryLightPurple
+    }
+    
+    var starOrConstImg: String {
+        post.postType == "completion" ? "constellation_icon" : "star_feed"
+    }
+    
+    var starOrConstText: String {
+        post.postType == "completion" ? "constellation" : "star"
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
@@ -32,7 +49,7 @@ struct PostCell: View {
                             .foregroundColor(Color.warmPurple)
                         
                         Text(post.postTime.formattedTimestamp())
-                            .font(.custom("CormorantInfant-SemiBold", size: 15))
+                            .font(.custom("CormorantInfant-SemiBold", size: 13))
                             .foregroundColor(Color.warmPurple)
                     }
                 }
@@ -40,7 +57,7 @@ struct PostCell: View {
                 
                 // VStack for "working on.." and "big dipper" (Right side)
                             VStack(alignment: .trailing, spacing: 2) {
-                                Text("working on..")
+                                Text(workingVsFinished)
                                     .font(.custom("CormorantInfant-SemiBold", size: 16)) // Slightly larger font
                                     .foregroundColor(Color.mediumOrchid)
                                     .padding(.bottom, -5)
@@ -66,7 +83,7 @@ struct PostCell: View {
                     .fill(Color.mediumOrchid)
                     .frame(height: 120)
                 Rectangle()
-                    .fill(Color.veryLightPurple)
+                    .fill(backgroundColor)
                     .padding(3.74)
                 
                 VStack(spacing: 4){
@@ -78,7 +95,7 @@ struct PostCell: View {
                         Text("•")
                             .font(.system(size: 30, weight: .bold))
                             .foregroundColor(Color.mediumOrchid)
-                        Image("star_feed")
+                        Image(starOrConstImg)
                             .resizable()
                             .frame(width: 50, height: 64)
                             .padding(.trailing, 64)
@@ -93,7 +110,7 @@ struct PostCell: View {
                         
                         Spacer()
 
-                        Text("1/7") // Hardcoded, replace with relevant session count
+                        Text(starOrConstText) // Hardcoded, replace with relevant session count
                             .font(.custom("CormorantInfant-SemiBold", size: 11))
                             .foregroundColor(Color.mediumOrchid)
                             .padding(.trailing, 65)
@@ -110,7 +127,7 @@ struct PostCell: View {
         .padding(.top, 30)
         .frame(height: 244)
         .frame(maxWidth: .infinity)
-        .background(Color.veryLightPurple)
+        .background(backgroundColor)
     }
     
 }
