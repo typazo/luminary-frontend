@@ -19,36 +19,114 @@ struct SessionActiveView: View {
 
 
     var body: some View {
+        
         NavigationStack {
-            VStack(spacing: 16) {
-                Text("Session")
-                    .font(.title)
-
-                CountdownView(
-                    onCompleted: {
-                        onFinish()
-                    })
-                .environmentObject(sessionManager)
-
-                Button("Cancel Session") {
-                    onCancel()
-                }
-                .foregroundColor(.red)
-
-                Button("Finish Session") {
-                    onFinish()
-                }
-                .foregroundColor(.blue)
+            ZStack(alignment: .topTrailing){
+                Image("star_bg")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea() // covers entire screen
+                    
+                Image("timer_alt")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 264)
+                    .padding(.top, -30)        // push upward off-screen
+                    .padding(.trailing, -30)
                 
-
-            }
-            .padding()
-            .toolbar(.hidden, for: .tabBar)
-            .onChange(of: scenePhase) { currentPhase in
-                if (currentPhase == .background){
+//                Text("01:24:50")
+//                    .font(.custom("CormorantInfant-SemiBold", size: 54))
+//                    .foregroundStyle(Color.persianIndigo)
+//                    .padding(.top, 50)        // push upward off-screen
+//                    .padding(.trailing, 10)
+                
+                //the actual timer
+                CountdownView(
+                        onCompleted: {
+                            onFinish()
+                        })
+                    .environmentObject(sessionManager)
+                    .padding(.top, -15)        // push upward off-screen
+                    .padding(.trailing, 5)
+                    
+                Button(action: {
                     onCancel()
+                }) {
+                    Image("quit_button")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 90)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+                .padding(.top, 70)         // push it partially off-screen if you want
+                .padding(.leading, 20)
+                
+                VStack(spacing: 16) {
+                    
+                   Spacer()
+                    //DO NOT DELETE!!!!
+                    //                CountdownView(
+                    //                    onCompleted: {
+                    //                        onFinish()
+                    //                    })
+                    //                .environmentObject(sessionManager)
+                    Image("constellation1_stage2")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 350, maxHeight: 350)
+                        .padding(.top, 200)
+
+                    Spacer()
+                    
+                    
+                    //DEBUG BUTTON
+                    Button("Finish Session") {
+                        onFinish()
+                    }
+                    .foregroundColor(.blue)
+                    
+                    ZStack(){
+                        Image("active_message")
+                            .resizable()
+                            .scaledToFit()   // keeps natural proportions and height
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .clipped()
+                            .padding(.bottom, -1)
+                        
+                        Text("user's message here")
+                            .font(.custom("CormorantInfant-SemiBold", size: 27))
+                            .foregroundColor(Color.warmPurple)
+                    }
+                    
+                    
+                   
+                    
+                }
+                .ignoresSafeArea()
+                .toolbar(.hidden, for: .tabBar)
+                .onChange(of: scenePhase) { currentPhase in
+                    if (currentPhase == .background){
+                        onCancel()
+                    }
+                }
+                
+                
+                
             }
+            .ignoresSafeArea()
+            
         }
+        
+        
+        
+        
+    }
+}
+
+struct SessionActiveViewPreviews: PreviewProvider {
+    static var previews: some View {
+        SessionActiveView(onCancel:{print("meow")}, onFinish:{print("meooow")})
+            .environmentObject(UserSettings())
+            .environmentObject(SessionManager())
     }
 }

@@ -185,6 +185,7 @@ struct ContentView: View {
                         )
                         .environmentObject(sessionManager)
                         .toolbar(.hidden, for: .tabBar)
+                        .colorScheme(.dark)
                     }
                     .fullScreenCover(isPresented: $sessionManager.sessionFinished) {
                         SessionFinishedView(onReturnToStart: {
