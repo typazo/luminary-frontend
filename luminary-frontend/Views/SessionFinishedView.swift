@@ -36,29 +36,29 @@ struct SessionFinishedView : View {
                     
                 // -- THE BIG GLOB OF VISUAL ELEMENTS TOGETHER IN THE CENTER --
                     ZStack{
+    
+//                        Image("constellation_frame")
+//                            .resizable()
+//                            .scaledToFit()
+//                            .frame(width: 290, height: 211)
+//                            .offset(y: -40)
+                        
+                        //                Image("constellation\(constellation.constellationId)_stage\(constellation.weight)_frame") //have to connect the current one we[re on
+                        Image("constellation3_stage5_frame")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 350, height: 254.7)
+                            .offset(y: -40)
+                        
+
                         Image("time_completed1")
                             .offset(y: -183)
                         
                         Text("01:25")
                             .font(.custom("CormorantInfant-SemiBold", size: 45.5))
-                            .foregroundStyle(Color.purpleMonster)
+                            .foregroundStyle(Color.warmPurple
+                            )
                             .offset(y: -175)
-                        
-                        Image("constellation_frame")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 290, height: 211)
-                            .offset(y: -40)
-                        
-                        //                Image("constellation\(constellation.constellationId)_stage\(constellation.weight)") //have to connect the current one we[re on
-                        Image("constellation3_stage5")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 155, height: 227)
-                            .rotationEffect(.degrees(-90))
-                            .offset(y: -40)
-                        
-
                     
                         Rectangle()
                             .fill(Color.veryLightPurple)
