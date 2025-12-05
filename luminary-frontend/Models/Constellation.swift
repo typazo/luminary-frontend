@@ -52,7 +52,7 @@ struct Constellation: Hashable, Codable {
 
 // this is temporary
 var constellationDummyData = [
-    Constellation(name: "triangulum", constellationId: 0, weight: 3),
-    Constellation(name: "delphinus", constellationId: 1, weight: 5),
-    Constellation(name: "big dipper", constellationId: 2, weight: 8)
+    Constellation(name: "triangulum", constellationId: 1, weight: 3),
+    Constellation(name: "delphinus", constellationId: 2, weight: 5),
+    Constellation(name: "big dipper", constellationId: 3, weight: 8)
 ]
