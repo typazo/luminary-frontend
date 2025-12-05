@@ -8,9 +8,16 @@
 import SwiftUI
 //TODO: Implement the difference between a constelation and a star completion. No point in starting until I can see the design. Will implement this with an if statement that changes the view depending on the "constelation" / "star" string passed in.
 struct ConstellationCell: View {
-    var constellation: Constellation
+    var constellationAttempt: ConstellationAttemptFocus
     //    var cellWidth: CGFloat = 128
     //    let cellHeight: CGFloat = 128
+    
+    
+    func totalHoursStudied(for attempt: ConstellationAttemptFocus) -> Double {
+        let totalMinutes = attempt.sessions.reduce(0) { $0 + $1.minutes }
+        return Double(totalMinutes) / 60.0
+    }
+
     
     var body: some View {
         VStack{
@@ -28,7 +35,7 @@ struct ConstellationCell: View {
                     VStack(alignment: .leading){
                         // Top Text (e.g., hours spent)
                         HStack(){
-                            Text("7")
+                            Text("\(totalHoursStudied(for: constellationAttempt), specifier: "%.2f")")
                                 .font(.custom("CormorantInfant-SemiBold", size: 20))
                                 .foregroundColor(.amour)
                                 .textCase(.lowercase)
@@ -41,7 +48,7 @@ struct ConstellationCell: View {
                         .padding(.bottom, -25)
                         
                         // Middle Text (e.g., constellation name)
-                        Text("\(constellation.name)")
+                        Text("\(constellationAttempt.constellation.name)")
                             .font(.custom("CormorantInfant-SemiBold", size: 35))
                             .foregroundColor(.amour)
                             .textCase(.lowercase)
@@ -51,7 +58,7 @@ struct ConstellationCell: View {
                     .padding(.top, 20)
                     .padding(.leading, 15)
                     
-                    Image("constellation\(constellation.constellationId)_stage\(constellation.weight)") //a little confused: is weight the stage or is it the constellation #?
+                    Image("constellation\(constellationAttempt.constellationId)_stage\(constellationAttempt.constellation.weight)") //a little confused: is weight the stage or is it the constellation #?
                         .resizable()
                         .scaledToFit()
                         .frame(width: 155, height: 227)
@@ -65,8 +72,8 @@ struct ConstellationCell: View {
     
 
 
-struct ConstellationCell_Previews: PreviewProvider {
-    static var previews: some View {
-        ConstellationCell(constellation:constellationDummyData[0])
-    }
-}
+//struct ConstellationCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ConstellationCell(constellation:constellationDummyData[0])
+//    }
+//}
