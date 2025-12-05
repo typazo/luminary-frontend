@@ -14,55 +14,60 @@ struct DisplayNameView: View {
     @EnvironmentObject var settings: UserSettings
 
     var body: some View {
-        VStack(spacing: 20) {
-            Text("create display name")
-                .font(.custom("CormorantInfant-SemiBold", size: 26.31))
-                .foregroundColor(.veryLightPurple)
-                .padding(.bottom, 25)
+        ZStack(){
+            Image("entry_bg")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
 
-            TextField("what's the name of your galaxy?", text: $inputName)
-                .font(.custom("CormorantInfant-SemiBold", size: 14.07))
-                .foregroundColor(.warmPurple) //must fix color
-                .frame(width: 253.33, height: 92.33)
-                .padding(.horizontal, 20)
-                .padding(.bottom, 25)
-                .background(Color(hex: 0xF8CDFB))
-//                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .textFieldStyle(.plain)
-                .cornerRadius(10)
-//                .padding()
-                .focused($nameFieldIsFocused)
-                .submitLabel(.done)
-                .onSubmit {
-                    Task { await saveName() }
-                }
-            
-            Spacer().frame(height: 27) //for padding
-            
-            
-            Button {
-                Task { await saveName() }
-            } label: {
-                ZStack {
-                    // --- IMAGE BACKGROUND ---
-                    Image("start_button") // Replace with your actual image asset name
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-//                        .frame(width: 253.33, height: 92.33) // Match your TextField's size, or adjust as needed
-                    
-                    // --- TEXT CONTENT ---
-                    Text("start your journey")
-                        .font(.custom("CormorantInfant-SemiBold", size: 21.31))
-                        // Set the text color to ensure visibility over the image
-                        .foregroundColor(.veryLightPurple) // Choose a color that stands out against the image
-                }
+            VStack(spacing: 20) {
+                Text("create display name")
+                    .font(.custom("CormorantInfant-SemiBold", size: 26.31))
+                    .foregroundColor(.veryLightPurple)
+                    .padding(.bottom, 25)
+
+                TextField("enter your name...", text: $inputName)
+                    .font(.custom("CormorantInfant-SemiBold", size: 26))
+                    .foregroundColor(.warmPurple)
+                    .frame(width: 253.33, height: 92.33)
+                    .padding(.horizontal, 20)
+                    .background(Color(hex: 0xF8CDFB))
+                    .textFieldStyle(.plain)
+                    .cornerRadius(10)
+                    .focused($nameFieldIsFocused)
+                    .submitLabel(.done)
+                    .multilineTextAlignment(.center)
+                    .onSubmit {
+                        Task { await saveName() }
+                    }
                 
+                Spacer().frame(height: 27) //for padding
+                
+                
+                Button {
+                    Task { await saveName() }
+                } label: {
+                    ZStack {
+                        // --- IMAGE BACKGROUND ---
+                        Image("start_button") // Replace with your actual image asset name
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+        //                        .frame(width: 253.33, height: 92.33) // Match your TextField's size, or adjust as needed
+                        
+                        // --- TEXT CONTENT ---
+                        Text("start your journey")
+                            .font(.custom("CormorantInfant-SemiBold", size: 21.31))
+                            // Set the text color to ensure visibility over the image
+                            .foregroundColor(.veryLightPurple) // Choose a color that stands out against the image
+                    }
+                    
+                }
+                .frame(width: 184.51, height: 51.11)
+                
+                .disabled(inputName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
-            .frame(width: 184.51, height: 51.11)
-            
-            .disabled(inputName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            .padding()
         }
-        .padding()
         
     }
 

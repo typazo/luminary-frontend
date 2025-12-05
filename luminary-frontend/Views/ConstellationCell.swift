@@ -14,65 +14,50 @@ struct ConstellationCell: View {
     
     var body: some View {
         VStack{
-            HStack{
-                Spacer()
-                Text(constellation.name)
-            }
-            //            Text("image containing \(constellation.weight) stars goes here")
-            //                .font(.system(size: 32))
-            
-            
-            .background(Color.gray)
-            .cornerRadius(15)
             
             ZStack {
                 // MARK: - 1. BACKGROUND SHAPE
-                Rectangle()
-                    .fill(Color.purple)
+//                Rectangle()
+//                    .fill(Color.purple)
                 
                 
                 Image("constellation_frame")
-                    .resizable().scaledToFit()
+                    .frame(width: 315, height: 230)
                 // MARK: - 2. CONTENT LAYER
-                VStack(alignment: .leading, spacing: 5) {
-                    
-                    // Top Text (e.g., hours spent)
-                    HStack(){
-                        Text("7")
-                            .font(.custom("CormorantInfant-SemiBold", size: 16))
-                            .foregroundColor(.veryLightPurple)
+                ZStack() {
+                    VStack(alignment: .leading){
+                        // Top Text (e.g., hours spent)
+                        HStack(){
+                            Text("7")
+                                .font(.custom("CormorantInfant-SemiBold", size: 20))
+                                .foregroundColor(.amour)
+                                .textCase(.lowercase)
+                            Text("hours spent")
+                                .font(.custom("CormorantInfant-SemiBold", size: 20))
+                                .foregroundColor(.veryLightPurple)
+                                .textCase(.lowercase)
+                                .padding(.leading, -3)
+                        }
+                        .padding(.bottom, -25)
+                        
+                        // Middle Text (e.g., constellation name)
+                        Text("\(constellation.name)")
+                            .font(.custom("CormorantInfant-SemiBold", size: 35))
+                            .foregroundColor(.amour)
                             .textCase(.lowercase)
-                        Text("hours spent")
-                            .font(.custom("CormorantInfant-SemiBold", size: 16))
-                            .foregroundColor(.warmPurple)
-                            .textCase(.lowercase)
-                            .padding(.leading, -3)
+                            .padding(.bottom, 10)
                     }
-                    .padding(.bottom, -5)
+                    .frame(width: 315, height: 230, alignment: .topLeading)
                     
-                    // Middle Text (e.g., constellation name)
-                    Text("\(constellation.name)")
-                        .font(.custom("CormorantInfant-SemiBold", size: 28))
-                        .foregroundColor(.veryLightPurple)
-                        .textCase(.lowercase)
-                        .padding(.bottom, 10)
+                    .padding(.top, 20)
+                    .padding(.leading, 15)
                     
-                    // --- Constellation Graphics Placeholder ---
-                    // This is where your constellation lines and stars go
-                
-                        // Placeholder for the actual constellation drawing
-                    Image("constellation\(constellation.constellationId+1)_stage\(constellation.weight)") //a little confused: is weight the stage or is it the constellation #?
+                    Image("constellation\(constellation.constellationId)_stage\(constellation.weight)") //a little confused: is weight the stage or is it the constellation #?
                         .resizable()
                         .scaledToFit()
                         .frame(width: 155, height: 227)
                         .rotationEffect(.degrees(-90))
-
-                    
-                    // Spacer to push content (like the "7 hours spent" text) to the top
-//                    Spacer()
                 }
-                // Constraint for the content area to align text to the top-left
-                .frame(width: 200, height: 180, alignment: .topLeading)
             }
         }
     }

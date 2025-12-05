@@ -32,7 +32,7 @@ struct ProfileView : View {
                             if let name = settings.displayName {
                                 Text("\(name)'s galaxy")
                                     .font(.custom("CormorantInfant-Bold", size: 35))
-                                    .foregroundColor(Color.warmPurple)
+                                    .foregroundColor(Color.mediumOrchid)
                                 //                        } else {
                                 //                            Text("Someone's Galaxy :)")
                                 //                                                .font(.system(size: 24))
@@ -77,13 +77,13 @@ struct ProfileView : View {
                                         VStack(alignment: .leading){
                                             Text("hours completed")
                                                 .font(.custom("CormorantInfant-SemiBold", size: 19))
-                                                .foregroundColor(Color.warmPurple)
+                                                .foregroundColor(Color.mediumOrchid)
                                             Text("stars completed")
                                                 .font(.custom("CormorantInfant-SemiBold", size: 19))
-                                                .foregroundColor(Color.warmPurple)
+                                                .foregroundColor(Color.mediumOrchid)
                                             Text("constellations completed")
                                                 .font(.custom("CormorantInfant-SemiBold", size: 19))
-                                                .foregroundColor(Color.warmPurple)
+                                                .foregroundColor(Color.mediumOrchid)
                                         }
                                         
                                     }
