@@ -16,28 +16,91 @@ struct SetTimeView : View {
     
     var body : some View {
         NavigationStack{
-            Text("Set timer duration")
-            Picker("Minutes", selection: $sessionManager.remainingMinutes) {
-                ForEach(1..<121, id: \.self) { Text("\($0) mins") }
+            ZStack{
+                Image("star_bg")
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea() // covers entire screen
+                
+                
+                VStack(spacing: 40){
+                    // -- the "set a timer" text"
+                    ZStack{
+                        Rectangle()
+                            .fill(Color.warmPurple)
+                            .frame(maxWidth: .infinity, maxHeight: 60)
+                            .cornerRadius(5)
+                            .padding(.top)
+                            .opacity(0.6)
+                        
+                        Text("set a focus timer")
+                            .font(.custom("CormorantInfant-SemiBold", size: 27))
+                            .foregroundStyle(Color.amour)
+                            .padding(.top)
+                    }
+                    .padding(.top, 150)
+                
+                    
+                    Spacer()
+                    
+                    //the hours and minutes pickers
+                    HStack{
+                        VStack {
+                            Text("hours")
+                                .font(.custom("CormorantInfant-SemiBold", size: 25))
+                                .foregroundColor(.white)
+                            
+                            Picker("Hours", selection: $sessionManager.remainingHours) {
+                                // Allow up to 5 hours for the session
+                                ForEach(0..<6, id: \.self) { hour in
+                                    Text("\(hour) hr")
+                                        .font(.custom("CormorantInfant-SemiBold", size: 22))
+                                        .tag(hour)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .pickerStyle(.wheel)
+                            .frame(width: 120, height: 180)
+                            .clipped()
+                            .labelsHidden()
+                        }
+                        
+                        VStack {
+                            Text("minutes")
+                                .font(.custom("CormorantInfant-SemiBold", size: 25))
+                                .foregroundColor(.white)
+                            
+                            Picker("Minutes", selection: $sessionManager.remainingMinutes) {
+                                // Iterate through 0 to 120 minutes (up to 2 hours)
+                                ForEach(1..<60, id: \.self) { minute in
+                                    Text("\(minute) min")
+                                        .font(.custom("CormorantInfant-SemiBold", size: 22))
+                                        .tag(minute)
+                                        .foregroundColor(.white)
+                                }
+                            }
+                            .pickerStyle(.wheel)
+                            // Adjusted frame width to look good when centered
+                            .frame(width: 150, height: 180)
+                            .clipped()
+                            .labelsHidden()
+                        }
+                    }
+                    .padding(.bottom, 320)
+                    
+                }
+                
+                   
+                
+                
+
             }
-            .pickerStyle(.wheel)
-            .clipped()
-            
-            Picker("Seconds", selection: $sessionManager.remainingSeconds) {
-                ForEach(0..<60, id: \.self) { Text("\($0) sec") }
-            }
-            .pickerStyle(.wheel)
-            .clipped()
-        
-            //right now i don't want to have this button because it adds an unnecessary step to the stack!!
-            //            NavigationLink(
-            //                "Save timer timesss",
-            //                destination: SessionStartView()
-            //            )
-            //        }
         }
+    
     }
 }
+
+
     struct CountdownView : View {
         //    @State private var remainingMinutes: Int
         //    @State private var remainingSeconds: Int
@@ -63,10 +126,9 @@ struct SetTimeView : View {
             VStack{
                 if (sessionManager.sessionActive){
                     VStack{
-                        Text("\(sessionManager.remainingMinutes) minutes")
-                            .font(.system(size: 25, weight: .bold))
-                        Text("\(sessionManager.remainingSeconds) seconds")
-                            .font(.system(size: 25, weight: .bold))
+                        Text("00:\(sessionManager.remainingMinutes):\(sessionManager.remainingSeconds)") //we will have to figure out how to format this better
+                            .font(.custom("CormorantInfant-SemiBold", size: 50))
+                                                .foregroundStyle(Color.persianIndigo)
                     }
                     .frame(width: 200, height: 200)
                     .onAppear {
@@ -116,5 +178,6 @@ struct SetTimeView : View {
 struct TimerView_Previews: PreviewProvider {
     static var previews: some View {
         SetTimeView()
+            .environmentObject(SessionManager())
     }
 }
