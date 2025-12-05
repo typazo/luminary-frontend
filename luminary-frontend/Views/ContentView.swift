@@ -125,7 +125,6 @@ struct ContentView: View {
                                 sessionManager.sessionFinished = true
 
                                 Task {
-                                    
                                     // 1) Complete the session
                                     guard let sessionId = sessionManager.currentSessionId else {
                                         print("No sessionId; cannot complete session.")
