@@ -13,8 +13,6 @@ import SwiftUI
 
 struct PostCell: View {
     var post: Post
-//    var cellWidth: CGFloat = 128
-//    let cellHeight: CGFloat = 128
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0){
@@ -22,10 +20,6 @@ struct PostCell: View {
             // MARK: - The top section of information
             HStack(alignment: .top){
                 HStack(alignment: .center, spacing: 12) {
-//                    Image("star_fade")
-//                        .resizable()
-//                        .scaledToFill()
-//                        .frame(width: 45, height: 45)
                     
                     Image("sample_pfp")
                         .resizable()
@@ -33,7 +27,7 @@ struct PostCell: View {
                         .frame(width: 45, height: 45)
                     
                     VStack(alignment: .leading, spacing: 2){
-                        Text(post.displayName)
+                        Text("@"+post.displayName)
                             .font(.custom("CormorantInfant-Bold", size: 27))
                             .foregroundColor(Color.warmPurple)
                         
@@ -51,15 +45,15 @@ struct PostCell: View {
                                     .foregroundColor(Color.mediumOrchid)
                                     .padding(.bottom, -5)
                                 
-                                Text("big dipper")
+                                Text("\(post.constellationName)")
                                     .font(.custom("CormorantInfant-Bold", size: 27))
                                     .foregroundColor(Color.warmPurple)
                             }
                 
             }.padding(.horizontal, 24)
-            
+                
             //the rest
-            Text(post.message)
+            Text("“"+post.message+"”")
                 .font(.custom("CormorantInfant-SemiBold", size: 12))
                 .foregroundColor(Color.warmPurple)
                 .offset(y: 10)
@@ -99,7 +93,7 @@ struct PostCell: View {
                         
                         Spacer()
 
-                        Text("1/7 sessions") // Hardcoded, replace with relevant session count
+                        Text("1/7") // Hardcoded, replace with relevant session count
                             .font(.custom("CormorantInfant-SemiBold", size: 11))
                             .foregroundColor(Color.mediumOrchid)
                             .padding(.trailing, 65)
