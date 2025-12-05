@@ -177,7 +177,7 @@ struct ContentView: View {
                                             totalMins = nil
                                             do { let completedConstellation = try await
                                                 NetworkManager.shared.completeConstellationAttempt(attemptId: attemptFocus.id)
-                                                print("The constellation with id \(attemptFocus.id) has been set to completed.")
+                                                print("The constellation: \(completedConstellation) has been set to completed. It's ID should be the same as this one \(attemptFocus.id)")
                                             } catch {
                                                 print("Failed to set as completed constellation with id \(attemptFocus.id)")
                                                 await MainActor.run {
