@@ -24,4 +24,22 @@ class SessionManager: ObservableObject {
     @Published var currentSessionId: Int? = nil
     
     @Published var currentAttempt: ConstellationAttemptFocus? = nil
+    
+    
+    
+    @Published var startMessage: String = ""
+
+    /// Optional helpers to keep things tidy between sessions:
+    func resetForNewSession() { //for now this is not used
+        // reset flags as needed; keep or clear message depending on your UX
+        sessionActive = false
+        sessionFailed = false
+        sessionFinished = false
+        // If you want to clear after finish/cancel, call clearMessage() there.
+    }
+
+    func clearMessage() {
+        startMessage = ""
+    }
+
 }

@@ -19,7 +19,6 @@ struct SessionStartView: View {
     @State private var errorMessage: String?
     @State private var selectedConstellation: Constellation = Constellation(name: "Loading…", constellationId: -1, weight: 0)
     
-    @State private var message: String = ""
 
 
     var body: some View {
@@ -53,7 +52,7 @@ struct SessionStartView: View {
                     }
                     
                     // -- Text field for message --
-                    TextField("write your message", text: $message)
+                    TextField("write your message", text: $sessionManager.startMessage)
                         .padding()
                         .frame(height: 100)
                         .background(Color.veryLightPurple) // light gray background

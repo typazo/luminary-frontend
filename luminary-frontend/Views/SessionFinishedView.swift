@@ -66,7 +66,7 @@ struct SessionFinishedView : View {
                             .cornerRadius(5)
                             .offset(y: 96)
                         
-                        Text("user's message")
+                        Text(sessionManager.startMessage)
                             .font(.custom("CormorantInfant-SemiBold", size: 18))
                             .foregroundStyle(Color.warmPurple)
                             .offset(y: 96)

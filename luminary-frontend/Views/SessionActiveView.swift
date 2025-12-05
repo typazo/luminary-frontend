@@ -93,7 +93,7 @@ struct SessionActiveView: View {
                             .clipped()
                             .padding(.bottom, -1)
                         
-                        Text("user's message here")
+                        Text(sessionManager.startMessage)
                             .font(.custom("CormorantInfant-SemiBold", size: 27))
                             .foregroundColor(Color.warmPurple)
                     }
