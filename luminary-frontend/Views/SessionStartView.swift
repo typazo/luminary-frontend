@@ -138,14 +138,15 @@ struct SessionStartView: View {
 
                             // 2) Compute minutes for backend (integer)
                             // Choose your rounding rule; here we round up if there are leftover seconds.
-                            let minutes = max(1, sessionManager.remainingMinutes + (sessionManager.remainingSeconds > 0 ? 1 : 0))
+//                            let minutes = max(1, sessionManager.remainingMinutes + (sessionManager.remainingSeconds > 0 ? 1 : 0))
+                            let workedMinutes = max(sessionManager.totalSessionMinutes, 0)
 
                             // 3) Create the session via NetworkManager
                             do {
                                 let session = try await NetworkManager.shared.createSession(
                                     userId: userId,
                                     attemptId: resolvedAttempt.id,          // Ensure your model has `id`
-                                    minutes: minutes
+                                    minutes: workedMinutes
                                 )
 
                                 // 4) Store the session id and activate UI
@@ -157,7 +158,7 @@ struct SessionStartView: View {
                                     self.errorMessage = nil
                                 }
 
-                                print("Session \(session.id) created for attempt \(resolvedAttempt.id) with \(minutes) minutes.")
+                                print("Session \(session.id) created for attempt \(resolvedAttempt.id) with \(workedMinutes) minutes.")
 
                             } catch {
                                 await MainActor.run {

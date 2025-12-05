@@ -54,10 +54,11 @@ struct SessionFinishedView : View {
                         Image("time_completed1")
                             .offset(y: -183)
                         
-                        Text("01:25")
+                        Text(String(format: "%02d:%02d",
+                                    sessionManager.totalHours,
+                                    sessionManager.totalMinutes))
                             .font(.custom("CormorantInfant-SemiBold", size: 45.5))
-                            .foregroundStyle(Color.warmPurple
-                            )
+                            .foregroundStyle(Color("warmPurple"))
                             .offset(y: -175)
                     
                         Rectangle()

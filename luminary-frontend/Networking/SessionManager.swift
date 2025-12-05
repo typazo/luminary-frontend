@@ -27,13 +27,7 @@ class SessionManager: ObservableObject {
     @Published var currentAttempt: ConstellationAttemptFocus? = nil
     
     @Published var startMessage: String = ""
-    
-    
-    var elapsedMinutes: Int {
-        let totalSeconds = totalHours * 3600 + totalMinutes * 60
-        let remainingSecondsTotal = remainingHours * 3600 + remainingMinutes * 60 + remainingSeconds
-        return max(0, Int(ceil(Double(totalSeconds - remainingSecondsTotal) / 60.0)))
-    }
+
     
     // Computed property: total session time in minutes
     var totalSessionMinutes: Int {
