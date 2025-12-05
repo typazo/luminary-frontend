@@ -18,6 +18,11 @@ struct ContentView: View {
     @EnvironmentObject var settings: UserSettings
     @State private var selectedTab: Int = 0
     
+    func totalHoursStudied(for attempt: ConstellationAttemptFocus) -> Double {
+        let totalMinutes = attempt.sessions.reduce(0) { $0 + $1.minutes }
+        return Double(totalMinutes) / 60.0
+    }
+    
     //We have to use UI kit to change the color of the tab bar
     init() {
         let appearance = UITabBarAppearance()
@@ -170,7 +175,7 @@ struct ContentView: View {
                                     
                                     var cORp = "progress"
                                     var message = sessionManager.startMessage.isEmpty ? "Default Study Message" : sessionManager.startMessage
-                                    var totalMins: Int? = (sessionManager.totalMinutes + (60 * sessionManager.totalHours))
+                                    var totalMins: Int = (sessionManager.totalMinutes + (60 * sessionManager.totalHours))
                                     do {
                                         let isAttemptComplete = try await
                                         NetworkManager.shared.isAttemptComplete(attemptId: attemptFocus.id)
@@ -179,7 +184,7 @@ struct ContentView: View {
                                         if isAttemptComplete {
                                             cORp = "completion"
                                             message = "I just finished this Constellation!"
-                                            totalMins = nil
+                                            totalMins = Int(totalHoursStudied(for: attemptFocus))
                                             do { let completedConstellation = try await
                                                 NetworkManager.shared.completeConstellationAttempt(attemptId: attemptFocus.id)
                                                 print("The constellation: \(completedConstellation) has been set to completed. It's ID should be the same as this one \(attemptFocus.id)")
