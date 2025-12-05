@@ -45,7 +45,10 @@ struct SessionStartView: View {
                                 .scaledToFit()
                                 .frame(height:270)
                             
-                            Text("0\(sessionManager.remainingHours):\(sessionManager.remainingMinutes)")
+                            Text(String(format: "%02d:%02d:%02d",
+                                        max(0, sessionManager.remainingHours),
+                                        max(0, sessionManager.remainingMinutes),
+                                        max(0, sessionManager.remainingSeconds)))
                                 .foregroundColor(Color.warmPurple)
                                 .font(.custom("CormorantInfant-Bold", size: 60))
                         }
@@ -53,14 +56,13 @@ struct SessionStartView: View {
                     
                     // -- Text field for message --
                     TextField("write your message", text: $sessionManager.startMessage)
-                        .padding()
+                        .padding(12)
                         .frame(height: 100)
-                        .background(Color.veryLightPurple) // light gray background
+                        .background(Color.veryLightPurple)
                         .cornerRadius(8)
                         .padding(.horizontal)
                         .font(.custom("CormorantInfant-SemiBold", size: 16))
-                        .foregroundStyle(Color.warmPurple)
-                        .padding(.top, 10)
+                        .foregroundColor(Color.warmPurple)
                     
 
                     // -- Start Button --
