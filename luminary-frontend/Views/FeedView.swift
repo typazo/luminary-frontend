@@ -12,20 +12,33 @@ struct FeedView : View {
     @StateObject var viewModel = PostListViewModel()
     
     var body : some View {
-        ScrollView {
-            LazyVStack(spacing: 16) {
-                ForEach(viewModel.posts, id: \.self) { post in
-                    PostCell(post: post)
-//                        .padding(.horizontal)
+        ZStack{
+            Image("star_bg")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea() // covers entire screen
+            
+            ScrollView {
+                VStack(spacing: 47) {
+                    Image("journey_bar")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: UIScreen.main.bounds.width)
+                        .clipped()
+                    
+                    ForEach(viewModel.posts, id: \.self) { post in
+                        PostCell(post: post)
+                    }
                 }
             }
-            .padding(.vertical)
-        }
-        .refreshable {
-            await viewModel.fetchPosts()
-        }
-        .task {
-            await viewModel.fetchPosts()
+            .refreshable {
+                await viewModel.fetchPosts()
+            }
+            .task {
+                await viewModel.fetchPosts()
+            }
+            .ignoresSafeArea(edges: .top)
+            
         }
     }
 }
