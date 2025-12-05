@@ -11,6 +11,7 @@
 import SwiftUI
 import Alamofire
 
+@MainActor
 struct SessionStartView: View {
     @EnvironmentObject var sessionManager: SessionManager
     @EnvironmentObject var settings: UserSettings
@@ -40,14 +41,19 @@ struct SessionStartView: View {
                     } else {
                         if let attemptFocus = sessionManager.currentAttempt {
                             Text("your current selected constellation is \(attemptFocus.id)")
+                                .font(.custom("CormorantInfant-SemiBold", size: 35))
+                                .foregroundColor(.amour)
                                 .padding(.top, 150)
                                 .padding(.bottom, 10)
+                                .textCase(.lowercase)
                         } else {
                             // Provide a fallback view when currentAttempt is nil
-                            Text("No current attempt; please choose a constellation.")
-                                .foregroundColor(.secondary)
+                            Text("no current constellation attempt")
+                                .font(.custom("CormorantInfant-SemiBold", size: 35))
+                                .foregroundColor(.amour)
                                 .padding(.top, 150)
                                 .padding(.bottom, 10)
+                                .textCase(.lowercase)
                         }
                     }
                     // -- Timer graphic + selected time

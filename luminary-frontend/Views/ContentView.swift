@@ -125,6 +125,8 @@ struct ContentView: View {
                                 sessionManager.sessionFinished = true
 
                                 Task {
+                                    let workedMinutes = sessionManager.elapsedMinutes
+                                    
                                     // 1) Complete the session
                                     guard let sessionId = sessionManager.currentSessionId else {
                                         print("No sessionId; cannot complete session.")
@@ -136,6 +138,7 @@ struct ContentView: View {
 
                                     do {
                                         let completed = try await NetworkManager.shared.completeSession(sessionId: sessionId)
+                                        //minutesWorked: workedMinutes?
                                         print("Session \(completed.id) completed? \(completed.isCompleted), minutes: \(completed.minutes)")
                                         await MainActor.run {
                                             sessionManager.sessionFailed = false

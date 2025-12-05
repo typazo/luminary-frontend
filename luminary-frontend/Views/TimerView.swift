@@ -126,7 +126,10 @@ struct SetTimeView : View {
             VStack{
                 if (sessionManager.sessionActive){
                     VStack{
-                        Text("00:\(sessionManager.remainingMinutes):\(sessionManager.remainingSeconds)") //we will have to figure out how to format this better
+                        Text(String(format: "%02d:%02d:%02d",
+                                    max(0, sessionManager.remainingHours),
+                                    max(0, sessionManager.remainingMinutes),
+                                    max(0, sessionManager.remainingSeconds)))
                             .font(.custom("CormorantInfant-SemiBold", size: 50))
                                                 .foregroundStyle(Color.persianIndigo)
                     }
@@ -140,9 +143,11 @@ struct SetTimeView : View {
                         //right now, we dont need to set it to fail and stuff because imagine what happens when you get out of the clock into the success screen?
                         //but i guess we should say timer is not active
                         
-                        //but we do reset back to defaults
-                        sessionManager.remainingMinutes = 5
-                        sessionManager.remainingSeconds = 0
+//                        //but we do reset back to defaults
+//                        sessionManager.remainingMinutes = 5
+//                        sessionManager.remainingSeconds = 0
+                        
+                        sessionManager.sessionActive = false
                         
                     }
                 } else {
