@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2F2A9A272EE26359003D98FF /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A9A262EE26359003D98FF /* AppColors.swift */; };
+		2F2A9A2B2EE2665D003D98FF /* CormorantInfant-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A9A292EE2636D003D98FF /* CormorantInfant-SemiBold.ttf */; };
+		2F2A9A2C2EE26661003D98FF /* CormorantInfant-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A9A282EE26364003D98FF /* CormorantInfant-Bold.ttf */; };
 		2F82CD1F2ED29F4E0012C3C9 /* luminary_frontendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD1E2ED29F4E0012C3C9 /* luminary_frontendApp.swift */; };
 		2F82CD212ED29F4E0012C3C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD202ED29F4E0012C3C9 /* ContentView.swift */; };
 		2F82CD232ED29F510012C3C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F82CD222ED29F510012C3C9 /* Assets.xcassets */; };
@@ -373,6 +375,8 @@
 			files = (
 				2F82CD262ED29F510012C3C9 /* Preview Assets.xcassets in Resources */,
 				2F82CD232ED29F510012C3C9 /* Assets.xcassets in Resources */,
+				2F2A9A2B2EE2665D003D98FF /* CormorantInfant-SemiBold.ttf in Resources */,
+				2F2A9A2C2EE26661003D98FF /* CormorantInfant-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
