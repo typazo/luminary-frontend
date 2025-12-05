@@ -80,8 +80,6 @@ struct ContentView: View {
                     
 
                     .fullScreenCover(isPresented: $sessionManager.sessionActive) {
-                        let attempt = sessionManager.currentAttempt
-
                         SessionActiveView(
                             onCancel: {
                                 sessionManager.sessionActive = false
@@ -175,7 +173,13 @@ struct ContentView: View {
                                     do {
                                         let justPostedPost = try await
                                         NetworkManager.shared.createPost(userId: settings.userId!, constellationId: attemptFocus.id, postType: cORp, message: message, studyDurationMinutes: totalMins)
+                                        print("The post has been posted. The post id is \(justPostedPost.id)")
+                                    } catch {
+                                        print("Failed to get post the post idk why")
+                                        await MainActor.run {
+                                        }
                                     }
+                                
                                 }
                             }
                         )
