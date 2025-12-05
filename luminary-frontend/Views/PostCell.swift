@@ -26,8 +26,10 @@ struct PostCell: View {
 //                        .resizable()
 //                        .scaledToFill()
 //                        .frame(width: 45, height: 45)
-                    Circle()
-                        .fill(Color.mediumOrchid)
+                    
+                    Image("sample_pfp")
+                        .resizable()
+                        .scaledToFit()
                         .frame(width: 45, height: 45)
                     
                     VStack(alignment: .leading, spacing: 2){
@@ -36,7 +38,7 @@ struct PostCell: View {
                             .foregroundColor(Color.warmPurple)
                         
                         Text(post.postTime.formattedTimestamp())
-                            .font(.custom("CormorantInfant-SemiBold", size: 12))
+                            .font(.custom("CormorantInfant-SemiBold", size: 15))
                             .foregroundColor(Color.warmPurple)
                     }
                 }
@@ -47,6 +49,7 @@ struct PostCell: View {
                                 Text("working on..")
                                     .font(.custom("CormorantInfant-SemiBold", size: 16)) // Slightly larger font
                                     .foregroundColor(Color.mediumOrchid)
+                                    .padding(.bottom, -5)
                                 
                                 Text("big dipper")
                                     .font(.custom("CormorantInfant-Bold", size: 27))
