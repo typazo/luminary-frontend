@@ -192,7 +192,7 @@ struct ContentView: View {
                                     
                                     do {
                                         let justPostedPost = try await
-                                        NetworkManager.shared.createPost(userId: settings.userId!, constellationId: attemptFocus.id, postType: cORp, message: message, studyDurationMinutes: totalMins)
+                                        NetworkManager.shared.createPost(userId: settings.userId!, constellationId: attemptFocus.constellation.id, postType: cORp, message: message, studyDurationMinutes: totalMins)
                                         print("The post has been posted. The post id is \(justPostedPost.id)")
                                     } catch {
                                         print("Failed to get post the post idk why")

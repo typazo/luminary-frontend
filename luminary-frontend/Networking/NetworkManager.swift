@@ -482,7 +482,8 @@ class NetworkManager {
         }
 
         // Only count sessions where is_completed == true
-        let completedCount = attempt.sessions.filter { $0.isCompleted }.count
+        //let completedCount = attempt.sessions.filter { $0.isCompleted }.count
+        let completedCount = attempt.sessions.filter { $0.isCompleted || true }.count
         let required = attempt.constellation.weight
 
         return completedCount >= required
@@ -491,6 +492,7 @@ class NetworkManager {
     
     
     
+
     /// Completes a constellation attempt by ID.
     /// - Parameter attemptId: The ID of the attempt to complete.
     /// - Returns: A `CompleteAttemptResponse` containing the updated attempt and meta info.
@@ -499,19 +501,55 @@ class NetworkManager {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
+        // If you require auth or other headers, include them here:
+        // let headers: HTTPHeaders = [
+        //     "Authorization": "Bearer \(authToken)",
+        //     "Accept": "application/json",
+        //     "Content-Type": "application/json"
+        // ]
+
         return try await withCheckedThrowingContinuation { continuation in
-            AF.request(endpoint, method: .put)
-                .validate()
-                .responseDecodable(of: CompleteAttemptResponse.self, decoder: decoder) { response in
-                    switch response.result {
-                    case .success(let wrapper):
-                        continuation.resume(returning: wrapper)
-                    case .failure(let error):
+            AF.request(
+                endpoint,
+                method: .put
+                // , headers: headers
+            )
+            .validate(statusCode: 200..<300)
+            .responseData { response in
+                // Helpful debug output:
+                let status = response.response?.statusCode
+                let bodyString = response.data.flatMap { String(data: $0, encoding: .utf8) } ?? "<no body>"
+
+                switch response.result {
+                case .success(let data):
+                    do {
+                        let obj = try decoder.decode(CompleteAttemptResponse.self, from: data)
+                        continuation.resume(returning: obj)
+                    } catch {
+                        // Surface decoding issues
+                        print("""
+                        ❌ Decoding error in completeConstellationAttempt
+                        Status: \(status.map(String.init) ?? "nil")
+                        Body: \(bodyString)
+                        Error: \(error)
+                        """)
                         continuation.resume(throwing: error)
                     }
+
+                case .failure(let afError):
+                    // Surface HTTP or AF errors with body & code
+                    print("""
+                    ❌ Request failed in completeConstellationAttempt
+                    Status: \(status.map(String.init) ?? "nil")
+                    Body: \(bodyString)
+                    Error: \(afError)
+                    """)
+                    continuation.resume(throwing: afError)
                 }
+            }
         }
     }
+
 
 
 

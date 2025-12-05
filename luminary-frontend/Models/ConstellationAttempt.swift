@@ -41,7 +41,7 @@ struct AttemptSession: Codable {
 
 /// Wrapper returned by `PUT /api/constellation_attempts/{id}/complete`.
 struct CompleteAttemptResponse: Codable {
-    let attempt: ConstellationAttempt
+    let attempt: ConstellationAttemptFocus
     let userUpdated: Bool
     let message: String
 }
