@@ -254,13 +254,13 @@
 				525331DA2ED2A94B008D49CD /* SessionActiveView.swift */,
 				525331D82ED2A923008D49CD /* SessionFinishedView.swift */,
 				525331D32ED2A8FE008D49CD /* SessionStartView.swift */,
+				2F82CD6E2ED413A30012C3C9 /* SessionFailedView.swift */,
 				525331D12ED2A8A5008D49CD /* FeedView.swift */,
 				525331CF2ED2A89E008D49CD /* ProfileView.swift */,
 				2F82CD202ED29F4E0012C3C9 /* ContentView.swift */,
 				2F82CD592ED2B0D90012C3C9 /* PostCell.swift */,
 				2F82CD642ED39CA30012C3C9 /* ConstellationCell.swift */,
 				2F82CD6A2ED3AF290012C3C9 /* DisplayNameView.swift */,
-				2F82CD6E2ED413A30012C3C9 /* SessionFailedView.swift */,
 				2F2A9A312EE29038003D98FF /* ConstellationsDropdownView.swift */,
 			);
 			path = Views;
