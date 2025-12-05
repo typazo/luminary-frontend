@@ -252,8 +252,8 @@ struct ProfileView: View {
                                                 .foregroundColor(Color.amour)
                                                 .multilineTextAlignment(.center)
                                         } else {
-                                            ForEach(viewModel.completedConstellations, id: \.self) { constellation in
-                                                ConstellationCell(constellation: constellation)
+                                            ForEach(viewModel.completedConstellations, id: \.self) { constellationAttempt in
+                                                ConstellationCell(constellationAttempt: constellationAttempt)
                                                     .padding(.horizontal)
                                             }
                                         }

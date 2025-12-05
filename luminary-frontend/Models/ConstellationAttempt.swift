@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ConstellationAttemptFocus: Codable {
+struct ConstellationAttemptFocus: Codable, Hashable {
     let id: Int
     let userId: Int
     let constellationId: Int
@@ -18,19 +18,19 @@ struct ConstellationAttemptFocus: Codable {
     let sessions: [AttemptSession]
 }
 
-struct AttemptUser: Codable {
+struct AttemptUser: Codable, Hashable {
     let id: Int
     let displayName: String
 }
 
-struct AttemptConstellation: Codable {
+struct AttemptConstellation: Codable, Hashable {
     let id: Int
     let name: String
     let weight: Int
 }
 
 /// Matches the minimal session object included in the attempt's `sessions` array.
-struct AttemptSession: Codable {
+struct AttemptSession: Codable, Hashable {
     let id: Int
     let userId: Int
     let constellationAttemptId: Int

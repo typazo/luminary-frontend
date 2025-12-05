@@ -274,6 +274,62 @@ class NetworkManager {
     }
     
     //THiS IS FOR THE PROFILE PAGE
+    /// Fetches only the user's **completed** constellation attempts.
+    /// Uses `GET /api/users/{userId}/constellation_attempts/` and filters with `isAttemptComplete(attemptId:)`.
+    func fetchCompletedConstellationAttempts(for userId: Int) async throws -> [ConstellationAttemptFocus] {
+        let endpoint = "\(baseURL)/api/users/\(userId)/constellation_attempts/"
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        struct ConstellationAttemptsResponse: Codable {
+            let constellationAttempts: [ConstellationAttemptFocus]
+        }
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(endpoint, method: .get)
+                .validate()
+                .responseDecodable(of: ConstellationAttemptsResponse.self, decoder: decoder) { response in
+                    switch response.result {
+                    case .success(let data):
+                        print("Fetched \(data.constellationAttempts.count) constellation attempts")
+
+                        // Filter attempts by completion using concurrency
+                        Task {
+                            do {
+                                let completed = try await withThrowingTaskGroup(of: ConstellationAttemptFocus?.self) { group in
+                                    for attempt in data.constellationAttempts {
+                                        group.addTask {
+                                            let completed = try await self.isAttemptComplete(attemptId: attempt.id)
+                                            return completed ? attempt : nil
+                                        }
+                                    }
+
+                                    var results: [ConstellationAttemptFocus] = []
+                                    for try await maybeAttempt in group {
+                                        if let attempt = maybeAttempt {
+                                            results.append(attempt)
+                                        }
+                                    }
+                                    return results
+                                }
+
+                                print("Completed attempts: \(completed.count)")
+                                continuation.resume(returning: completed)
+                            } catch {
+                                print("Error filtering completed attempts: \(error.localizedDescription)")
+                                continuation.resume(throwing: error)
+                            }
+                        }
+
+                    case .failure(let error):
+                        print("Error fetching constellation attempts: \(error.localizedDescription)")
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+    }
+
+    //OLD FUNCTION__ NOT IN USE
     func fetchCompletedConstellations(for userId: Int) async throws -> [Constellation] {
         let endpoint = "\(baseURL)/api/users/\(userId)/completed_constellations/"
         let decoder = JSONDecoder()

@@ -9,21 +9,22 @@ import Foundation
 
 @MainActor
 class ProfileViewModel: ObservableObject {
-    @Published var completedConstellations: [Constellation] = []
+    // Now holds completed **attempts** instead of Constellations
+    @Published var completedConstellations: [ConstellationAttemptFocus] = []
     @Published var userStats: UserStats? = nil
     @Published var loadingState: LoadingState = .loading
 
     func fetchProfileData(for userId: Int) async {
         loadingState = .loading
         do {
-            // Fetch stats + completed constellations in parallel
+            // Fetch stats + completed attempts in parallel
             async let statsTask = NetworkManager.shared.fetchUserStats(for: userId)
-            async let completedTask = NetworkManager.shared.fetchCompletedConstellations(for: userId)
+            async let completedTask = NetworkManager.shared.fetchCompletedConstellationAttempts(for: userId)
 
-            let (fetchedStats, fetchedCompleted) = try await (statsTask, completedTask)
+            let (fetchedStats, fetchedCompletedAttempts) = try await (statsTask, completedTask)
 
             self.userStats = fetchedStats
-            self.completedConstellations = fetchedCompleted
+            self.completedConstellations = fetchedCompletedAttempts
             self.loadingState = .loaded
         } catch {
             self.loadingState = .error(error)
