@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+@MainActor
 class SessionManager: ObservableObject {
     static let shared = SessionManager()  // singleton
     
@@ -18,4 +19,7 @@ class SessionManager: ObservableObject {
     
     @Published var remainingMinutes: Int = 5
     @Published var remainingSeconds: Int = 0
+    
+    
+    @Published var currentSessionId: Int? = nil
 }

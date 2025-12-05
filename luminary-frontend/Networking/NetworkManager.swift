@@ -27,6 +27,39 @@ struct ConstellationAttempt: Codable {
 
 
 
+/// Top-level envelope for GET /api/constellations/
+struct ConstellationsEnvelope: Codable {
+    let constellations: [ConstellationFull]
+}
+
+/// Full constellation shape as returned by the API.
+/// We decode everything, but only map what we need to `Constellation` (name/id/weight).
+struct ConstellationFull: Codable {
+    let id: Int
+    let name: String
+    let weight: Int
+    let userAttempts: [AttemptMini]
+    let posts: [PostMini]
+}
+
+struct AttemptMini: Codable {
+    let id: Int
+    let userId: Int
+    let constellationId: Int
+    let starsCompleted: Int
+}
+
+struct PostMini: Codable {
+    let id: Int
+    let postType: String
+    let message: String?
+    let studyDuration: Int?
+    let createdAt: String
+}
+
+
+
+
 class NetworkManager {
 
     /// Shared singleton instance
@@ -97,6 +130,34 @@ class NetworkManager {
     
     // MARK: - Users API
 
+    
+    
+    
+    /// Fetches the user's current constellation attempt.
+    /// - Parameter userId: The user's ID.
+    /// - Returns: The current `ConstellationAttempt` for the user.
+    func getUserCurrentAttempt(userId: Int) async throws -> ConstellationAttemptFocus {
+        let endpoint = "\(baseURL)/api/users/\(userId)/current-attempt/"
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+        return try await withCheckedThrowingContinuation { continuation in
+            AF.request(endpoint, method: .get)
+                .validate()
+                .responseDecodable(of: ConstellationAttemptFocus.self, decoder: decoder) { response in
+                    switch response.result {
+                    case .success(let attempt):
+                        continuation.resume(returning: attempt)
+                    case .failure(let error):
+                        continuation.resume(throwing: error)
+                    }
+                }
+        }
+    }
+
+    
+    
+    
     func fetchAllUsers() async throws -> [User] {
         let endpoint = "\(baseURL)/api/users/"
         let decoder = JSONDecoder()
@@ -526,6 +587,37 @@ class NetworkManager {
             }
         }
     }
+    
+    
+    
+    
+    /// Fetches all constellations and maps them to your `Constellation` model (name, id, weight).
+        /// Extra fields like `user_attempts` and `posts` from the API are ignored.
+        func fetchAllConstellations() async throws -> [Constellation] {
+            let endpoint = "\(baseURL)/api/constellations/"
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+
+            let response = try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<ConstellationsEnvelope, Error>) in
+                AF.request(endpoint, method: .get)
+                    .validate()
+                    .responseDecodable(of: ConstellationsEnvelope.self, decoder: decoder) { result in
+                        switch result.result {
+                        case .success(let envelope):
+                            continuation.resume(returning: envelope)
+                        case .failure(let error):
+                            continuation.resume(throwing: error)
+                        }
+                    }
+            }
+
+            // Map the API's full constellation objects to your lightweight `Constellation`
+            let mapped: [Constellation] = response.constellations.map {
+                Constellation(name: $0.name, constellationId: $0.id, weight: $0.weight)
+            }
+            return mapped
+        }
+
 
 
 }
