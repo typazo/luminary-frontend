@@ -146,7 +146,7 @@ struct SetTimeView : View {
                                     max(0, sessionManager.remainingMinutes),
                                     max(0, sessionManager.remainingSeconds)))
                             .font(.custom("CormorantInfant-SemiBold", size: 50))
-                            .foregroundStyle(Color.warmPurple)
+                                    .foregroundStyle(Color.warmPurple)
                     }
                     .frame(width: 200, height: 200)
                     .onAppear {
@@ -155,13 +155,6 @@ struct SetTimeView : View {
                     .onDisappear {
                         timer?.invalidate()
                         timer = nil
-                        //right now, we dont need to set it to fail and stuff because imagine what happens when you get out of the clock into the success screen?
-                        //but i guess we should say timer is not active
-                        
-//                        //but we do reset back to defaults
-//                        sessionManager.remainingMinutes = 5
-//                        sessionManager.remainingSeconds = 0
-                        
                         sessionManager.sessionActive = false
                         
                     }
@@ -175,25 +168,30 @@ struct SetTimeView : View {
             guard timer == nil else { return }
             
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
-                if sessionManager.remainingSeconds > 0 {
-                    sessionManager.remainingSeconds -= 1
+                    if sessionManager.remainingHours == 0 &&
+                       sessionManager.remainingMinutes == 0 &&
+                       sessionManager.remainingSeconds == 0 {
+                        // finished
+                        timer?.invalidate()
+                        timer = nil
+                        onCompleted()
+                        return
+                    }
 
-                } else if sessionManager.remainingMinutes > 0 {
-                    sessionManager.remainingMinutes -= 1
-                    sessionManager.remainingSeconds = 59
-
-                } else if sessionManager.remainingHours > 0 {
-                    sessionManager.remainingHours -= 1
-                    sessionManager.remainingMinutes = 59
-                    sessionManager.remainingSeconds = 59
-
-                } else {
-                    // finished
-                    timer?.invalidate()
-                    timer = nil
-                    onCompleted()
+                    if sessionManager.remainingSeconds > 0 {
+                        sessionManager.remainingSeconds -= 1
+                    } else {
+                        // seconds == 0
+                        if sessionManager.remainingMinutes > 0 {
+                            sessionManager.remainingMinutes -= 1
+                            sessionManager.remainingSeconds = 59
+                        } else if sessionManager.remainingHours > 0 {
+                            sessionManager.remainingHours -= 1
+                            sessionManager.remainingMinutes = 59
+                            sessionManager.remainingSeconds = 59
+                        }
+                    }
                 }
-            }
         }
     }
 

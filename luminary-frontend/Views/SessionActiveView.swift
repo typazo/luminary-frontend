@@ -36,12 +36,6 @@ struct SessionActiveView: View {
                     .padding(.top, -30)        // push upward off-screen
                     .padding(.trailing, -30)
                 
-//                Text("01:24:50")
-//                    .font(.custom("CormorantInfant-SemiBold", size: 54))
-//                    .foregroundStyle(Color.persianIndigo)
-//                    .padding(.top, 50)        // push upward off-screen
-//                    .padding(.trailing, 10)
-                
                 //the actual timer
                 CountdownView(
                         onCompleted: {
@@ -66,12 +60,6 @@ struct SessionActiveView: View {
                 VStack(spacing: 16) {
                     
                    Spacer()
-                    //DO NOT DELETE!!!!
-                    //                CountdownView(
-                    //                    onCompleted: {
-                    //                        onFinish()
-                    //                    })
-                    //                .environmentObject(sessionManager)
                     
                     if let attemptFocus = sessionManager.currentAttempt {
                         Image("constellation\(attemptFocus.constellationId)_stage\(attemptFocus.starsCompleted+1)")
@@ -80,6 +68,7 @@ struct SessionActiveView: View {
                             .frame(width: 325)
                             .offset(y: 50)
                     } else {
+                        //just a debug
                         ZStack{
                             Image("constellation2_stage2")
                                 .resizable()

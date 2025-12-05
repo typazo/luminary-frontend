@@ -104,6 +104,9 @@ struct ContentView: View {
                             onCancel: {
                                 sessionManager.sessionActive = false
                                 sessionManager.sessionFailed = true
+                                sessionManager.remainingSeconds = 0;
+                                sessionManager.totalSeconds = 0;
+                                
                                 Task {
                                     guard let sessionId = sessionManager.currentSessionId else {
                                         print("No sessionId; cannot cancel session.")
@@ -125,6 +128,8 @@ struct ContentView: View {
                             onFinish: {
                                 sessionManager.sessionActive = false
                                 sessionManager.sessionFinished = true
+                                sessionManager.remainingSeconds = 0;
+                                sessionManager.totalSeconds = 0;
                                 
                                 print("DEBUG — Hours selected: remaining=\(sessionManager.remainingHours), total=\(sessionManager.totalHours)")
 
