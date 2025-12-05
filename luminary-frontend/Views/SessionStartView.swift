@@ -11,6 +11,7 @@
 import SwiftUI
 import Alamofire
 
+@MainActor
 struct SessionStartView: View {
     @EnvironmentObject var sessionManager: SessionManager
     @EnvironmentObject var settings: UserSettings
