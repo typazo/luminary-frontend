@@ -175,7 +175,7 @@ struct ContentView: View {
                                     
                                     var cORp = "progress"
                                     var message = sessionManager.startMessage.isEmpty ? "Default Study Message" : sessionManager.startMessage
-                                    var totalMins: Int? = sessionManager.totalMinutes
+                                    var totalMins: Int? = (sessionManager.totalMinutes + (60 * sessionManager.totalHours))
                                     do {
                                         let isAttemptComplete = try await
                                         NetworkManager.shared.isAttemptComplete(attemptId: attemptFocus.id)
