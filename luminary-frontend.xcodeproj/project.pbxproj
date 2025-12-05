@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F2A9A212EE2608E003D98FF /* CormorantInfant-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A9A202EE2608E003D98FF /* CormorantInfant-SemiBold.ttf */; };
-		2F2A9A242EE260BE003D98FF /* CormorantInfant-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F2A9A222EE260BE003D98FF /* CormorantInfant-Bold.ttf */; };
-		2F2A9A252EE260BE003D98FF /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A9A232EE260BE003D98FF /* AppColors.swift */; };
+		2F2A9A272EE26359003D98FF /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2A9A262EE26359003D98FF /* AppColors.swift */; };
 		2F82CD1F2ED29F4E0012C3C9 /* luminary_frontendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD1E2ED29F4E0012C3C9 /* luminary_frontendApp.swift */; };
 		2F82CD212ED29F4E0012C3C9 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F82CD202ED29F4E0012C3C9 /* ContentView.swift */; };
 		2F82CD232ED29F510012C3C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F82CD222ED29F510012C3C9 /* Assets.xcassets */; };
@@ -63,9 +61,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F2A9A202EE2608E003D98FF /* CormorantInfant-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CormorantInfant-SemiBold.ttf"; path = "../../../../../../../Downloads/Assets/CormorantInfant-SemiBold.ttf"; sourceTree = "<group>"; };
-		2F2A9A222EE260BE003D98FF /* CormorantInfant-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "CormorantInfant-Bold.ttf"; path = "../../../../../../../Downloads/Assets/CormorantInfant-Bold.ttf"; sourceTree = "<group>"; };
-		2F2A9A232EE260BE003D98FF /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppColors.swift; path = ../../../../../../../Downloads/Assets/AppColors.swift; sourceTree = "<group>"; };
+		2F2A9A262EE26359003D98FF /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		2F2A9A282EE26364003D98FF /* CormorantInfant-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantInfant-Bold.ttf"; sourceTree = "<group>"; };
+		2F2A9A292EE2636D003D98FF /* CormorantInfant-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantInfant-SemiBold.ttf"; sourceTree = "<group>"; };
 		2F82CD1B2ED29F4E0012C3C9 /* luminary-frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "luminary-frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F82CD1E2ED29F4E0012C3C9 /* luminary_frontendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luminary_frontendApp.swift; sourceTree = "<group>"; };
 		2F82CD202ED29F4E0012C3C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -132,9 +130,9 @@
 		2F2A9A1F2EE26009003D98FF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				2F2A9A232EE260BE003D98FF /* AppColors.swift */,
-				2F2A9A222EE260BE003D98FF /* CormorantInfant-Bold.ttf */,
-				2F2A9A202EE2608E003D98FF /* CormorantInfant-SemiBold.ttf */,
+				2F2A9A292EE2636D003D98FF /* CormorantInfant-SemiBold.ttf */,
+				2F2A9A282EE26364003D98FF /* CormorantInfant-Bold.ttf */,
+				2F2A9A262EE26359003D98FF /* AppColors.swift */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -373,8 +371,6 @@
 			files = (
 				2F82CD262ED29F510012C3C9 /* Preview Assets.xcassets in Resources */,
 				2F82CD232ED29F510012C3C9 /* Assets.xcassets in Resources */,
-				2F2A9A212EE2608E003D98FF /* CormorantInfant-SemiBold.ttf in Resources */,
-				2F2A9A242EE260BE003D98FF /* CormorantInfant-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,7 +420,7 @@
 				2F82CD212ED29F4E0012C3C9 /* ContentView.swift in Sources */,
 				525331D02ED2A8A3008D49CD /* ProfileView.swift in Sources */,
 				2F82CD1F2ED29F4E0012C3C9 /* luminary_frontendApp.swift in Sources */,
-				2F2A9A252EE260BE003D98FF /* AppColors.swift in Sources */,
+				2F2A9A272EE26359003D98FF /* AppColors.swift in Sources */,
 				2F82CD692ED3AEED0012C3C9 /* UserSettings.swift in Sources */,
 				2F82CD5A2ED2B0D90012C3C9 /* PostCell.swift in Sources */,
 			);
