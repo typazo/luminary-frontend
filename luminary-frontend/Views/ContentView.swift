@@ -17,18 +17,32 @@ struct ContentView: View {
     @EnvironmentObject var sessionManager: SessionManager
     @EnvironmentObject var settings: UserSettings
     @State private var selectedTab: Int = 0
+    
+    //We have to use UI kit to change the color of the tab bar
+    init() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithOpaqueBackground() // could also make background transparent
+        appearance.backgroundColor = UIColor(red: 56/255, green: 37/255, blue: 142/255, alpha: 1.0)
+        
+        UITabBar.appearance().standardAppearance = appearance
+        if #available(iOS 15.0, *) {
+            UITabBar.appearance().scrollEdgeAppearance = appearance
+        }
+    }
+    
 
     var body: some View {
         Group {
             if settings.userId != nil {
                 ZStack(alignment:.bottom){
-                    Color.blue
-                            .edgesIgnoringSafeArea(.all)
                     
                     TabView(selection: $selectedTab) {
                         FeedView()
                             .tabItem {
                                 Image(selectedTab == 0 ? "feed_selected" : "feed_unselected")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15, height: 15)
                                 Text("feed")
                                 //                                .font(.custom("CormorantInfant-SemiBold", size: 21.31))
                                 //                                .foregroundColor(Color.barleyWhite)
@@ -38,6 +52,9 @@ struct ContentView: View {
                         SessionStartView()
                             .tabItem {
                                 Image(selectedTab == 1 ? "session_selected" : "session_unselected")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15, height: 15)
                                 Text("session")
                                 //                                .font(.custom("CormorantInfant-SemiBold", size: 21.31))
                                 //                                .foregroundColor(Color.barleyWhite)
@@ -47,6 +64,9 @@ struct ContentView: View {
                         ProfileView()
                             .tabItem {
                                 Image(selectedTab == 2 ? "profile_selected" : "profile_unselected")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 15, height: 15)
                                 Text("profile")
                                 //                                .font(.custom("CormorantInfant-SemiBold", size: 21.31))
                                 //                                .foregroundColor(Color.barleyWhite)

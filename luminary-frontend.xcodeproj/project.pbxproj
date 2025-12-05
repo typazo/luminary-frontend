@@ -42,7 +42,6 @@
 		525331E32ED2C7F0008D49CD /* TimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331E22ED2C7EE008D49CD /* TimerView.swift */; };
 		525331E92ED2F2D4008D49CD /* Constellation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331E82ED2F2D2008D49CD /* Constellation.swift */; };
 		525331EB2ED2F73F008D49CD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 525331EA2ED2F73C008D49CD /* User.swift */; };
-		526F295E2EE29EAB00CCEA9C /* TabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526F295D2EE29EA900CCEA9C /* TabItemView.swift */; };
 		52F809D42ED38D8E003BDF93 /* DetectLeavingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F809D32ED38D87003BDF93 /* DetectLeavingView.swift */; };
 		52F809D72ED3A998003BDF93 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F809D62ED3A996003BDF93 /* SessionManager.swift */; };
 /* End PBXBuildFile section */
@@ -103,7 +102,6 @@
 		525331E22ED2C7EE008D49CD /* TimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerView.swift; sourceTree = "<group>"; };
 		525331E82ED2F2D2008D49CD /* Constellation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constellation.swift; sourceTree = "<group>"; };
 		525331EA2ED2F73C008D49CD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		526F295D2EE29EA900CCEA9C /* TabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabItemView.swift; sourceTree = "<group>"; };
 		52F809D32ED38D87003BDF93 /* DetectLeavingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectLeavingView.swift; sourceTree = "<group>"; };
 		52F809D62ED3A996003BDF93 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -242,7 +240,6 @@
 		2F82CD512ED2A1D80012C3C9 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				526F295D2EE29EA900CCEA9C /* TabItemView.swift */,
 				52F809D32ED38D87003BDF93 /* DetectLeavingView.swift */,
 				525331E22ED2C7EE008D49CD /* TimerView.swift */,
 				525331DA2ED2A94B008D49CD /* SessionActiveView.swift */,
@@ -418,7 +415,6 @@
 				2F82CD4D2ED2A1A50012C3C9 /* PostListViewModel.swift in Sources */,
 				2F82CD5D2ED3827A0012C3C9 /* Date+Extension.swift in Sources */,
 				525331DB2ED2A94E008D49CD /* SessionActiveView.swift in Sources */,
-				526F295E2EE29EAB00CCEA9C /* TabItemView.swift in Sources */,
 				525331D92ED2A926008D49CD /* SessionFinishedView.swift in Sources */,
 				2F82CD652ED39CA30012C3C9 /* ConstellationCell.swift in Sources */,
 				2F82CD6B2ED3AF290012C3C9 /* DisplayNameView.swift in Sources */,
