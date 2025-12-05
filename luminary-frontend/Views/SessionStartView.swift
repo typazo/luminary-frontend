@@ -16,7 +16,6 @@ struct SessionStartView: View {
     @EnvironmentObject var settings: UserSettings
 
     @State private var navigateToCountdown = false
-    @State private var attempt: ConstellationAttemptFocus?
     @State private var errorMessage: String?
     @State private var selectedConstellation: Constellation = Constellation(name: "Loading…", constellationId: -1, weight: 0)
 
@@ -51,7 +50,7 @@ struct SessionStartView: View {
                         do {
                             resolvedAttempt = try await NetworkManager.shared.getUserCurrentAttempt(userId: userId)
                             await MainActor.run {
-                                self.attempt = resolvedAttempt
+                                sessionManager.currentAttempt = resolvedAttempt
                                 self.errorMessage = nil
                             }
                         } catch {
@@ -64,7 +63,7 @@ struct SessionStartView: View {
                                     )
                                     resolvedAttempt = created
                                     await MainActor.run {
-                                        self.attempt = created
+                                        sessionManager.currentAttempt = created
                                         self.errorMessage = nil
                                     }
                                 } catch {

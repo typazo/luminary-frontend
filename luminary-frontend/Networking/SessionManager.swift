@@ -22,4 +22,6 @@ class SessionManager: ObservableObject {
     
     
     @Published var currentSessionId: Int? = nil
+    
+    @Published var currentAttempt: ConstellationAttemptFocus? = nil
 }

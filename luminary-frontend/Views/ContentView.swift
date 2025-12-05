@@ -52,7 +52,7 @@ struct ContentView: View {
                                 //                                .foregroundColor(Color.barleyWhite)
                             }
                             .tag(2)
-                            .environmentObject(UserSettings())
+//                            .environmentObject(UserSettings())
                         
     
                         #if DEBUG
@@ -80,6 +80,8 @@ struct ContentView: View {
                     
 
                     .fullScreenCover(isPresented: $sessionManager.sessionActive) {
+                        let attempt = sessionManager.currentAttempt
+
                         SessionActiveView(
                             onCancel: {
                                 sessionManager.sessionActive = false
@@ -94,7 +96,6 @@ struct ContentView: View {
                                         print("Session \(canceled.id) canceled. isCompleted: \(canceled.isCompleted), minutes: \(canceled.minutes)")
                                     } catch {
                                         print("Failed to cancel session: \(error)")
-                                        // Optionally set a user-facing error state
                                         await MainActor.run {
                                             sessionManager.sessionFailed = true
                                         }
@@ -104,44 +105,77 @@ struct ContentView: View {
                             onFinish: {
                                 sessionManager.sessionActive = false
                                 sessionManager.sessionFinished = true
-                                
-                                // Async network call to complete the session
+
                                 Task {
-                                    
-                                    
-                                    
-                                    
-                                    
+                                    // 1) Complete the session
                                     guard let sessionId = sessionManager.currentSessionId else {
                                         print("No sessionId; cannot complete session.")
+                                        await MainActor.run {
+                                            sessionManager.sessionFailed = true
+                                        }
                                         return
                                     }
+
                                     do {
                                         let completed = try await NetworkManager.shared.completeSession(sessionId: sessionId)
                                         print("Session \(completed.id) completed? \(completed.isCompleted), minutes: \(completed.minutes)")
-                                        
-                                        // If you track anything else after finishing (e.g., refresh attempt state/UI),
-                                        // do that here, and ensure UI mutations happen on the main actor.
                                         await MainActor.run {
-                                            // e.g., sessionManager.refreshAttempt() or set a success banner
                                             sessionManager.sessionFailed = false
                                         }
                                     } catch {
                                         print("Failed to complete session: \(error)")
                                         await MainActor.run {
-                                            // Roll back or show an error state, if desired
                                             sessionManager.sessionFailed = true
-                                            // Optionally: sessionManager.sessionFinished = false
+                                        }
+                                        return
+                                    }
+
+                                    // 2) Increment the attempt progress
+                                    guard let attemptFocus = sessionManager.currentAttempt else {
+                                        print("No currentAttempt; skipping incrementAttemptProgress.")
+                                        return
+                                    }
+
+                                    do {
+                                        let updatedAttempt = try await NetworkManager.shared.incrementAttemptProgress(attemptId: attemptFocus.id)
+                                        print("Attempt \(updatedAttempt.constellationId) incremented. New progress: \(updatedAttempt.starsCompleted)")
+                                    } catch {
+                                        print("Failed to increment attempt: \(error)")
+                                        await MainActor.run {
                                         }
                                     }
                                     
+                                    var cORp = "progress"
+                                    var message = "Default Study Message" //TODO: Put the user's message here
+                                    var totalMins: Int? = sessionManager.totalMinutes
+                                    do {
+                                        let isAttemptComplete = try await
+                                        NetworkManager.shared.isAttemptComplete(attemptId: attemptFocus.id)
+                                        print("Successfully checked if the current attempt is complete! The value is \(isAttemptComplete).")
+                                        
+                                        if isAttemptComplete {
+                                            cORp = "completion"
+                                            message = "I just finished this Constellation!"
+                                            totalMins = nil
+                                            do { let completedConstellation = try await
+                                                NetworkManager.shared.completeConstellationAttempt(attemptId: attemptFocus.id)
+                                                print("The constellation with id \(attemptFocus.id) has been set to completed.")
+                                            } catch {
+                                                print("Failed to set as completed constellation with id \(attemptFocus.id)")
+                                                await MainActor.run {
+                                                }
+                                            }
+                                        }
+                                    } catch {
+                                        print("Failed to get isAttemptComplete attempt: \(error)")
+                                        await MainActor.run {
+                                        }
+                                    }
                                     
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
+                                    do {
+                                        let justPostedPost = try await
+                                        NetworkManager.shared.createPost(userId: settings.userId!, constellationId: attemptFocus.id, postType: cORp, message: message, studyDurationMinutes: totalMins)
+                                    }
                                 }
                             }
                         )

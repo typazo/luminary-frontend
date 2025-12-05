@@ -312,14 +312,14 @@ class NetworkManager {
     
     /// - Parameter attemptId: The ID of the attempt to increment.
     /// - Returns: The updated attempt object as returned by the API.
-    func incrementAttemptProgress(attemptId: Int) async throws -> ConstellationAttempt {
+    func incrementAttemptProgress(attemptId: Int) async throws -> ConstellationAttemptFocus {
         let endpoint = "\(baseURL)/api/constellation_attempts/\(attemptId)/"
         let decoder = JSONDecoder()
         
         return try await withCheckedThrowingContinuation { continuation in
             AF.request(endpoint, method: .put)
                 .validate()
-                .responseDecodable(of: ConstellationAttempt.self, decoder: decoder) { response in
+                .responseDecodable(of: ConstellationAttemptFocus.self, decoder: decoder) { response in
                     switch response.result {
                     case .success(let attempt):
                         continuation.resume(returning: attempt)
