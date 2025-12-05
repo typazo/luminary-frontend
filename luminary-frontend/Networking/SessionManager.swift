@@ -20,7 +20,6 @@ class SessionManager: ObservableObject {
     @Published var remainingMinutes: Int = 5
     @Published var remainingSeconds: Int = 0
     
-    
     @Published var currentSessionId: Int? = nil
     
     @Published var currentAttempt: ConstellationAttemptFocus? = nil

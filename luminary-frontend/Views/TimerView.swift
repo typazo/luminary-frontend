@@ -36,7 +36,6 @@ struct SetTimeView : View {
             //            )
             //        }
         }
-        
     }
 }
     struct CountdownView : View {
