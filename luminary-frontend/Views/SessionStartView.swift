@@ -63,7 +63,6 @@ struct SessionStartView: View {
                         .foregroundStyle(Color.warmPurple)
                         .padding(.top, 10)
                     
-                    Spacer()
 
                     // -- Start Button --
                     Button {
@@ -156,7 +155,7 @@ struct SessionStartView: View {
                             .scaledToFit()
                             .frame(width:184, height: 51)
                     }
-                    .padding(.bottom, 150)
+                    .padding(.bottom, 175)
                     
 
                     if let errorMessage {
