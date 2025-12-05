@@ -2,21 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSExceptionDomains</key>
-		<dict>
-			<key>136.107.14.97</key>
-			<dict>
-				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-		</dict>
-	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>CormorantInfant-Bold.ttf</string>
-		<string>CormorantInfant-SemiBold.ttf</string>
+		<string>Assets/CormorantInfant-SemiBold.ttf</string>
+		<string>Assets/CormorantInfant-Bold.ttf</string>
 	</array>
 </dict>
 </plist>

@@ -64,6 +64,7 @@
 		2F2A9A262EE26359003D98FF /* AppColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2F2A9A282EE26364003D98FF /* CormorantInfant-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantInfant-Bold.ttf"; sourceTree = "<group>"; };
 		2F2A9A292EE2636D003D98FF /* CormorantInfant-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CormorantInfant-SemiBold.ttf"; sourceTree = "<group>"; };
+		2F2A9A2A2EE2644F003D98FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2F82CD1B2ED29F4E0012C3C9 /* luminary-frontend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "luminary-frontend.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F82CD1E2ED29F4E0012C3C9 /* luminary_frontendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = luminary_frontendApp.swift; sourceTree = "<group>"; };
 		2F82CD202ED29F4E0012C3C9 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -160,6 +161,7 @@
 		2F82CD1D2ED29F4E0012C3C9 /* luminary-frontend */ = {
 			isa = PBXGroup;
 			children = (
+				2F2A9A2A2EE2644F003D98FF /* Info.plist */,
 				2F2A9A1F2EE26009003D98FF /* Assets */,
 				2F82CD5B2ED382580012C3C9 /* Extensions */,
 				2F82CD512ED2A1D80012C3C9 /* Views */,
@@ -584,6 +586,7 @@
 				DEVELOPMENT_TEAM = WL6L6PX44C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "luminary-frontend/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -613,6 +616,7 @@
 				DEVELOPMENT_TEAM = WL6L6PX44C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "luminary-frontend/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
