@@ -48,7 +48,6 @@ struct ConstellationCell: View {
                             .padding(.bottom, 10)
                     }
                     .frame(width: 315, height: 230, alignment: .topLeading)
-                    
                     .padding(.top, 20)
                     .padding(.leading, 15)
                     
