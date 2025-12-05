@@ -430,7 +430,7 @@ class NetworkManager {
     /// - Parameter sessionId: The ID of the session to complete.
     /// - Returns: The updated Session object from the API.
     func completeSession(sessionId: Int) async throws -> Session {
-        let endpoint = "\(baseURL)/api/sessions/\(sessionId)/complete"
+        let endpoint = "\(baseURL)/api/sessions/\(sessionId)/complete/"
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         
@@ -611,7 +611,7 @@ class NetworkManager {
     /// - Parameter sessionId: The ID of the session to cancel.
     /// - Returns: The updated `Session` object from the API.
     func cancelSession(sessionId: Int) async throws -> Session {
-        let endpoint = "\(baseURL)/api/sessions/\(sessionId)/cancel"
+        let endpoint = "\(baseURL)/api/sessions/\(sessionId)/cancel/"
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
