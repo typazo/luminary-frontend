@@ -4,8 +4,8 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Assets/CormorantInfant-SemiBold.ttf</string>
-		<string>Assets/CormorantInfant-Bold.ttf</string>
+		<string>CormorantInfant-SemiBold.ttf</string>
+		<string>CormorantInfant-Bold.ttf</string>
 	</array>
 </dict>
 </plist>
