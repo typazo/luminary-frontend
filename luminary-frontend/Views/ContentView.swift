@@ -125,7 +125,7 @@ struct ContentView: View {
                                 sessionManager.sessionFinished = true
 
                                 Task {
-                                    let workedMinutes = sessionManager.elapsedMinutes
+//                                    let workedMinutes = sessionManager.elapsedMinutes
                                     
                                     // 1) Complete the session
                                     guard let sessionId = sessionManager.currentSessionId else {
