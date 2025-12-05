@@ -156,7 +156,7 @@ struct ContentView: View {
 
                                     do {
                                         let updatedAttempt = try await NetworkManager.shared.incrementAttemptProgress(attemptId: attemptFocus.id)
-                                        print("Attempt \(updatedAttempt.constellationId) incremented. New progress: \(updatedAttempt.starsCompleted)")
+                                        print("Attempt \(updatedAttempt.id) incremented. New progress: \(updatedAttempt.starsCompleted)")
                                     } catch {
                                         print("Failed to increment attempt: \(error)")
                                         await MainActor.run {
@@ -169,7 +169,7 @@ struct ContentView: View {
                                     do {
                                         let isAttemptComplete = try await
                                         NetworkManager.shared.isAttemptComplete(attemptId: attemptFocus.id)
-                                        print("Successfully checked if the current attempt is complete! The value is \(isAttemptComplete).")
+                                        print("Successfully checked if the current attempt is complete! The value is \(isAttemptComplete). The current name of the constellation user is working on is \(attemptFocus.constellation.name), and the ConstellationAttemptId is \(attemptFocus.id)")
                                         
                                         if isAttemptComplete {
                                             cORp = "completion"

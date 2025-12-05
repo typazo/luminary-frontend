@@ -315,20 +315,26 @@ class NetworkManager {
     func incrementAttemptProgress(attemptId: Int) async throws -> ConstellationAttemptFocus {
         let endpoint = "\(baseURL)/api/constellation_attempts/\(attemptId)/"
         let decoder = JSONDecoder()
-        
+        decoder.keyDecodingStrategy = .convertFromSnakeCase  // <-- key part
+
         return try await withCheckedThrowingContinuation { continuation in
-            AF.request(endpoint, method: .put)
-                .validate()
+            AF.request(endpoint, method: .put, headers: [.accept("application/json")])
+                .validate(statusCode: 200..<300)
                 .responseDecodable(of: ConstellationAttemptFocus.self, decoder: decoder) { response in
                     switch response.result {
                     case .success(let attempt):
                         continuation.resume(returning: attempt)
                     case .failure(let error):
+                        // Optional: print raw response to aid debugging in the future
+                        if let data = response.data, let body = String(data: data, encoding: .utf8) {
+                            print("PUT /constellation_attempts response body:", body)
+                        }
                         continuation.resume(throwing: error)
                     }
                 }
         }
     }
+
     
     
     
