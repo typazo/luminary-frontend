@@ -44,11 +44,25 @@ struct SessionFinishedView : View {
 //                            .offset(y: -40)
                         
                         //                Image("constellation\(constellation.constellationId)_stage\(constellation.weight)_frame") //have to connect the current one we[re on
-                        Image("constellation3_stage5_frame")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 350, height: 254.7)
-                            .offset(y: -40)
+                        if let attemptFocus = sessionManager.currentAttempt {
+                            Image("constellation\(attemptFocus.constellationId)_stage\(attemptFocus.starsCompleted+1)_frame")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 350, height: 254.7)
+                                .offset(y: -40)
+                        } else {
+                            ZStack{
+                                Image("constellation3_stage7_frame")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 350, height: 254.7)
+                                    .offset(y: -40)
+                                
+                                Text("(image did not load: placeholder)")
+                                    .font(.custom("CormorantInfant-SemiBold", size: 12))
+                            }
+                            
+                        }
                         
 
                         Image("time_completed1")

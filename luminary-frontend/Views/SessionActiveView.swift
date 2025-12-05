@@ -14,6 +14,8 @@ struct SessionActiveView: View {
     @EnvironmentObject var sessionManager: SessionManager
     @Environment(\.scenePhase) var scenePhase
     
+    @State private var selectedConstellation: Constellation = Constellation(name: "Loading…", constellationId: -1, weight: 0)
+    
     let onCancel: () -> Void
     let onFinish: () -> Void
 
@@ -70,11 +72,27 @@ struct SessionActiveView: View {
                     //                        onFinish()
                     //                    })
                     //                .environmentObject(sessionManager)
-                    Image("constellation1_stage2")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 350, maxHeight: 350)
-                        .padding(.top, 200)
+                    
+                    if let attemptFocus = sessionManager.currentAttempt {
+                        Image("constellation\(attemptFocus.constellationId)_stage\(attemptFocus.starsCompleted+1)")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 325)
+                            .offset(y: 50)
+                    } else {
+                        ZStack{
+                            Image("constellation2_stage2")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 325)
+                                .offset(y: 50)
+                            
+                            Text("(image did not load: placeholder)")
+                                .font(.custom("CormorantInfant-SemiBold", size: 12))
+                                .foregroundStyle(Color.white)
+                        }
+                        
+                    }
 
                     Spacer()
                     

@@ -36,8 +36,13 @@ struct SessionStartView: View {
                 VStack(spacing: 30) {
                     // -- Dropdown of Constellation Choices --
                     if !activeAttempt {
-                        ConstellationsDropdownView(selectedConstellation: $selectedConstellation)
+                        Text("select a constellation to work towards")
+                            .font(.custom("CormorantInfant-SemiBold", size: 12))
+                            .foregroundColor(.veryLightPurple)
                             .padding(.top, 150)
+                            .padding(.bottom, -25)
+                        ConstellationsDropdownView(selectedConstellation: $selectedConstellation)
+//                            .padding(.top, 150)
                             .padding(.bottom, 10)
                     } else {
                         if let attemptFocus = sessionManager.currentAttempt {
