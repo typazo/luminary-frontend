@@ -137,3 +137,11 @@ struct SessionStartView: View {
         }
     }
 }
+
+struct SessionStartViewPreviews: PreviewProvider {
+    static var previews: some View {
+        SessionStartView()
+//            .environmentObject(UserSettings())
+            .environmentObject(SessionManager())
+    }
+}
