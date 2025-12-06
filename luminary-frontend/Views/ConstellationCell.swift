@@ -45,7 +45,7 @@ struct ConstellationCell: View {
                                 .textCase(.lowercase)
                                 .padding(.leading, -3)
                         }
-                        .padding(.bottom, -25)
+                        .padding(.bottom, -14)
                         
                         // Middle Text (e.g., constellation name)
                         Text("\(constellationAttempt.constellation.name)")
@@ -70,8 +70,8 @@ struct ConstellationCell: View {
 }
 
     
-
-
+//
+//
 //struct ConstellationCell_Previews: PreviewProvider {
 //    static var previews: some View {
 //        ConstellationCell(constellation:constellationDummyData[0])

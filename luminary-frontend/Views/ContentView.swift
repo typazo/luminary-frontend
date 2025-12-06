@@ -81,27 +81,27 @@ struct ContentView: View {
 //                            .environmentObject(UserSettings())
                         
     
-                        #if DEBUG
-                        Button("Reset Display Name") {
-                            Task {
-                                if let userId = settings.userId {
-                                    do {
-                                        try await NetworkManager.shared.deleteUser(byID: userId)
-                                        print("Deleted user from backend")
-                                    } catch {
-                                        print("Failed to delete user: \(error)")
-                                    }
-                                }
-                                settings.clear() // Clears userId and displayName locally
-                                print("Reset displayName and userId (DEBUG)")
-                            }
-                        }
-                        .background(Color.red.opacity(0.2))
-                        .cornerRadius(8)
-                        .tabItem {
-                            Label("Reset", systemImage: "arrow.counterclockwise")
-                        }
-                        #endif
+//                        #if DEBUG
+//                        Button("Reset Display Name") {
+//                            Task {
+//                                if let userId = settings.userId {
+//                                    do {
+//                                        try await NetworkManager.shared.deleteUser(byID: userId)
+//                                        print("Deleted user from backend")
+//                                    } catch {
+//                                        print("Failed to delete user: \(error)")
+//                                    }
+//                                }
+//                                settings.clear() // Clears userId and displayName locally
+//                                print("Reset displayName and userId (DEBUG)")
+//                            }
+//                        }
+//                        .background(Color.red.opacity(0.2))
+//                        .cornerRadius(8)
+//                        .tabItem {
+//                            Label("Reset", systemImage: "arrow.counterclockwise")
+//                        }
+//                        #endif
                     }
                     
 

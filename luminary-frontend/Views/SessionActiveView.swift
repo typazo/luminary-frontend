@@ -85,13 +85,13 @@ struct SessionActiveView: View {
 
                     Spacer()
                     
-                    
-                    //DEBUG BUTTON
-                    Button("Finish Session") {
-                        onFinish()
-                    }
-                    .foregroundColor(.blue)
-                    
+//                    
+//                    //DEBUG BUTTON
+//                    Button("Finish Session") {
+//                        onFinish()
+//                    }
+//                    .foregroundColor(.blue)
+//                    
                     ZStack(){
                         Image("active_message")
                             .resizable()
