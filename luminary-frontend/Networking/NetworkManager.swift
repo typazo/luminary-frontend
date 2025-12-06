@@ -238,6 +238,7 @@ class NetworkManager {
     /// 1) Local userId → verify via GET /api/users/{id}/
     /// 2) Else GET /api/users/ → match by display_name
     /// 3) Else POST /api/users/
+    @MainActor
     func ensureUserExists(using settings: UserSettings, fallbackDisplayName: String) async throws -> User {
         // 1) Try stored ID
         if let id = settings.userId {
