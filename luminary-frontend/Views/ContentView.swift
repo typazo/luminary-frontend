@@ -18,10 +18,11 @@ struct ContentView: View {
     @EnvironmentObject var settings: UserSettings
     @State private var selectedTab: Int = 0
     
-    func totalHoursStudied(for attempt: ConstellationAttemptFocus) -> Double {
-        let totalMinutes = attempt.sessions.reduce(0) { $0 + $1.minutes }
-        return Double(totalMinutes) / 60.0
+    @MainActor
+    func totalMinutesStudied(for attempt: ConstellationAttemptFocus) -> Int {
+        attempt.sessions.reduce(0) { $0 + $1.minutes }
     }
+
     
     //We have to use UI kit to change the color of the tab bar
     init() {
@@ -177,7 +178,6 @@ struct ContentView: View {
                                         await MainActor.run {
                                         }
                                     }
-                                    
                                     var cORp = "progress"
                                     var message = sessionManager.startMessage.isEmpty ? "Default Study Message" : sessionManager.startMessage
                                     var totalMins: Int = (sessionManager.totalMinutes + (60 * sessionManager.totalHours))
@@ -192,9 +192,7 @@ struct ContentView: View {
 
                                         
                                         if isAttemptComplete {
-                                            cORp = "completion"
-                                            message = "I just finished this Constellation!"
-                                            totalMins = Int(totalHoursStudied(for: attemptFocus))
+                                            //MARK: HERE1
                                             do { let completedConstellation = try await
                                                 NetworkManager.shared.completeConstellationAttempt(attemptId: attemptFocus.id)
                                                 print("The constellation: \(completedConstellation) has been set to completed. It's ID should be the same as this one \(attemptFocus.id)")
@@ -209,12 +207,35 @@ struct ContentView: View {
                                         await MainActor.run {
                                         }
                                     }
-                                    
                                     do {
-                                        let justPostedPost = try await
-                                        NetworkManager.shared.createPost(userId: settings.userId!, constellationId: attemptFocus.constellation.id, postType: cORp, message: message, studyDurationMinutes: totalMins)
-                                        print("The post has been posted. The post id is \(justPostedPost.id)")
-                                    } catch {
+                                        // 1) Post progress first
+                                        let progressPost = try await NetworkManager.shared.createPost(
+                                            userId: settings.userId!,
+                                            constellationId: attemptFocus.constellation.id,
+                                            postType: cORp,            // "progress"
+                                            message: message,          // startMessage or default
+                                            studyDurationMinutes: totalMins // minutes, not hours
+                                        )
+                                        print("Progress post created. id=\(progressPost.id)")
+
+                                        // 2) Snapshot the flag on the main actor to avoid races with other tasks
+                                        let isComplete = await MainActor.run { sessionManager.isAttemptComplete }
+
+                                        if isComplete {
+                                            // Prepare completion payload (use minutes)
+                                            let completionMinutes = totalMinutesStudied(for: attemptFocus)
+
+                                            let completionPost = try await NetworkManager.shared.createPost(
+                                                userId: settings.userId!,
+                                                constellationId: attemptFocus.constellation.id,
+                                                postType: "completion",
+                                                message: "I just finished this Constellation!",
+                                                studyDurationMinutes: completionMinutes
+                                            )
+                                            print("Completion post created. id=\(completionPost.id)")
+                                        }
+                                    }
+ catch {
                                         print("Failed to get post the post idk why")
                                         await MainActor.run {
                                         }
