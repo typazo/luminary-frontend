@@ -58,7 +58,7 @@ struct ConstellationCell: View {
                     .padding(.top, 20)
                     .padding(.leading, 15)
                     
-                    Image("constellation\(constellationAttempt.constellationId)_stage\(constellationAttempt.constellation.weight)") //a little confused: is weight the stage or is it the constellation #?
+                    Image("constellation\(constellationAttempt.constellationId)_stage\(constellationAttempt.constellation.weight)")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 155, height: 227)

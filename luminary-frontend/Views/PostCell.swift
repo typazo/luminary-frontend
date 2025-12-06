@@ -45,7 +45,7 @@ struct PostCell: View {
                     
                     VStack(alignment: .leading, spacing: 2){
                         Text("@"+post.displayName)
-                            .font(.custom("CormorantInfant-Bold", size: 27))
+                            .font(.custom("CormorantInfant-Bold", size: 24))
                             .foregroundColor(Color.warmPurple)
                         
                         Text(post.postTime.formattedTimestamp())

@@ -19,6 +19,7 @@ struct luminary_frontendApp: App {
             ContentView()
                 .environmentObject(settings)
                 .environmentObject(sessionManager)
+                .preferredColorScheme(.light)
         }
     }
 }

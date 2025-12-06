@@ -19,17 +19,20 @@ struct FeedView : View {
                 .ignoresSafeArea() // covers entire screen
             
             ScrollView {
+                Image("journey_bar")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: UIScreen.main.bounds.width)
+                    .clipped()
+                
                 VStack(spacing: 47) {
-                    Image("journey_bar")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: UIScreen.main.bounds.width)
-                        .clipped()
+                    
                     
                     ForEach(viewModel.posts, id: \.self) { post in
                         PostCell(post: post)
                     }
                 }
+                .padding(.top, 30) // This 30 points is added *after*
             }
             .refreshable {
                 await viewModel.fetchPosts()
