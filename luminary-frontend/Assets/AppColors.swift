@@ -29,6 +29,8 @@ extension Color {
     static let veryLightPurple = Color(hex: 0xF8CDFB)
     static let amour = Color(hex: 0xFDE7FF)
     static let barleyWhite = Color(hex: 0xFFF4CC)
+    static let semiOpaqueMuted = Color(hex: 0xDD88FF)
+    static let darkPurp = Color(hex: 0x4B2496)
     
     // Alias for specific UI element
     static let textFieldBackground = Color.veryLightPurple // Using the name for easy UI reference

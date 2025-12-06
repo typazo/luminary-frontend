@@ -28,6 +28,7 @@ class SessionManager: ObservableObject {
     
     @Published var startMessage: String = ""
 
+    @Published var isAttemptComplete: Bool = false
     
     // Computed property: total session time in minutes
     var totalSessionMinutes: Int {

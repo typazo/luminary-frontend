@@ -9,24 +9,49 @@
 
 import Foundation
 import SwiftUI
-
-//TODO: make time and message actually adapt
+import Alamofire
 
 struct SessionFinishedView : View {
     let onReturnToStart: () -> Void
+    let initialSessionActive: Bool
     
     @EnvironmentObject var sessionManager : SessionManager
+    @EnvironmentObject var settings: UserSettings
+    
+//    @State private var errorMessage: String?
+//    @State private var activeAttempt = true
+    
+    var bg: String {
+        initialSessionActive ? "star_bg" : "alt_bg"
+    }
+    
+    var sessionComplete: String {
+        initialSessionActive ? "session_complete_text" : "constellation_completion_text"
+    }
+    
+    var timeCompleted: String {
+        initialSessionActive ? "time_completed1" : "time_completed2"
+    }
+    
+    var timeColor: Color {
+        initialSessionActive ? Color.warmPurple : Color.semiOpaqueMuted
+    }
+    
+    var rectangleColor: Color {
+        initialSessionActive ? Color.veryLightPurple : Color.darkPurp
+    }
+    
     
     var body : some View {
         ZStack(){
-            Image("star_bg")
+            Image(bg)
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea() // covers entire screen
             
             
             VStack(spacing: 20) {
-                    Image("session_complete_text")
+                    Image(sessionComplete)
                         .resizable()
                         .scaledToFit()
                         .frame(width: UIScreen.main.bounds.width)
@@ -65,19 +90,20 @@ struct SessionFinishedView : View {
                         }
                         
 
-                        Image("time_completed1")
+                        Image(timeCompleted)
                             .offset(y: -183)
                         
                         Text(String(format: "%02d:%02d",
                                     sessionManager.totalHours,
                                     sessionManager.totalMinutes))
-//                        Text("Placeholder")
                             .font(.custom("CormorantInfant-SemiBold", size: 45.5))
-                            .foregroundStyle(Color.warmPurple)
+                            .foregroundStyle(timeColor)
                             .offset(y: -175)
+                            .opacity(initialSessionActive ? 1.0 : 0.70)
+                            
                     
                         Rectangle()
-                            .fill(Color.veryLightPurple)
+                            .fill(rectangleColor)
                             .frame(width:261, height: 62)
                             .cornerRadius(5)
                             .offset(y: 96)
@@ -111,13 +137,42 @@ struct SessionFinishedView : View {
             .padding()
             .toolbar(.hidden, for: .tabBar)
         }
+//        .task {
+//            await resolveCurrentAttemptOnAppear()
+//        }
     }
+    
+//    @MainActor
+//    private func resolveCurrentAttemptOnAppear() async {
+//        guard let userId = settings.userId else {
+//            errorMessage = "No user ID is set."
+//            return
+//        }
+//
+//        do {
+//            let resolvedAttempt = try await NetworkManager.shared.getUserCurrentAttempt(userId: userId)
+//            errorMessage = nil
+//            activeAttempt = true
+//        } catch {
+//            if let afError = error as? AFError, afError.responseCode == 404 {
+//                // No current attempt exists
+//                activeAttempt = false
+//                print("This time it should show constellation stuff")
+//            } else {
+//                errorMessage = "Unable to load current attempt."
+//                sessionManager.sessionActive = false
+//                sessionManager.sessionFailed = true
+//                sessionManager.sessionFinished = false
+//                print("Fetch attempt error:", error)
+//            }
+//        }
+//    }
 }
 
 
 struct SessionFinishedViewPreviews: PreviewProvider {
     static var previews: some View {
-        SessionFinishedView(onReturnToStart: {print("Return to start tapped (placeholder)")})
+        SessionFinishedView(onReturnToStart: {print("Return to start tapped (placeholder)")}, initialSessionActive: true)
             .environmentObject(UserSettings())
             .environmentObject(SessionManager())
     }

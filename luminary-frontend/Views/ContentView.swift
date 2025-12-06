@@ -186,6 +186,11 @@ struct ContentView: View {
                                         NetworkManager.shared.isAttemptComplete(attemptId: attemptFocus.id)
                                         print("Successfully checked if the current attempt is complete! The value is \(isAttemptComplete). The current name of the constellation user is working on is \(attemptFocus.constellation.name), and the ConstellationAttemptId is \(attemptFocus.id)")
                                         
+                                        await MainActor.run {
+                                            sessionManager.isAttemptComplete = isAttemptComplete
+                                        }
+
+                                        
                                         if isAttemptComplete {
                                             cORp = "completion"
                                             message = "I just finished this Constellation!"
@@ -222,14 +227,18 @@ struct ContentView: View {
                         .colorScheme(.dark)
                     }
                     .fullScreenCover(isPresented: $sessionManager.sessionFinished) {
-                        SessionFinishedView(onReturnToStart: {
-                            sessionManager.sessionFinished = false
-                            sessionManager.sessionFailed = false
-                            sessionManager.sessionActive = false
-                        })
-                        .environmentObject(sessionManager)
+                        SessionFinishedView(
+                            onReturnToStart: {
+                                sessionManager.sessionFinished = false
+                                sessionManager.sessionFailed = false
+                                sessionManager.sessionActive = false
+                            },
+                            initialSessionActive: !sessionManager.isAttemptComplete
+                        )
+                        .environmentObject(sessionManager) // if you need other live manager stuff
                         .toolbar(.hidden, for: .tabBar)
                     }
+
                     .fullScreenCover(isPresented: $sessionManager.sessionFailed) {
                         SessionFailedView(onReturnToStart: {
                             sessionManager.sessionFinished = false
