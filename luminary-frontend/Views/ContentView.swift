@@ -207,37 +207,36 @@ struct ContentView: View {
                                         await MainActor.run {
                                         }
                                     }
-                                    do {
-                                        // 1) Post progress first
-                                        let progressPost = try await NetworkManager.shared.createPost(
-                                            userId: settings.userId!,
-                                            constellationId: attemptFocus.constellation.id,
-                                            postType: cORp,            // "progress"
-                                            message: message,          // startMessage or default
-                                            studyDurationMinutes: totalMins // minutes, not hours
-                                        )
-                                        print("Progress post created. id=\(progressPost.id)")
-
-                                        // 2) Snapshot the flag on the main actor to avoid races with other tasks
-                                        let isComplete = await MainActor.run { sessionManager.isAttemptComplete }
-
-                                        if isComplete {
-                                            // Prepare completion payload (use minutes)
-                                            let completionMinutes = totalMinutesStudied(for: attemptFocus)
-
-                                            let completionPost = try await NetworkManager.shared.createPost(
+                                    Task {
+                                        do {
+                                            // 1) Post progress first
+                                            let progressPost = try await NetworkManager.shared.createPost(
                                                 userId: settings.userId!,
                                                 constellationId: attemptFocus.constellation.id,
-                                                postType: "completion",
-                                                message: "I just finished this Constellation!",
-                                                studyDurationMinutes: completionMinutes
+                                                postType: cORp,            // "progress"
+                                                message: message,          // startMessage or default
+                                                studyDurationMinutes: totalMins // minutes, not hours
                                             )
-                                            print("Completion post created. id=\(completionPost.id)")
-                                        }
-                                    }
- catch {
-                                        print("Failed to get post the post idk why")
-                                        await MainActor.run {
+                                            print("Progress post created. id=\(progressPost.id)")
+                                            
+                                            // 2) Snapshot the flag on the main actor to avoid races with other tasks
+                                            let isComplete = await MainActor.run { sessionManager.isAttemptComplete }
+                                            
+                                            if isComplete {
+                                                // Prepare completion payload (use minutes)
+                                                let completionMinutes = totalMinutesStudied(for: attemptFocus) + totalMins
+                                                
+                                                let completionPost = try await NetworkManager.shared.createPost(
+                                                    userId: settings.userId!,
+                                                    constellationId: attemptFocus.constellation.id,
+                                                    postType: "completion",
+                                                    message: "I just finished this Constellation!",
+                                                    studyDurationMinutes: completionMinutes
+                                                )
+                                                print("Completion post created. id=\(completionPost.id)")
+                                            }
+                                        } catch {
+                                            print("Failed to get post the post idk why")
                                         }
                                     }
                                 }
