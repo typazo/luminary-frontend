@@ -41,7 +41,7 @@ The personal achievement tracker.
 The three-stage focus workflow.
 
 * **Start Session:** Set timer, select constellation, write custom message, and tap Start.
-* **During Session:** Displays countdown timer. Must use the Cancel button to stop (app enforces focus).
+* **During Session:** Displays countdown timer. Must use the Cancel button to stop (app enforces focus). If you leave the app, you break your focus, so session fails. If timer is completed, you successfully complete it.
 * **Finished Session:** Summary of session duration and progress. Exit button returns to the Start screen.
 
 ---
