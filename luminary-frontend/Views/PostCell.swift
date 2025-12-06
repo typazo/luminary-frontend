@@ -82,47 +82,68 @@ struct PostCell: View {
                 Rectangle()
                     .fill(Color.mediumOrchid)
                     .frame(height: 120)
+
                 Rectangle()
                     .fill(backgroundColor)
                     .padding(3.74)
-                
-                VStack(spacing: 4){
-                    HStack(spacing:20){
+
+                // Center inner content vertically within the box
+
+                // ======= INNER CONTENT (place this inside your existing ZStack) =======
+                VStack(spacing: 8) {
+
+                    // TOP ROW: Timer (trailing) • Dot (narrow) • Image (leading)
+                    HStack(alignment: .center, spacing: 0) {
+                        // Left column: Timer, right-aligned to hug the dot
                         Text("\(post.studyDuration.formattedHHMM())")
                             .font(.custom("CormorantInfant-SemiBold", size: 50))
                             .foregroundColor(Color.mediumOrchid)
-                            .padding(.leading, 64)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .padding(.trailing, 16) // ← tiny gap to the dot
+
+                        // Dot — very narrow
                         Text("•")
-                            .font(.system(size: 30, weight: .bold))
+                            .font(.system(size: 22, weight: .bold)) // slightly smaller dot
                             .foregroundColor(Color.mediumOrchid)
+                            .frame(width: 8, alignment: .center)     // ← as narrow as possible
+
+                        // Right column: Image, left-aligned to hug the dot
                         Image(starOrConstImg)
                             .resizable()
-                            .frame(width: 50, height: 64)
-                            .padding(.trailing, 64)
-                        
+                            .scaledToFit()
+                            .frame(width: 50, height: 60)            // a touch shorter helps closeness
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.leading, 16)                    // ← tiny gap to the dot
                     }
-                    
-                    HStack(alignment: .top) {
+                    .frame(maxWidth: 332)
+
+                    // BOTTOM ROW: Captions — mirror the dot width with a transparent spacer
+                    HStack(alignment: .top, spacing: 0) {
                         Text("time completed")
                             .font(.custom("CormorantInfant-SemiBold", size: 11))
                             .foregroundColor(Color.mediumOrchid)
-                            .padding(.leading, 79)
-                        
-                        Spacer()
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .multilineTextAlignment(.center)
+                            .padding(.trailing, post.postType == "completion" ? 32 : 32) // mirror tiny gap above
 
-                        Text(starOrConstText) // Hardcoded, replace with relevant session count
+                        Color.clear
+                            .frame(width: 8)       // ← must match the dot’s width
+
+                        Text(starOrConstText)
                             .font(.custom("CormorantInfant-SemiBold", size: 11))
                             .foregroundColor(Color.mediumOrchid)
-                            .padding(.trailing, 65)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .multilineTextAlignment(.center)
+                            .padding(.leading, post.postType == "completion" ? 13 : 32)  // mirror tiny gap above
                     }
-                    .frame(width:332)
+                    .frame(maxWidth: 332)
                 }
-                
-                
+                .offset(x: 24, y: 24)
             }
-            .padding(.vertical, 16) // Padding inside the ZStack content
+            .padding(.vertical, 16)
             .padding(.horizontal, 17)
             .padding(.bottom, 17)
+
         }
         .padding(.top, 30)
         .frame(height: 244)
